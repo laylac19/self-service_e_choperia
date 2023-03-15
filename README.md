@@ -1,6 +1,6 @@
-# Self-service e Choperia do Pulini
+# Choperia e Self-service do Pulini
 
-Projeto de desenvolvimento de softawe realizado na disciplina de `Laboratório de Engenharia de Software` (7º período da faculade de Sistemas de Informação - IFES Colatina), onde o projeto é utilizado para  gerenciar `A Choperia e Self-service do Pulini`.
+Projeto de desenvolvimento de softawe realizado na disciplina de `Laboratório de Engenharia de Software` (7º período da faculade de Sistemas de Informação - IFES Colatina), onde o projeto é utilizado para  gerenciar a `Choperia e Self-service do Pulini`.
 
 Esse projeto envolve a criação de um software que possa gerenciar as atividades da choperia e self-service, permitindo que o estabelecimento possa realizar o controle de estoque, gestão de pedidos, cobrança de clientes, entre outras funcionalidades importantes. Nele é realizado o uso de equpamentos integrados, como:
 - Leitor de Código de Barras;
