@@ -1,26 +1,29 @@
 export class EntidadeUtil {
 
-    static readonly ATOR = new EntidadeUtil(1, 'Ator');
-    static readonly CLASSE = new EntidadeUtil(2, 'Classe');
-    static readonly DIRETOR = new EntidadeUtil(3, 'Diretor');
-    static readonly TITULO = new EntidadeUtil(4, 'Filme');
-    static readonly ITEM_TITULO = new EntidadeUtil(5, 'Item Filme');
-    static readonly CLIENTE = new EntidadeUtil(6, 'Cliente');
-    static readonly LOCACAO = new EntidadeUtil(7, 'Locação');
+  static readonly USUARIO = new EntidadeUtil(1, 'Usuário');
+  static readonly RELATORIO = new EntidadeUtil(2, 'Relatório');
+  static readonly PRODUTO = new EntidadeUtil(3, 'Produto');
+  static readonly CLIENTE = new EntidadeUtil(4, 'Cliente');
+  static readonly CAIXA = new EntidadeUtil(5, 'Caixa');
+  static readonly COZINHA = new EntidadeUtil(6, 'Cozinha');
+  static readonly SELF_SERVICE_CHOPE = new EntidadeUtil(7, 'Self-Service');
+  static readonly CHOPE = new EntidadeUtil(8, 'Chope');
 
 
-    static values = [
-        EntidadeUtil.ATOR,
-        EntidadeUtil.CLASSE,
-        EntidadeUtil.DIRETOR,
-        EntidadeUtil.TITULO,
-        EntidadeUtil.ITEM_TITULO,
-        EntidadeUtil.CLIENTE
-    ];
+  static values = [
+    EntidadeUtil.USUARIO,
+    EntidadeUtil.RELATORIO,
+    EntidadeUtil.PRODUTO,
+    EntidadeUtil.CLIENTE,
+    EntidadeUtil.CAIXA,
+    EntidadeUtil.COZINHA,
+    EntidadeUtil.SELF_SERVICE_CHOPE,
+    EntidadeUtil.CHOPE
+  ];
 
-    constructor(
-        public id: number,
-        public descricao: string
-    ) {
-    }
+  constructor(
+    public id: number,
+    public descricao: string
+  ) {
+  }
 }

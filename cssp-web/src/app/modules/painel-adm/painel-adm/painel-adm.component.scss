@@ -1,0 +1,27 @@
+div.container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 50px 10px 50px;
+  justify-content: space-evenly;
+}
+
+.card-item-menu {
+  width: 100%;
+  text-align: center;
+}
+
+.icon {
+  color: var(--cor-tema-beige);
+  text-align: center;
+  font-size: 25pt;
+}
+
+.label-button {
+  color: var(--cor-tema-beige);
+  font-size: 20pt;
+  font-family: 'Kreon', Verdana, sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+
