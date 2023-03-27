@@ -1,13 +1,12 @@
 package com.cssp.choperiaselfservice.domain;
 
-import com.cssp.choperiaselfservice.domain.enums.TipoProduto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -19,6 +18,7 @@ import java.io.Serializable;
 @Table(name = "produto")
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto implements Serializable {
 
     @Id
@@ -27,13 +27,10 @@ public class Produto implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "codigoBarras", nullable = false)
-    private String codigoBarras;
+    @Column(name = "qtde_estoque", nullable = false)
+    private Double qtdeEstoque;
 
-    @Column(name = "qtdeEstoque", nullable = false)
-    private Integer qtdeEstoque;
-
-    @Column(name = "precoCompra", nullable = false)
+    @Column(name = "preco_compra", nullable = false)
     private Double precoCompra;
 
     @Column(name = "descricao", nullable = false)
@@ -42,15 +39,11 @@ public class Produto implements Serializable {
     @Column(name = "unidade", nullable = false)
     private String unidade;
 
-    @Column(name = "pontoEncomenda", nullable = false)
-    private Integer pontoEncomenda;
+    @Column(name = "ponto_encomenda", nullable = false)
+    private Double pontoEncomenda;
 
-    @Column(name = "precoVenda", nullable = false)
+    @Column(name = "preco_venda", nullable = false)
     private Double precoVenda;
-
-    @Column(name = "tipoProduto", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TipoProduto tipoProduto;
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
