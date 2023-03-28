@@ -6,13 +6,16 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
 
-    <changeSet id="1680004260396-1" author="layla.couto">
-        <createSequence incrementBy="1" sequenceName="seq_perfil" startValue="1"/>
-        <createTable tableName="perfil">
+    <changeSet id="1680004681786-1" author="layla.couto">
+        <createSequence incrementBy="1" sequenceName="seq_prato" startValue="1"/>
+        <createTable tableName="notificacao_cozinha">
             <column name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_perfil"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_notificacao_cozinha"/>
             </column>
-            <column name="descricao" type="VARCHAR(255)">
+            <column name="prato" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_prato" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="ativo" type="BOOLEAN">

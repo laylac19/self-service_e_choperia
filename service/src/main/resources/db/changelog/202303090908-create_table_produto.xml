@@ -6,16 +6,13 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
 
-    <changeSet id="1678893178114-1" author="layla.couto">
+    <changeSet id="1680004445331-1" author="layla.couto">
         <createSequence incrementBy="1" sequenceName="seq_produto" startValue="1"/>
         <createTable tableName="produto">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_produto"/>
             </column>
-            <column name="codigo_barras" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="qtde_estoque" type="INT">
+            <column name="qtde_estoque" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
             <column name="preco_compra" type="DOUBLE">
@@ -27,13 +24,10 @@
             <column name="unidade" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ponto_encomenda" type="INT">
+            <column name="ponto_encomenda" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
             <column name="preco_venda" type="DOUBLE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="tipo_produto" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="ativo" type="BOOLEAN">

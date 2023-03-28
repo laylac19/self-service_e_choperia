@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
 
-    <changeSet id="1678892987010-1" author="layla.couto">
+    <changeSet id="1680004398441-1" author="layla.couto">
         <insert tableName="perfil" schemaName="">
             <column name="id" valueSequenceNext="seq_perfil"/>
             <column name="descricao" value="Fiscal de Entrada"/>
