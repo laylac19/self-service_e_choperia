@@ -1,6 +1,5 @@
 package com.cssp.choperiaselfservice.service.dto;
 
-import com.cssp.choperiaselfservice.domain.enums.TipoProduto;
 import com.cssp.choperiaselfservice.service.util.MensagemProdutoUtil;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -19,12 +18,8 @@ public class ProdutoDTO implements Serializable {
 
     private Long id;
 
-    @NotNull(message = MensagemProdutoUtil.NULL_BARCODE)
-    @NotEmpty(message = MensagemProdutoUtil.EMPTY_BARCODE)
-    private String codigoBarras;
-
     @NotNull(message = MensagemProdutoUtil.NULL_STOCK_QUANTITY)
-    private Integer qtdeEstoque;
+    private Double qtdeEstoque;
 
     @NotNull(message = MensagemProdutoUtil.NULL_PURCHASE_PRICE)
     private Double precoCompra;
@@ -37,14 +32,10 @@ public class ProdutoDTO implements Serializable {
     private String unidade;
 
     @NotNull(message = MensagemProdutoUtil.NULL_ORDER_POINT)
-    private Integer pontoEncomenda;
+    private Double pontoEncomenda;
 
     @NotNull(message = MensagemProdutoUtil.NULL_SALE_PRICE)
     private Double precoVenda;
-
-    @NotNull(message = MensagemProdutoUtil.NULL_PRODUCT_TYPE)
-    @NotEmpty(message = MensagemProdutoUtil.PRODUCT_TYPE_EMPTY)
-    private TipoProduto tipoProduto;
 
     private Boolean ativo = true;
 

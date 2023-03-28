@@ -11,13 +11,11 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProdutoListDTO implements Serializable {
+public class ClienteCompraListDTO implements Serializable {
 
     private Long id;
-    private Double qtdeEstoque;
-    private Double precoCompra;
-    private String descricao;
-    private String unidade;
-    private Double pontoEncomenda;
-    private Double precoVenda;
+    private Long idCliente;
+    private String nomeCliente;
+    private String cartaoCliente;
+    private Double valorCompra;
 }

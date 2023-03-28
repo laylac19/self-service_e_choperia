@@ -29,4 +29,5 @@ public class Perfil implements Serializable {
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
+
 }

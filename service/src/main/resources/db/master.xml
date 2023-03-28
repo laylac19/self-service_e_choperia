@@ -9,6 +9,11 @@
     <include file="db/changelog/202303051254-insert_into_table_perfil.xml"/>
     <include file="db/changelog/202303051247-create_table_usuario.xml"/>
     <include file="db/changelog/202303090908-create_table_produto.xml"/>
+    <include file="db/changelog/202303090910-create_table_chope.xml"/>
+    <include file="db/changelog/202303090912-create_table_insumo.xml"/>
+    <include file="db/changelog/202303090913-create_table_cozinha.xml"/>
     <include file="db/changelog/202303191139-create_table_cliente.xml"/>
     <include file="db/changelog/202303191141-create_table_compra.xml"/>
+    <include file="db/changelog/202303280900-create_table_chope_compra.xml"/>
+    <include file="db/changelog/202303280903-create_table_self_service_compra.xml"/>
 </databaseChangeLog>

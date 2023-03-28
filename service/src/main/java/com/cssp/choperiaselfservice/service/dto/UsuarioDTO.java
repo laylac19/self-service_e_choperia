@@ -34,8 +34,4 @@ public class UsuarioDTO implements Serializable {
 
     @NotNull(message = MensagemUsuarioUtil.NULL_PROFILE)
     private Integer idPerfil;
-
-    @NotNull(message = MensagemUsuarioUtil.NULL_PROFILE)
-    @NotEmpty(message = MensagemUsuarioUtil.EMPTY_USER)
-    private String descPerfil;
 }

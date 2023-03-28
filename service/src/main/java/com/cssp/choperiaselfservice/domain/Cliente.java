@@ -5,9 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -29,7 +27,7 @@ public class Cliente implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "numCartaoRFID", nullable = false)
+    @Column(name = "numCartaoRFID")
     private String numCartaoRFID;
 
     @Column(name = "nome", nullable = false)

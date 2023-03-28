@@ -16,7 +16,7 @@ import java.io.Serializable;
 @PrimaryKeyJoinColumn(name = "id")
 public class Chope extends Produto implements Serializable {
 
-    @Column(name = "etiquetaRFID")
+    @Column(name = "etiquetaRFID", nullable = false)
     private String etiquetaRFID;
 
 }
