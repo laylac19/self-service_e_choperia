@@ -11,10 +11,13 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChopeListDTO implements Serializable {
+public class ChopeListDTO extends ProdutoListDTO implements Serializable {
 
-    private Long id;
-    private String descricao;
-    private Double qtdeEstoque;
-    private Double precoVenda;
+    private String etiquetaRFID;
+
+    public ChopeListDTO(Long id, Double qtdeEstoque, Double precoCompra, String descricao, String unidade,
+                        Double pontoEncomenda, Double precoVenda, String etiquetaRFID) {
+        super(id, qtdeEstoque, precoCompra, descricao, unidade, pontoEncomenda, precoVenda);
+        this.etiquetaRFID = etiquetaRFID;
+    }
 }

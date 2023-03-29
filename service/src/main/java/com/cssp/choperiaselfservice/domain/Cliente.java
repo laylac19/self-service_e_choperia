@@ -27,7 +27,7 @@ public class Cliente implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "numCartaoRFID")
+    @Column(name = "num_cartaorfid")
     private String numCartaoRFID;
 
     @Column(name = "nome", nullable = false)

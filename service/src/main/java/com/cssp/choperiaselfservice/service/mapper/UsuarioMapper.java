@@ -10,7 +10,6 @@ import org.mapstruct.Mapping;
 public interface UsuarioMapper extends EntityMapper<UsuarioDTO, Usuario> {
     @Override
     @Mapping(source = "perfil.id", target = "idPerfil")
-    @Mapping(source = "perfil.descricao", target = "descPerfil")
     UsuarioDTO toDto(Usuario entity);
 
     @Override

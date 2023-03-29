@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query(" SELECT NEW com.cssp.choperiaselfservice.service.dto.ProdutoListDTO(p.id, " +
-            " p.codigoBarras, p.qtdeEstoque, p.precoCompra, p.descricao, p.unidade, p.pontoEncomenda, p.precoVenda," +
-            " p.tipoProduto) " +
-            " FROM Produto p WHERE p.ativo = true ")
+            " p.qtdeEstoque, p.precoCompra, p.descricao, p.unidade, p.pontoEncomenda, p.precoVenda) " +
+            " FROM Produto p " +
+            " WHERE p.ativo = true ")
     Page<ProdutoListDTO> listAll(Pageable pageable);
 }

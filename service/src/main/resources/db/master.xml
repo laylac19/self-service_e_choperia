@@ -16,4 +16,5 @@
     <include file="db/changelog/202303191141-create_table_compra.xml"/>
     <include file="db/changelog/202303280900-create_table_chope_compra.xml"/>
     <include file="db/changelog/202303280903-create_table_self_service_compra.xml"/>
+    <include file="db/changelog/202303281225-crete_table_prato_cozinha.xml"/>
 </databaseChangeLog>

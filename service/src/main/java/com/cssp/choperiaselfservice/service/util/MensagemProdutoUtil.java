@@ -20,5 +20,7 @@ public class MensagemProdutoUtil {
     public static final String PRODUCT_REACHED_REORDER_POINT = "Produto Atingiu Ponto de Encomenda. Faça um Novo Pedido!";
     public static final String STOCK_QUANTITY_NOT_BE_NEGATIVE = "A quantidade de Estoque não pode ser negativa";
     public static final String LIST_NOT_VALID = "A Lista de Produtos Não é Válida";
+    public static final String REPLACE_FOOD = "Repor Produto No Service-Self";
+    public static final String REPLACE_CHOPE = "Repor Chope";
 
 }

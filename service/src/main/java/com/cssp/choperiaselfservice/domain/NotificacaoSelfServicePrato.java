@@ -8,21 +8,18 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "self_service_prato")
+@Table(name = "notificacao_cozinha")
 @Getter
 @Setter
-public class SelfServicePrato implements Serializable {
+public class NotificacaoSelfServicePrato implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_prato")
     @SequenceGenerator(name = "seq_prato", sequenceName = "seq_prato", allocationSize = 1)
@@ -38,8 +35,4 @@ public class SelfServicePrato implements Serializable {
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
-
-    @OneToMany(mappedBy = "selfServicePrato", orphanRemoval = true)
-    private Set<Insumo> insumoes = new LinkedHashSet<>();
-
 }
