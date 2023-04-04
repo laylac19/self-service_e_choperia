@@ -12,21 +12,21 @@ export class SidemenuComponent {
   @Input() public configuracaoMenuLateral?: SidemenuModel;
 
   @Input() public opcoesControleAverco: OpcaoMenuModel[] = [
-    new OpcaoMenuModel('pi pi-home', 'Início', 'Início',
+    new OpcaoMenuModel('pi pi-home', 'Painel Geral',
       () => this.router.navigateByUrl('/')),
-    new OpcaoMenuModel('bi bi-file-earmark-person', 'Usuários', 'Usuários',
+    new OpcaoMenuModel('bi bi-person-vcard', 'Usuários',
       () => this.router.navigateByUrl('/Usuarios')),
-    new OpcaoMenuModel('bi bi-ticket-detailed', 'Relatórios', 'Relatórios',
+    new OpcaoMenuModel('bi bi-card-heading', 'Relatórios',
       () => this.router.navigateByUrl('/Relatorio')),
-    new OpcaoMenuModel('bi bi-person-video3', 'Produtos', 'Produtos',
+    new OpcaoMenuModel('bi bi-grid', 'Produtos',
       () => this.router.navigateByUrl('/Produtos')),
-    new OpcaoMenuModel('bi bi-film', 'Clientes', 'Clientes',
+    new OpcaoMenuModel('bi-people-fill', 'Clientes',
       () => this.router.navigateByUrl('/Clientes')),
-    new OpcaoMenuModel('bi bi-upc-scan', 'Caixa', 'Caixa',
+    new OpcaoMenuModel('bi bi-cart', 'Caixa',
       () => this.router.navigateByUrl('/Caixa')),
-    new OpcaoMenuModel('bi bi-upc-scan', 'Cozinha', 'Caixa',
+    new OpcaoMenuModel('icon bi bi-fire', 'Cozinha',
       () => this.router.navigateByUrl('/Cozinha')),
-    new OpcaoMenuModel('bi bi-upc-scan', 'Self-Service e Chope', 'Self-Service e Chope',
+    new OpcaoMenuModel('bi bi-shop-window', 'Self-Service e Chope',
       () => this.router.navigateByUrl('/Produtos')),
   ];
 
