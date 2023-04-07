@@ -3,10 +3,24 @@
   <div class="corpo-aplicacao">
     <app-sidemenu [configuracaoMenuLateral]="configuracaoMenuLateral"></app-sidemenu>
     <div class="conteudo-principal">
-      <div class="container list col-8">
+      <div class="container list col-12">
           <router-outlet></router-outlet>
       </div>
     </div>
   </div>
 </div>
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<p-confirmDialog #dialogDelete [baseZIndex]="99999">
+  <div class="p-col-12">
+    <div class="p-col-6">
+      <button pButton icon="pi pi-close" label="Não"
+              (click)="dialogDelete.reject()"></button>
+    </div>
+    <div class="p-col-6">
+      <button pButton icon="pi pi-save" label="Sim"
+              (click)="dialogDelete.accept()"></button>
+    </div>
+  </div>
+</p-confirmDialog>
+
+<p-toast></p-toast>

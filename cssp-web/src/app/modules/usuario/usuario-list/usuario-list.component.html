@@ -1,1 +1,32 @@
-<p>usuario-list works!</p>
+<div class="pagina flex flex-column col-12">
+  <div class="item-pagina col-12">
+    <span class="titulo">Itens</span>
+  </div>
+
+  <div class="item-pagina">
+    <button pButton type="button"
+            icon="pi pi-plus"
+            class="button-action ui-button-success button-save-new"
+            iconPos="left"
+            label="Novo Usuário"
+            (click)="newUser()">
+    </button>
+  </div>
+
+  <custom-table [colunas]="columns"
+                [dados]="usersList"
+                [paginator]="true"
+                [rows]="12"
+                [editarDado]="true" [desativarDado]="true"
+                (abrirModalHabilitado)="editUser($event)" (deletarDado)="confirmAction($event)">
+  </custom-table>
+
+
+</div>
+
+<custom-dialog [display]="display"
+               [header]="titleDialog"
+               (answerForm)="onSave()"
+               (closeDialog)="onClose()">
+  <app-usuario-form></app-usuario-form>
+</custom-dialog>

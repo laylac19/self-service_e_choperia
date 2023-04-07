@@ -8,13 +8,13 @@ import {ComponentsModule} from "./components/components.module";
   imports: [
     PRIMENG_IMPORTS,
     ANGULAR_IMPORTS,
-    ComponentsModule
+    ComponentsModule,
   ],
   providers: [],
   exports: [
     PRIMENG_IMPORTS,
     ANGULAR_IMPORTS,
-    ComponentsModule
+    ComponentsModule,
   ]
 })
 export class SharedModule {

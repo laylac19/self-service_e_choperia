@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
 	selector: 'custom-dialog',
 	templateUrl: './custom-dialog.component.html',
-	styleUrls: ['./custom-dialog.component.css']
+	styleUrls: ['./custom-dialog.component.scss']
 })
 export class CustomDialogComponent {
 

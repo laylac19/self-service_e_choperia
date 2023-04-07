@@ -6,8 +6,9 @@ import {AppComponent} from './app.component';
 import {TopbarComponent} from "./components/topbar/topbar.component";
 import {SidemenuComponent} from "./components/sidemenu/sidemenu.component";
 import {SharedModule} from "./shared/shared.module";
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {MensagensConfirmacao} from "./shared/util/msgConfirmacaoDialog.util";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -19,9 +20,10 @@ import {MensagensConfirmacao} from "./shared/util/msgConfirmacaoDialog.util";
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    BrowserAnimationsModule,
   ],
   providers: [
-    ConfirmationService, MensagensConfirmacao
+    MessageService, ConfirmationService, MensagensConfirmacao
   ],
   bootstrap: [AppComponent]
 })

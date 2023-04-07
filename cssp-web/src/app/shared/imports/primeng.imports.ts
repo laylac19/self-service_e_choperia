@@ -24,6 +24,7 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import {DropdownModule} from "primeng/dropdown";
 import {TabViewModule} from "primeng/tabview";
 import {InputMaskModule} from "primeng/inputmask";
+import {PasswordModule} from "primeng/password";
 
 
 export const PRIMENG_IMPORTS: any = [
@@ -54,5 +55,6 @@ export const PRIMENG_IMPORTS: any = [
   AutoCompleteModule,
   DropdownModule,
   TabViewModule,
-  InputMaskModule
+  InputMaskModule,
+  PasswordModule
 ];
