@@ -15,15 +15,17 @@
             <column name="valor_compra" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
-            <column name="cliente_compra_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
+            <column name="cliente_compra_id" type="BIGINT"/>
             <column name="ativo" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
+            <column name="compras_cliente" type="BIGINT"/>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="cliente_compra_id" baseTableName="cliente_compra"
                                  constraintName="FK_CLIENTE_COMPRA_ON_CLIENTE_COMPRA" referencedColumnNames="id"
+                                 referencedTableName="cliente"/>
+        <addForeignKeyConstraint baseColumnNames="compras_cliente" baseTableName="cliente_compra"
+                                 constraintName="FK_CLIENTE_COMPRA_ON_COMPRAS_CLIENTE" referencedColumnNames="id"
                                  referencedTableName="cliente"/>
     </changeSet>
 </databaseChangeLog>

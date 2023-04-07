@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("api/insumo")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -47,14 +49,15 @@ public class InsumoController {
     }
 
     @PutMapping("/entrada-produto")
-    public ResponseEntity<Void> enterProduct (@RequestBody InsumoDTO dto) {
-        service.enterProduct(dto);
+    public ResponseEntity<Void> enterProduct(@RequestBody Set<InsumoDTO> dtoSet) {
+        service.enterListOfProducts(dtoSet);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/saida-produto")
-    public ResponseEntity<Void> releaseProductOutput (@RequestBody InsumoDTO dto) {
-        service.productWithdrawal(dto);
+    public ResponseEntity<Void> releaseProductOutput(@RequestBody Set<InsumoDTO> dtoSet) {
+        service.withdrawalListOfProducts(dtoSet);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

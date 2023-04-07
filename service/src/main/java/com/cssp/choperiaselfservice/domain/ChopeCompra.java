@@ -20,4 +20,5 @@ public class ChopeCompra extends ClienteCompra implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "chope_id", nullable = false)
     private Chope chope;
+
 }

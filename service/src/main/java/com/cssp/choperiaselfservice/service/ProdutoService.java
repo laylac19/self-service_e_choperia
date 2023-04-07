@@ -2,7 +2,6 @@ package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.Produto;
 import com.cssp.choperiaselfservice.repository.ProdutoRepository;
-import com.cssp.choperiaselfservice.service.dto.ProdutoDTO;
 import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
 import com.cssp.choperiaselfservice.service.util.MensagemProdutoUtil;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -24,34 +22,34 @@ public class ProdutoService {
                 () -> new EntityNotFoundException(MensagemProdutoUtil.ENTITY_NOT_FOUND));
     }
 
-    private void enterProduct(ProdutoDTO dto) {
-        Produto product = findEntity(dto.getId());
-        product.setQtdeEstoque(product.getQtdeEstoque() + dto.getQtdeEstoque());
-        product.setPrecoCompra(dto.getPrecoCompra());
-        product.setPrecoVenda(dto.getPrecoVenda());
-        repository.save(product);
-    }
-
-    private void productWithdrawal(ProdutoDTO dto) {
-        Produto product = findEntity(dto.getId());
-        product.setQtdeEstoque(validadeStockWithdrawal(product.getQtdeEstoque(), dto.getQtdeEstoque()));
-        validateStockQuantity(product.getQtdeEstoque(), product.getPontoEncomenda());
-        repository.save(product);
-    }
-
-    public void enterListOfProducts(Set<ProdutoDTO> productDTOList) {
-        if (Objects.isNull(productDTOList)) {
-            throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
-        }
-        productDTOList.forEach(this::enterProduct);
-    }
-
-    public void withdrawalListOfProducts(Set<ProdutoDTO> productDTOList) {
-        if (Objects.isNull(productDTOList)) {
-            throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
-        }
-        productDTOList.forEach(this::productWithdrawal);
-    }
+//    private void enterProduct(ProdutoDTO dto) {
+//        Produto product = findEntity(dto.getId());
+//        product.setQtdeEstoque(product.getQtdeEstoque() + dto.getQtdeEstoque());
+//        product.setPrecoCompra(dto.getPrecoCompra());
+//        product.setPrecoVenda(dto.getPrecoVenda());
+//        repository.save(product);
+//    }
+//
+//    private void productWithdrawal(ProdutoDTO dto) {
+//        Produto product = findEntity(dto.getId());
+//        product.setQtdeEstoque(validadeStockWithdrawal(product.getQtdeEstoque(), dto.getQtdeEstoque()));
+//        validateStockQuantity(product.getQtdeEstoque(), product.getPontoEncomenda());
+//        repository.save(product);
+//    }
+//
+//    public void enterListOfProducts(Set<ProdutoDTO> productDTOList) {
+//        if (Objects.isNull(productDTOList)) {
+//            throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
+//        }
+//        productDTOList.forEach(this::enterProduct);
+//    }
+//
+//    public void withdrawalListOfProducts(Set<ProdutoDTO> productDTOList) {
+//        if (Objects.isNull(productDTOList)) {
+//            throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
+//        }
+//        productDTOList.forEach(this::productWithdrawal);
+//    }
 
     public Double validadeStockWithdrawal(Double productStock, Double dtoStock) {
         if (dtoStock > 0 && productStock >= dtoStock) {

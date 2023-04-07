@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NotificacaoSelfServiceRepository extends JpaRepository<NotificacaoSelfServicePrato, Long> {
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.NotificacaoSelfServicePratoListDTO(nss.id, " +
-            " nss.descricao, nss.statusPrato) " +
+            " nss.prato.descricao, nss.statusPrato) " +
             " FROM NotificacaoSelfServicePrato nss WHERE nss.ativo = true " )
     Page<NotificacaoSelfServicePratoListDTO> listAll(Pageable pageable);
 

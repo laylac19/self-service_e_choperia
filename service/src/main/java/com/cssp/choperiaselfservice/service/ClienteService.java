@@ -66,4 +66,9 @@ public class ClienteService {
         repository.save(client);
     }
 
+    public void unlinkCardWithCustomer(Long idCLient) {
+        Cliente client = findEntity(idCLient);
+        client.setNumCartaoRFID(null);
+        repository.save(client);
+    }
 }

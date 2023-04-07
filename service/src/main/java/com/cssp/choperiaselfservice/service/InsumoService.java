@@ -4,6 +4,7 @@ import com.cssp.choperiaselfservice.domain.Insumo;
 import com.cssp.choperiaselfservice.repository.InsumoRepository;
 import com.cssp.choperiaselfservice.service.dto.InsumoDTO;
 import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
+import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
 import com.cssp.choperiaselfservice.service.mapper.InsumoMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemProdutoUtil;
@@ -12,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +49,20 @@ public class InsumoService {
         repository.save(product);
     }
 
+    public void enterListOfProducts(Set<InsumoDTO> productDTOList) {
+        if (Objects.isNull(productDTOList)) {
+            throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
+        }
+        productDTOList.forEach(this::enterProduct);
+    }
+
+    public void withdrawalListOfProducts(Set<InsumoDTO> productDTOList) {
+        if (Objects.isNull(productDTOList)) {
+            throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
+        }
+        productDTOList.forEach(this::productWithdrawal);
+    }
+
     public void enterProduct(InsumoDTO dto) {
         Insumo product = findEntity(dto.getId());
         product.setQtdeEstoque(product.getQtdeEstoque() + dto.getQtdeEstoque());
@@ -59,4 +77,5 @@ public class InsumoService {
         productService.validateStockQuantity(product.getQtdeEstoque(), product.getPontoEncomenda());
         repository.save(product);
     }
+
 }

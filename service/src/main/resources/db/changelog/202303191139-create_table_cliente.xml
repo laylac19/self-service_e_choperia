@@ -26,6 +26,10 @@
             <column name="ativo" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
+            <column name="contas_clientes" type="BIGINT"/>
         </createTable>
+        <addForeignKeyConstraint baseColumnNames="contas_clientes" baseTableName="cliente"
+                                 constraintName="FK_CLIENTE_ON_CONTAS_CLIENTES" referencedColumnNames="id"
+                                 referencedTableName="caixa"/>
     </changeSet>
 </databaseChangeLog>

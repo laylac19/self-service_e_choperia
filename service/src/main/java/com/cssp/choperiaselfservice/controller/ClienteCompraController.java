@@ -2,6 +2,7 @@ package com.cssp.choperiaselfservice.controller;
 
 import com.cssp.choperiaselfservice.service.ClienteCompraService;
 import com.cssp.choperiaselfservice.service.dto.ClienteCompraDTO;
+import com.cssp.choperiaselfservice.service.dto.ComprasCaixaListDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/cliente-compra")
@@ -36,5 +39,10 @@ public class ClienteCompraController {
     public ResponseEntity<Void> delete(@PathVariable("idCompra") Long idCompra) {
         service.delete(idCompra);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/compras-cliente/{cartaoRFID}")
+    public ResponseEntity<Set<ComprasCaixaListDTO>> findByID(@PathVariable("cartaoRFID") String cartaoRFID) {
+        return new ResponseEntity<>(service.listPurchasedItemsOfCustomer(cartaoRFID), HttpStatus.OK);
     }
 }

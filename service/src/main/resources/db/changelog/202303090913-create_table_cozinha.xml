@@ -12,9 +12,7 @@
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_notificacao_cozinha"/>
             </column>
-            <column name="prato" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="prato_id" type="BIGINT"/>
             <column name="status_prato" type="INT">
                 <constraints nullable="false"/>
             </column>
@@ -22,5 +20,8 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <addForeignKeyConstraint baseColumnNames="prato_id" baseTableName="notificacao_cozinha"
+                                 constraintName="FK_NOTIFICACAO_COZINHA_ON_PRATO" referencedColumnNames="id"
+                                 referencedTableName="prato_cozinha"/>
     </changeSet>
 </databaseChangeLog>

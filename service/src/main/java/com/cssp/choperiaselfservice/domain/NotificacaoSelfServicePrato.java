@@ -1,13 +1,17 @@
 package com.cssp.choperiaselfservice.domain;
 
 import com.cssp.choperiaselfservice.domain.enums.StatusPrato;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -26,8 +30,9 @@ public class NotificacaoSelfServicePrato implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "prato", nullable = false)
-    private String descricao;
+    @OneToOne(fetch =  FetchType.LAZY, cascade = CascadeType.DETACH, optional = false, orphanRemoval = true)
+    @JoinColumn(name = "prato_id", nullable = false)
+    private Prato prato;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status_prato", nullable = false)
@@ -35,4 +40,7 @@ public class NotificacaoSelfServicePrato implements Serializable {
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
+
+
+
 }

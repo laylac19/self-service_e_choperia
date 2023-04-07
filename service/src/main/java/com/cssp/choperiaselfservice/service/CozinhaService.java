@@ -22,7 +22,10 @@ import java.util.Objects;
 @Transactional
 public class CozinhaService {
     private final NotificacaoSelfServiceRepository repository;
+
     private final NotificacaoSelfServiceMapper mapper;
+
+    private final PratoCozinhaService pratoCozinhaService;
 
     public NotificacaoSelfServicePrato findEntity(Long id) {
         return repository.findById(id).orElseThrow(
@@ -46,7 +49,7 @@ public class CozinhaService {
     public void needToReplacePlate(String dish) {
         if (Objects.nonNull(dish)) {
             NotificacaoSelfServicePrato notification = new NotificacaoSelfServicePrato();
-            notification.setDescricao(dish);
+            notification.setPrato(pratoCozinhaService.findDishByDescription(dish));
             notification.setStatusPrato(StatusPrato.PENDENTE);
             notification.setAtivo(true);
             repository.save(notification);
@@ -61,4 +64,5 @@ public class CozinhaService {
         notification.setAtivo(false);
         repository.save(notification);
     }
+
 }

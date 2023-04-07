@@ -1,10 +1,13 @@
 package com.cssp.choperiaselfservice.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -45,7 +48,8 @@ public class Cliente implements Serializable {
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
 
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true)
-    private Set<ClienteCompra> cliente_compra = new LinkedHashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "compras_cliente")
+    private Set<ClienteCompra> clienteCompras = new LinkedHashSet<>();
 
 }

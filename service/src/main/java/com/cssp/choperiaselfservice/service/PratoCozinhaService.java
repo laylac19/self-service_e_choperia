@@ -44,4 +44,8 @@ public class PratoCozinhaService {
         repository.save(product);
     }
 
+    public Prato findDishByDescription(String description) {
+        return mapper.toEntity(repository.findDishByDescription(description));
+    }
+
 }
