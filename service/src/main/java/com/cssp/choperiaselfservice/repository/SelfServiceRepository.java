@@ -18,8 +18,7 @@ public interface SelfServiceRepository extends JpaRepository<Prato, Long> {
             " WHERE pc.ativo = true ")
     Page<PratoListDTO> listAll(Pageable pageable);
 
-    @Query(" SELECT new com.cssp.choperiaselfservice.service.dto.PratoDTO(" +
-            " p.id, p.descricao)" +
+    @Query(" SELECT p.id, p.descricao" +
             " FROM Prato p " +
             " WHERE p.ativo = true AND p.descricao = :description ")
     PratoDTO findDishByDescription(@Param("description") String description);

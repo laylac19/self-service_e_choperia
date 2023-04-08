@@ -33,7 +33,7 @@ export class SelfServiceProdComponent implements OnInit {
     this.formGroup = this.builder.group({
       id: [null],
       descricao: [null, [Validators.required]],
-      precokg: [null, [Validators.required]],
+      precoKg: [null, [Validators.required]],
     });
   }
 

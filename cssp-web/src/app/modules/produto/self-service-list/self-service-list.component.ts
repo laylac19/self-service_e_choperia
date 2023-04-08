@@ -76,8 +76,8 @@ export class SelfServiceListComponent implements OnInit {
     this.dishService.delete(id).subscribe(() => this.listAllIDishes());
   }
 
-  confirmAction(id: number): void {
-    this.message.confirmarDialog(id, () => this.deactivateDish(id), EntidadeUtil.USUARIO)
+  confirmAction(dish: any): void {
+    this.message.confirmarDialog(dish.id, () => this.deactivateDish(dish.id), EntidadeUtil.USUARIO, dish.descricao)
   }
 
   onClose(): void {
