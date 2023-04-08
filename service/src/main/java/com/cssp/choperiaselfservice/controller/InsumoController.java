@@ -32,12 +32,12 @@ public class InsumoController {
         return new ResponseEntity<>(service.listAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping("/{idProduto}")
-    public ResponseEntity<InsumoDTO> findByID(@PathVariable("idProduto") Long idProduto) {
-        return new ResponseEntity<>(service.findByID(idProduto), HttpStatus.OK);
+    @GetMapping("/{idInsumo}")
+    public ResponseEntity<InsumoDTO> findByID(@PathVariable("idInsumo") Long idInsumo) {
+        return new ResponseEntity<>(service.findByID(idInsumo), HttpStatus.OK);
     }
 
-    @GetMapping("/{barCode}")
+    @GetMapping("/buscar-cod-barras/{barCode}")
     public ResponseEntity<InsumoListDTO> findInputByBarCode(@PathVariable("barCode") String barCode) {
         return new ResponseEntity<>(service.findInputByBarCode(barCode), HttpStatus.OK);
     }
@@ -47,9 +47,9 @@ public class InsumoController {
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{idProduto}")
-    public ResponseEntity<Void> delete(@PathVariable("idProduto") Long idProduto) {
-        service.delete(idProduto);
+    @DeleteMapping("/{idInsumo}")
+    public ResponseEntity<Void> delete(@PathVariable("idInsumo") Long idInsumo) {
+        service.delete(idInsumo);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

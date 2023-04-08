@@ -88,8 +88,8 @@ export class InsumoListComponent implements OnInit {
     this.inputService.delete(id).subscribe(() => this.listAllInputs());
   }
 
-  confirmAction(id: number): void {
-    this.message.confirmarDialog(id, () => this.deactivateUser(id), EntidadeUtil.USUARIO)
+  confirmAction(input: any): void {
+    this.message.confirmarDialog(input.id, () => this.deactivateUser(input.id), EntidadeUtil.INSUMO, input.descricao)
   }
 
   onClose(): void {

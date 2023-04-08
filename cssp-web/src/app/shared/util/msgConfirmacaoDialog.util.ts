@@ -9,10 +9,10 @@ export class MensagensConfirmacao {
               private messageService: MessageService) {
   }
 
-  public confirmarDialog(id: number, alterarSituacao: () => void, entidade: EntidadeUtil): void {
+  public confirmarDialog(id: number, alterarSituacao: () => void, entidade: EntidadeUtil, description?: string): void {
     this.confirmMessage.confirm({
       header: 'Confirmação',
-      message: 'Deseja desativar esse(a) ' + entidade.descricao + ' ?',
+      message: 'Deseja desativar esse(a) ' + entidade.descricao + ' - ' + description + '?',
       acceptLabel: 'Sim',
       rejectLabel: 'Cancelar',
       accept: alterarSituacao

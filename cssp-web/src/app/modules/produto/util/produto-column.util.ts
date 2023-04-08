@@ -18,6 +18,8 @@ export class ProdutoColumnUtil {
 		{
 			header: 'Preço Compra',
 			field: 'precoCompra',
+      type: 'price',
+      pipe: 'currency',
 		},
     {
       header: 'Unidade',
@@ -29,7 +31,9 @@ export class ProdutoColumnUtil {
 		},
     {
 			header: 'Preço de Venda',
-			field: 'precoVenda'
+			field: 'precoVenda',
+      type: 'price',
+      pipe: 'currency',
 		},
     {
 			header: 'Ações',
@@ -50,6 +54,8 @@ export class ProdutoColumnUtil {
 		{
 			header: 'Preço Kg',
 			field: 'precoKg',
+      type: 'price',
+      pipe: 'currency',
 		},
     {
 			header: 'Ações',
@@ -74,6 +80,8 @@ export class ProdutoColumnUtil {
 		{
 			header: 'Preço Compra',
 			field: 'precoCompra',
+      type: 'price',
+      pipe: 'currency',
 		},
     {
       header: 'Unidade',
@@ -85,7 +93,9 @@ export class ProdutoColumnUtil {
 		},
     {
 			header: 'Preço de Venda',
-			field: 'precoVenda'
+			field: 'precoVenda',
+      type: 'price',
+      pipe: 'currency',
 		},
     {
 			header: 'Ações',

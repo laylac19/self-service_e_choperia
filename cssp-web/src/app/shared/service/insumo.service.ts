@@ -24,7 +24,7 @@ export class InsumoService {
   }
 
   findInputByBarCode(barCode: string): Observable<InsumoListModel> {
-    return this.http.get<InsumoListModel>(this.resourceUrl + '/' + barCode);
+    return this.http.get<InsumoListModel>(this.resourceUrl + '/buscar-cod-barras/' + barCode);
   }
 
   insert(entity: InsumoModel): Observable<InsumoModel> {

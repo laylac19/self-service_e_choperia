@@ -14,7 +14,7 @@ export class SelfServiceService {
   constructor(private http: HttpClient) {
   }
 
-  resourceUrl = environment.apiUrl + '/insumo';
+  resourceUrl = environment.apiUrl + '/prato-produto';
 
   findAll(): Observable<Page<SelfServicePratoListModel[]>> {
     return this.http.get<Page<SelfServicePratoListModel[]>>(this.resourceUrl);
