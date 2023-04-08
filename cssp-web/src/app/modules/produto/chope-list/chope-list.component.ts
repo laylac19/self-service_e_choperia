@@ -89,8 +89,10 @@ export class ChopeListComponent implements OnInit {
     this.drafBeerService.delete(id).subscribe(() => this.listAllDraftBeers());
   }
 
-  confirmAction(id: number): void {
-    this.message.confirmarDialog(id, () => this.deactivateUser(id), EntidadeUtil.USUARIO)
+  confirmAction(draftBeer: any): void {
+    this.message.confirmarDialog(draftBeer.id,
+      () => this.deactivateUser(draftBeer.id),
+      EntidadeUtil.CHOPE, draftBeer.descricao);
   }
 
   onClose(): void {
