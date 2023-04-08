@@ -39,6 +39,10 @@ public class InsumoService {
         return mapper.toDto(findEntity(id));
     }
 
+    public InsumoListDTO findInputByBarCode(String barCode) {
+        return repository.findInputByBarCode(barCode);
+    }
+
     public InsumoDTO save(InsumoDTO dto) {
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

@@ -37,6 +37,11 @@ public class InsumoController {
         return new ResponseEntity<>(service.findByID(idProduto), HttpStatus.OK);
     }
 
+    @GetMapping("/{barCode}")
+    public ResponseEntity<InsumoListDTO> findInputByBarCode(@PathVariable("barCode") String barCode) {
+        return new ResponseEntity<>(service.findInputByBarCode(barCode), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<InsumoDTO> save(@RequestBody InsumoDTO dto) {
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);

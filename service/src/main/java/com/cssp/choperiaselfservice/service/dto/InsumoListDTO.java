@@ -20,4 +20,9 @@ public class InsumoListDTO extends ProdutoListDTO implements Serializable {
         super(id, qtdeEstoque, precoCompra, descricao, unidade, pontoEncomenda, precoVenda);
         this.codigoBarras = codigoBarras;
     }
+
+    public InsumoListDTO(Long id, Double qtdeEstoque, String descricao, String codigoBarras) {
+        super(id, qtdeEstoque, descricao);
+        this.codigoBarras = codigoBarras;
+    }
 }

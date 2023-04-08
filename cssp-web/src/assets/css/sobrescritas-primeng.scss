@@ -13,36 +13,54 @@ p-card.card-item-menu .p-card-content {
   width: 190px;
 }
 
-p-card.card-item-menu .p-card-body{
-    background-color: var(--cor-tema-2);
+p-card.card-item-menu .p-card-body {
+  background-color: var(--cor-tema-2);
 }
 
-app-titulo-list > p-dialog > div > div {
-  min-width: 50%;
-}
+//app-titulo-list > p-dialog > div > div {
+//  min-width: 50%;
+//}
 
 p-dialog-header {
   cursor: none;
 }
 
-app-cliente-list > div > p-tabview > div > div.p-tabview-panels {
-  padding: 0 !important;
-}
+//app-cliente-list > div > p-tabview > div > div.p-tabview-panels {
+//  padding: 0 !important;
+//}
 
 body > app-root > div > div > div > div > p-card > div {
   height: 85vh;
 }
 
-app-locacao-list > p-dialog > div > div {
-  min-width: 55%;
+//app-locacao-list > p-dialog > div > div {
+//  min-width: 55%;
+//}
+
+//app-titulo-list > p-dialog > div > div {
+//  min-width: 60%;
+//}
+
+body > app-root > div > div > div > div > {
+  app-usuario-list,
+  app-produto-list,
+  app-insumo-list,
+  app-self-service-list,
+  app-chope-list,
+  app-cliente-list,
+  app-chope-view {
+    width: 100%;
+  }
 }
 
-app-titulo-list > p-dialog > div > div {
-  min-width: 60%;
+.p-tabview .p-tabview-nav {
+
+  li .p-tabview-nav-link {
+    color: var(--cor-tema-4);;
+  }
+
+  li.p-highlight .p-tabview-nav-link {
+    border-color: var(--cor-tema-4);
+    color: var(--cor-tema-4);
+  }
 }
-
-body > app-root > div > div > div > div > app-usuario-list {
-  width: 100%;
-}
-
-

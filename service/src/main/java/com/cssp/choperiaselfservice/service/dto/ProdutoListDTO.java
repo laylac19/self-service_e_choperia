@@ -20,4 +20,10 @@ public class ProdutoListDTO implements Serializable {
     private String unidade;
     private Double pontoEncomenda;
     private Double precoVenda;
+
+    public ProdutoListDTO(Long id, Double qtdeEstoque, String descricao) {
+        this.id = id;
+        this.qtdeEstoque = qtdeEstoque;
+        this.descricao = descricao;
+    }
 }

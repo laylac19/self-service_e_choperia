@@ -66,7 +66,7 @@ public class ChopeController {
     }
 
     @PutMapping("/cliente-chope-saida")
-    public ResponseEntity<Void> releaseProductOutput(@RequestBody ChopeCompraDTO dto) {
+    public ResponseEntity<Void> removalBeerMugByTheCustomer(@RequestBody ChopeCompraDTO dto) {
         service.removalBeerMugByTheCustomer(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
