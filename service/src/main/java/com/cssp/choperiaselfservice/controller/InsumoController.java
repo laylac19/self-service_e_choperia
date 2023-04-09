@@ -2,6 +2,7 @@ package com.cssp.choperiaselfservice.controller;
 
 import com.cssp.choperiaselfservice.service.InsumoService;
 import com.cssp.choperiaselfservice.service.dto.InsumoDTO;
+import com.cssp.choperiaselfservice.service.dto.InsumoEntryDTO;
 import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -54,13 +55,13 @@ public class InsumoController {
     }
 
     @PutMapping("/entrada-produto")
-    public ResponseEntity<Void> enterProduct(@RequestBody Set<InsumoDTO> dtoSet) {
+    public ResponseEntity<Void> enterProduct(@RequestBody Set<InsumoEntryDTO> dtoSet) {
         service.enterListOfProducts(dtoSet);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/saida-produto")
-    public ResponseEntity<Void> releaseProductOutput(@RequestBody Set<InsumoDTO> dtoSet) {
+    public ResponseEntity<Void> releaseProductOutput(@RequestBody Set<InsumoEntryDTO> dtoSet) {
         service.withdrawalListOfProducts(dtoSet);
         return new ResponseEntity<>(HttpStatus.OK);
     }

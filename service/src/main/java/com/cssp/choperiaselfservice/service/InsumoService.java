@@ -3,6 +3,7 @@ package com.cssp.choperiaselfservice.service;
 import com.cssp.choperiaselfservice.domain.Insumo;
 import com.cssp.choperiaselfservice.repository.InsumoRepository;
 import com.cssp.choperiaselfservice.service.dto.InsumoDTO;
+import com.cssp.choperiaselfservice.service.dto.InsumoEntryDTO;
 import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
 import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
@@ -53,29 +54,27 @@ public class InsumoService {
         repository.save(product);
     }
 
-    public void enterListOfProducts(Set<InsumoDTO> productDTOList) {
+    public void enterListOfProducts(Set<InsumoEntryDTO> productDTOList) {
         if (Objects.isNull(productDTOList)) {
             throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
         }
         productDTOList.forEach(this::enterProduct);
     }
 
-    public void withdrawalListOfProducts(Set<InsumoDTO> productDTOList) {
+    public void withdrawalListOfProducts(Set<InsumoEntryDTO> productDTOList) {
         if (Objects.isNull(productDTOList)) {
             throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
         }
         productDTOList.forEach(this::productWithdrawal);
     }
 
-    public void enterProduct(InsumoDTO dto) {
+    public void enterProduct(InsumoEntryDTO dto) {
         Insumo product = findEntity(dto.getId());
         product.setQtdeEstoque(product.getQtdeEstoque() + dto.getQtdeEstoque());
-        product.setPrecoCompra(dto.getPrecoCompra());
-        product.setPrecoVenda(dto.getPrecoVenda());
         repository.save(product);
     }
 
-    public void productWithdrawal(InsumoDTO dto) {
+    public void productWithdrawal(InsumoEntryDTO dto) {
         Insumo product = findEntity(dto.getId());
         product.setQtdeEstoque(productService.validadeStockWithdrawal(product.getQtdeEstoque(), dto.getQtdeEstoque()));
         productService.validateStockQuantity(product.getQtdeEstoque(), product.getPontoEncomenda());

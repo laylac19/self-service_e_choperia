@@ -23,8 +23,8 @@ export class InsumoService {
     return this.http.get<InsumoModel>(this.resourceUrl + '/' + id);
   }
 
-  findInputByBarCode(barCode: string): Observable<InsumoListModel> {
-    return this.http.get<InsumoListModel>(this.resourceUrl + '/buscar-cod-barras/' + barCode);
+  findByBarCode(barCode: string): Observable<InsumoModel> {
+    return this.http.get<InsumoModel>(this.resourceUrl + '/buscar-cod-barras/' + barCode);
   }
 
   insert(entity: InsumoModel): Observable<InsumoModel> {
@@ -39,12 +39,12 @@ export class InsumoService {
     return this.http.delete<InsumoModel>(this.resourceUrl + '/' + id);
   }
 
-  enterProductInput(inputs: InsumoModel[]): Observable<InsumoModel[]> {
-    return this.http.put<InsumoModel[]>(this.resourceUrl + '/', inputs);
+  enterProductInput(inputs: { id: number, qtdeEstoque: number }[]): Observable<InsumoModel[]> {
+    return this.http.put<any>(this.resourceUrl + '/entrada-produto', inputs);
   }
 
-  releaseProductOutput(inputs: InsumoModel[]): Observable<InsumoModel[]> {
-    return this.http.put<InsumoModel[]>(this.resourceUrl + '/', inputs);
+  releaseProductOutput(inputs: { id: number, qtdeEstoque: number }[]): Observable<InsumoModel[]> {
+    return this.http.put<any>(this.resourceUrl + '/saida-produto', inputs);
   }
 
 }
