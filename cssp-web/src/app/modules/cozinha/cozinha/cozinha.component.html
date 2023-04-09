@@ -1,1 +1,24 @@
-<p>cozinha works!</p>
+<div class="pagina flex flex-column col-12">
+  <div class="item-pagina col-12">
+    <span class="titulo">Cozinha</span>
+  </div>
+
+  <div class="list-card">
+    <div *ngFor="let item of notificationList">
+      <div class="item">
+        <div class="body-card">
+          <span>{{item.prato}}</span>
+          <span class="status">{{item.statusPrato}}</span>
+        </div>
+        <div class="card-footer">
+          <button pButton type="button"
+                  class="button-action ui-button-success button-save-new"
+                  iconPos="left"
+                  label="Repor"
+                  (click)="confirmAction(item)">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
