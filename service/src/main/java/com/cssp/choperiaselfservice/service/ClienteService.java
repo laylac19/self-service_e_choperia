@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -28,6 +30,10 @@ public class ClienteService {
 
     public Page<ClienteListDTO> findAll(Pageable pageable) {
         return repository.listAll(pageable);
+    }
+
+    public List<ClienteListDTO> listCustomersWhoHaveEntered() {
+        return repository.listCustomersWhoHaveEntered();
     }
 
     public ClienteDTO findByID(Long id) {

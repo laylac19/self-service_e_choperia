@@ -4,18 +4,19 @@ import {ANGULAR_IMPORTS} from './imports/angular.imports';
 import {ComponentsModule} from "./components/components.module";
 
 @NgModule({
-  declarations: [],
+    declarations: [
+    ],
   imports: [
     PRIMENG_IMPORTS,
     ANGULAR_IMPORTS,
     ComponentsModule,
   ],
   providers: [],
-  exports: [
-    PRIMENG_IMPORTS,
-    ANGULAR_IMPORTS,
-    ComponentsModule,
-  ]
+    exports: [
+        PRIMENG_IMPORTS,
+        ANGULAR_IMPORTS,
+        ComponentsModule,
+    ]
 })
 export class SharedModule {
 }

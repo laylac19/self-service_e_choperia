@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class CPFPipe implements PipeTransform {
-    transform(value) {
+    transform(value: any) {
         if (value == null || value == "") {
             return "";
         }

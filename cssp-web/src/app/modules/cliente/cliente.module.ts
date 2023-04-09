@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ClienteRoutingModule } from './cliente-routing.module';
-import { ClienteFormComponent } from './cliente-form/cliente-form.component';
-import { ClienteListComponent } from './cliente-list/cliente-list.component';
+import {ClienteRoutingModule} from './cliente-routing.module';
+import {ClienteFormComponent} from './cliente-form/cliente-form.component';
+import {ClienteListComponent} from './cliente-list/cliente-list.component';
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { ClienteListComponent } from './cliente-list/cliente-list.component';
   ],
   imports: [
     CommonModule,
-    ClienteRoutingModule
+    ClienteRoutingModule,
+    SharedModule
   ]
 })
-export class ClienteModule { }
+export class ClienteModule {
+}
