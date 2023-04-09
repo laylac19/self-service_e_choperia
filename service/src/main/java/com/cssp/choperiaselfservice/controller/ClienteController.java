@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/cliente")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -27,6 +29,11 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<Page<ClienteListDTO>> findAll(Pageable pageable) {
         return new ResponseEntity<>(service.findAll(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/entradas")
+    public ResponseEntity<List<ClienteListDTO>> listCustomersWhoHaveEntered() {
+        return new ResponseEntity<>(service.listCustomersWhoHaveEntered(), HttpStatus.OK);
     }
 
     @GetMapping("/{idCliente}")

@@ -1,0 +1,47 @@
+<div class="form p-fluid p-grid">
+  <form [formGroup]="formGroup">
+
+    <div class="area-field flex col-12">
+
+      <div class="item-field col-5 pt-2">
+        <span class="item-form">
+          <label class="campo" for="cartao">Cartão RFID</label>
+          <input type="text" id="cartao" pInputText formControlName="numCartaoRFID">
+        </span>
+      </div>
+
+      <div class="item-field col-7 pt-2">
+        <span class="item-form">
+          <label class="campo">Nome</label>
+          <input type="text" pInputText formControlName="nome">
+        </span>
+      </div>
+    </div>
+
+    <div class="area-field flex col-12" >
+      <div class="item-field col-4">
+        <span class="item-form">
+          <label class="campo">CPF</label>
+          <input type="text" pInputText formControlName="cpf">
+
+        </span>
+      </div>
+
+      <div class="item-field col-4">
+        <span class="item-form">
+          <label class="campo">Telefone</label>
+          <input type="text" pInputText formControlName="telefone">
+        </span>
+      </div>
+
+      <div class="item-field col-4">
+        <span class="item-form">
+          <label class="campo">Email</label>
+          <input type="text" pInputText formControlName="email">
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
+<ng-content></ng-content>
+

@@ -10,12 +10,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ClienteListDTO(c.id, " +
-            " c.numCartaoRFID, c.nome, c.cpf) " +
-            " FROM Cliente c WHERE c.ativo = true " )
+            " c.numCartaoRFID, c.nome, c.cpf, c.telefone, c.email) " +
+            " FROM Cliente c WHERE c.ativo = true" )
     Page<ClienteListDTO> listAll(Pageable pageable);
+
+    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ClienteListDTO(c.id, " +
+            " c.numCartaoRFID, c.nome, c.cpf) " +
+            " FROM Cliente c WHERE c.ativo = true AND c.numCartaoRFID IS NOT NULL " )
+    List<ClienteListDTO> listCustomersWhoHaveEntered();
 
     ClienteDTO findClienteByNumCartaoRFIDLikeAndAtivoIsTrue (@Param("numCartaoRFID") String numCartaoRFID);
 

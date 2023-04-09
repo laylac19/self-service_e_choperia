@@ -10,11 +10,11 @@ import com.cssp.choperiaselfservice.service.mapper.NotificacaoSelfServiceMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemCozinhaUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -32,7 +32,7 @@ public class CozinhaService {
                 () -> new EntityNotFoundException(MensagemCozinhaUtil.ENTITY_NOT_FOUND));
     }
 
-    public Page<NotificacaoSelfServicePratoListDTO> listAll(Pageable pageable) {
+    public List<NotificacaoSelfServicePratoListDTO> listAll(Pageable pageable) {
         return repository.listAll(pageable);
     }
 

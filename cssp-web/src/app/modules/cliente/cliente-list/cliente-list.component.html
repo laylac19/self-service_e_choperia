@@ -1,1 +1,56 @@
-<p>cliente-list works!</p>
+<div class="pagina flex flex-column col-12">
+  <div class="item-pagina col-12">
+    <span class="titulo">Entrada e Saída de Clientes</span>
+  </div>
+
+  <div class="item-pagina-botoes pt-3">
+    <button pButton type="button"
+            icon="pi pi-plus"
+            class="button-action ui-button-success button-save-new"
+            iconPos="left"
+            label="Cadastrar Cliente"
+            (click)="newCustomer()">
+    </button>
+  </div>
+
+  <p-tabView>
+    <p-tabPanel header="Clientes Cadastrados">
+      <custom-table [colunas]="columns"
+                    [dados]="customersList"
+                    [paginator]="true"
+                    [rows]="12"
+                    [editarDado]="true" [desativarDado]="true" [entradaCliente]="true" [saidaCliente]="true"
+                    (abrirModalHabilitado)="editCustomer($event)" (deletarDado)="confirmAction($event)"
+                    (abrirModalEntrada)="checkIn($event)" (abrirModalSaida)="checkOut($event)">
+      </custom-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Entrada">
+      <div class="list-card">
+        <div *ngFor="let item of customerEntries">
+          <div class="item">
+            <div class="body-card">
+              <span class="nome">{{item.nome.toUpperCase()}}</span>
+              <span>CPF: {{item.cpf | cpf}}</span>
+              <span>Cartão RFID: {{item.numCartaoRFID}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+
+<custom-dialog [display]="display"
+               [header]="titleDialog"
+               (answerForm)="onSave()"
+               (closeDialog)="onClose()">
+  <app-cliente-form></app-cliente-form>
+</custom-dialog>
+
+<custom-dialog [display]="displayEntry"
+               [header]="titleDialog"
+               (answerForm)="onSaveEntry()"
+               (closeDialog)="onCloseEntryDialog()">
+  <app-cliente-entrada></app-cliente-entrada>
+</custom-dialog>

@@ -4,12 +4,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CustomDialogComponent} from './custom-dialog/custom-dialog.component';
 import {PRIMENG_IMPORTS} from "../imports/primeng.imports";
 import {CustomTableComponent} from "./custom-table/custom-table.component";
+import {CPFPipe} from "../util/pipes/cpf.pipe";
 import {SimpleTableComponent} from "./simple-table/simple-table.component";
 
 @NgModule({
   declarations: [
     CustomDialogComponent,
     CustomTableComponent,
+    CPFPipe,
     SimpleTableComponent
   ],
   imports: [
@@ -21,6 +23,7 @@ import {SimpleTableComponent} from "./simple-table/simple-table.component";
   exports: [
     CustomDialogComponent,
     CustomTableComponent,
+    CPFPipe,
     SimpleTableComponent
   ],
   entryComponents: [],
