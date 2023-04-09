@@ -7,6 +7,7 @@ export class MenuEnum {
   static readonly COZINHA = new MenuEnum(5, 'Cozinha');
   static readonly SELF_SERVICE = new MenuEnum(6, 'Self-Service');
   static readonly CHOPE = new MenuEnum(7, 'Chope');
+  static readonly PAINEL = new MenuEnum(8, 'Painel');
 
   static values = [
     MenuEnum.USUARIO,
@@ -17,6 +18,7 @@ export class MenuEnum {
     MenuEnum.COZINHA,
     MenuEnum.SELF_SERVICE,
     MenuEnum.CHOPE,
+    MenuEnum.PAINEL
   ];
 
   constructor(

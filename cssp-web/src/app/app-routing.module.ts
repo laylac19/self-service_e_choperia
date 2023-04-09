@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'Cozinha', loadChildren: () => import('./modules/cozinha/cozinha.module').then(m => m.CozinhaModule)},
   {path: 'Self-Service', loadChildren: () => import('./modules/self-service/self-service.module').then(m => m.SelfServiceModule)},
   {path: 'Chope', loadChildren: () => import('./modules/chope/chope.module').then(m => m.ChopeModule)},
+  {path: 'Painel', loadChildren: () => import('./modules/painel-ssc/painel-ssc.module').then(m => m.PainelSscModule)},
 ];
 
 @NgModule({

@@ -16,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -32,12 +34,12 @@ public class ChopeService {
                 () -> new EntityNotFoundException(MensagemProdutoUtil.ENTITY_NOT_FOUND));
     }
 
-    public Page<ChopeListDTO> listAll (Pageable pageable) {
+    public Page<ChopeListDTO> listAll(Pageable pageable) {
         return repository.listAll(pageable);
     }
 
-    public Page<ChopeViewDTO> listAllDraftBeers (Pageable pageable) {
-        return repository.listAllDraftBeer(pageable);
+    public List<ChopeViewDTO> listAllDraftBeers() {
+        return repository.listAllDraftBeer();
     }
 
     public ChopeDTO findByID(Long id) {

@@ -6,12 +6,15 @@ import { SelfServiceComponent } from './self-service/self-service.component';
 
 
 @NgModule({
-  declarations: [
-    SelfServiceComponent
-  ],
-  imports: [
-    CommonModule,
-    SelfServiceRoutingModule
-  ]
+    declarations: [
+        SelfServiceComponent
+    ],
+    exports: [
+        SelfServiceComponent
+    ],
+    imports: [
+        CommonModule,
+        SelfServiceRoutingModule
+    ]
 })
 export class SelfServiceModule { }

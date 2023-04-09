@@ -27,7 +27,7 @@ export class SidemenuComponent {
     new OpcaoMenuModel('icon bi bi-fire', 'Cozinha',
       () => this.router.navigateByUrl('/Cozinha')),
     new OpcaoMenuModel('bi bi-shop-window', 'Self-Service e Chope',
-      () => this.router.navigateByUrl('/Produtos')),
+      () => this.router.navigateByUrl('/Painel')),
   ];
 
   constructor(

@@ -6,12 +6,15 @@ import { ChopeViewComponent } from './chope-view/chope-view.component';
 
 
 @NgModule({
-  declarations: [
-    ChopeViewComponent
-  ],
-  imports: [
-    CommonModule,
-    ChopeRoutingModule
-  ]
+    declarations: [
+        ChopeViewComponent
+    ],
+    exports: [
+        ChopeViewComponent
+    ],
+    imports: [
+        CommonModule,
+        ChopeRoutingModule
+    ]
 })
 export class ChopeModule { }
