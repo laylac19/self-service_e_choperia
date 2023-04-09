@@ -66,6 +66,19 @@
                       iconPos="left"
                       (click)="this.abrirModalHabilitado.emit(rowData.id)">
               </button>
+              <button *ngIf="entradaCliente"
+                      [disabled]="!!rowData.numCartaoRFID"
+                      pButton
+                      icon="bi bi-clipboard-check"
+                      class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
+                      (click)="this.abrirModalEntrada.emit(rowData.id)">
+              </button>
+              <button *ngIf="saidaCliente"
+                      pButton
+                      icon="bi bi-clipboard-x"
+                      class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
+                      (click)="this.abrirModalEntrada.emit(rowData.id)">
+              </button>
               <button *ngIf="desativarDado"
                       pButton
                       icon="pi pi-trash"

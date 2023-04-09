@@ -3,15 +3,15 @@ import {BlockUI, NgBlockUI} from "ng-block-ui";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
 import {ClienteFormComponent} from "../cliente-form/cliente-form.component";
 import {ClienteService} from "../../../shared/service/cliente.service";
-import {MensagensUsuarioUtil} from "../../usuario/util/mensagens-usuario.util";
 import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
-import {TituloModalUsuarioUtil} from "../../usuario/util/titulo-modal-usuario.util";
 import {EntidadeUtil} from "../../../shared/util/entidade.util";
 import {ClienteListModel} from "../../../model/list/cliente-list.model";
 import {ColumnUtil} from "../../../shared/util/columnUtil";
 import {ClienteColumnUtil} from "../util/cliente-column.util";
 import {Page} from "../../../shared/util/page";
 import {finalize} from "rxjs";
+import {ClienteEntradaComponent} from "../cliente-entrada/cliente-entrada.component";
+import {TituloModalClienteUtil} from "../util/titulo-modal-cliente.util";
 
 @Component({
   selector: 'app-cliente-list',
@@ -27,8 +27,10 @@ export class ClienteListComponent implements OnInit {
   titleDialog: string;
 
   @BlockUI() blockUI: NgBlockUI;
-  @Input() display = false;
+  @Input() display: boolean = false;
+  @Input() displayEntry: boolean = false;
   @ViewChild(ClienteFormComponent) customerFormComponent: ClienteFormComponent;
+  @ViewChild(ClienteEntradaComponent) customerEntryComponent: ClienteEntradaComponent;
 
   constructor(private customerService: ClienteService,
               private message: MensagensConfirmacao) {
@@ -48,7 +50,7 @@ export class ClienteListComponent implements OnInit {
           this.resultRequestList(result);
         },
         error: () => {
-          this.message.showInfo(MensagensUsuarioUtil.ERROS_LIST_ALL, MensagensProntasUtil.ERROR);
+          this.message.showInfo(MensagensProntasUtil.ERROS_LIST_ALL, MensagensProntasUtil.ERROR);
         }
       })
   }
@@ -70,7 +72,7 @@ export class ClienteListComponent implements OnInit {
   }
 
   newCustomer(): void {
-    this.titleDialog = TituloModalUsuarioUtil.setTitulo(TituloModalUsuarioUtil.NEW.index).header;
+    this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.NEW.index).header;
     this.customerFormComponent.formGroup.reset();
     this.display = true;
   }
@@ -81,8 +83,14 @@ export class ClienteListComponent implements OnInit {
     this.onClose();
   }
 
+  onSaveEntry(): void {
+    this.customerEntryComponent.saveForm();
+    this.listAllCustomers();
+    this.onCloseEntryDialog();
+  }
+
   editCustomer(id: number): void {
-    this.titleDialog = TituloModalUsuarioUtil.setTitulo(TituloModalUsuarioUtil.EDIT.index).header;
+    this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.EDIT.index).header;
     this.display = true;
     this.customerFormComponent.editCustomer(id);
   }
@@ -100,11 +108,18 @@ export class ClienteListComponent implements OnInit {
     this.customerFormComponent.formGroup.reset();
   }
 
-  checkIn() {
-
+  onCloseEntryDialog(): void {
+    this.displayEntry = false;
+    this.customerEntryComponent.formGroup.reset();
   }
 
-  checkOut() {
+  checkIn(id: number) {
+    this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.EXIT.index).header;
+    this.customerEntryComponent.findCustomerByID(id);
+    this.displayEntry = true;
+  }
+
+  checkOut(customer: any) {
 
   }
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
 import {ClienteModel} from "../../../model/cliente.model";
@@ -13,7 +13,6 @@ import {FuncoesUtil} from "../../../shared/util/funcoes.util";
 })
 export class ClienteFormComponent implements OnInit {
 
-  @Input() userModel: ClienteModel;
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
 
   formGroup: FormGroup;
