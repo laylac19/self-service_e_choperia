@@ -73,3 +73,7 @@ body > app-root > div > div > div > div > {
 .p-datatable .p-datatable-thead > tr > th {
   color: var(--cor-tema-5);
 }
+
+app-cliente-list > p-dialog > div > div {
+  width: fit-content !important;
+}

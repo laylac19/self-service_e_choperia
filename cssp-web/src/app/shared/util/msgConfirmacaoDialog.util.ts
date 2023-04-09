@@ -29,6 +29,16 @@ export class MensagensConfirmacao {
     });
   }
 
+  public confirmExitCustomer(id: number, alterarSituacao: () => void, description?: string): void {
+    this.confirmMessage.confirm({
+      header: 'Confirmação',
+      message: 'Deseja liberar saída do cliente' + ' - ' + description + '?',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Cancelar',
+      accept: alterarSituacao
+    });
+  }
+
 
   showSuccess(message: string) {
     this.messageService.add({severity: 'success', summary: 'Success', detail: message});

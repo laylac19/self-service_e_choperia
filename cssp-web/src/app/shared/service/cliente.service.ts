@@ -50,7 +50,7 @@ export class ClienteService {
   }
 
   customerExit(id: number): Observable<ClienteModel> {
-    return this.http.post<ClienteModel>(this.resourceUrl + '/resgistrar-entrada-cliente' + id, null);
+    return this.http.put<ClienteModel>(this.resourceUrl + '/resgistrar-saida-cliente/' + id, id);
   }
 
 }

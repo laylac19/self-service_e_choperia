@@ -1,8 +1,8 @@
 package com.cssp.choperiaselfservice.repository;
 
 import com.cssp.choperiaselfservice.domain.Cliente;
-import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteListDTO;
+import com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,10 +24,10 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             " FROM Cliente c WHERE c.ativo = true AND c.numCartaoRFID IS NOT NULL " )
     List<ClienteListDTO> listCustomersWhoHaveEntered();
 
-    ClienteDTO findClienteByNumCartaoRFIDLikeAndAtivoIsTrue (@Param("numCartaoRFID") String numCartaoRFID);
+//    ClienteDTO findClienteByNumCartaoRFIDLikeAndAtivoIsTrue (@Param("numCartaoRFID") String numCartaoRFID);
 
-//    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO(c.id, " +
-//            " c.nome, c.numCartaoRFID) " +
-//            " FROM Cliente c WHERE c.ativo = true AND c.numCartaoRFID LIKE 'numCartaoRFID' " )
-//    ClienteDTO findClienteByNumCartaoRFID(@Param("numCartaoRFID") String numCartaoRFID);
+    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO(c.id, " +
+            " c.nome, c.numCartaoRFID) " +
+            " FROM Cliente c WHERE c.ativo = true AND c.numCartaoRFID LIKE :numCartaoRFID " )
+    ClienteSearchDTO findClienteByNumCartaoRFIDLikeAndAtivoIsTrue(@Param("numCartaoRFID") String numCartaoRFID);
 }

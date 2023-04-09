@@ -3,6 +3,7 @@ package com.cssp.choperiaselfservice.controller;
 import com.cssp.choperiaselfservice.service.ClienteService;
 import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteListDTO;
+import com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +55,7 @@ public class ClienteController {
     }
 
     @GetMapping("/buscar-cliente/{cod}")
-    public ResponseEntity<ClienteDTO> findClienteByNumCartaoRFIDAndAndAtivoIsTrue(@PathVariable("cod") String cod) {
+    public ResponseEntity<ClienteSearchDTO> findClienteByNumCartaoRFIDAndAndAtivoIsTrue(@PathVariable("cod") String cod) {
         return new ResponseEntity<>(service.findClienteByNumCartaoRFIDAndAndAtivoIsTrue(cod), HttpStatus.OK);
     }
 
@@ -68,8 +70,8 @@ public class ClienteController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/resgistrar-saida-cliente/{idCliente}")
-    public ResponseEntity<ClienteDTO> customerExit(@PathVariable("idCliente") Long idCliente) {
+    @PutMapping("/resgistrar-saida-cliente/{idCliente}")
+    public ResponseEntity<Void> customerExit(@PathVariable("idCliente") Long idCliente) {
         service.customerExit(idCliente);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -3,8 +3,8 @@ export class TituloModalClienteUtil {
     static readonly VIEW = new TituloModalClienteUtil(1, 'Visualizar Dados Cliente');
     static readonly EDIT = new TituloModalClienteUtil(2, 'Editar Cliente');
     static readonly DELETE = new TituloModalClienteUtil(3, 'Excluir Cliente');
-    static readonly ENTRY = new TituloModalClienteUtil(3, 'Registrar Entrada de Cliente');
-    static readonly EXIT = new TituloModalClienteUtil(3, 'Registrar Saída de Cliente');
+    static readonly ENTRY = new TituloModalClienteUtil(4, 'Registrar Entrada de Cliente');
+    static readonly EXIT = new TituloModalClienteUtil(5, 'Registrar Saída de Cliente');
 
     static values = [
       TituloModalClienteUtil.NEW,
