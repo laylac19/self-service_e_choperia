@@ -5,12 +5,14 @@ import {CustomDialogComponent} from './custom-dialog/custom-dialog.component';
 import {PRIMENG_IMPORTS} from "../imports/primeng.imports";
 import {CustomTableComponent} from "./custom-table/custom-table.component";
 import {CPFPipe} from "../util/pipes/cpf.pipe";
+import {SimpleTableComponent} from "./simple-table/simple-table.component";
 
 @NgModule({
   declarations: [
     CustomDialogComponent,
     CustomTableComponent,
-    CPFPipe
+    CPFPipe,
+    SimpleTableComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import {CPFPipe} from "../util/pipes/cpf.pipe";
   exports: [
     CustomDialogComponent,
     CustomTableComponent,
-    CPFPipe
+    CPFPipe,
+    SimpleTableComponent
   ],
   entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -49,3 +49,18 @@
                (closeDialog)="onClose()">
   <app-insumo-prod></app-insumo-prod>
 </custom-dialog>
+
+<custom-dialog [display]="displayEntry"
+               [header]="titleDialog"
+               (answerForm)="callEntryQtd()"
+               (closeDialog)="onCloseEntry()">
+  <app-insumo-entry></app-insumo-entry>
+</custom-dialog>
+
+<custom-dialog [display]="displayWithdraw"
+               [header]="titleDialog"
+               (answerForm)="callWithdrawQtd()"
+               (closeDialog)="onCloseWithdraw()">
+  <app-insumo-withdraw></app-insumo-withdraw>
+</custom-dialog>
+

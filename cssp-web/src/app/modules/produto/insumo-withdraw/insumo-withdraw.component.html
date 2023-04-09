@@ -1,0 +1,24 @@
+<div class="form p-fluid p-grid">
+  <form [formGroup]="formGroup">
+
+    <div class="area-field flex pt-2">
+
+      <div class="item-field col-5">
+        <span class="item-form">
+          <label class="campo" for="codBarras">Código de Barras</label>
+          <input type="text" id="codBarras" pInputText formControlName="codigoBarras" (change)="addProductOnTable($event)">
+        </span>
+      </div>
+
+    </div>
+  </form>
+
+  <simple-table [colunas]="columns"
+                [dados]="withdrawList"
+                [paginator]="true"
+                [rows]="12">
+  </simple-table>
+
+</div>
+<ng-content></ng-content>
+

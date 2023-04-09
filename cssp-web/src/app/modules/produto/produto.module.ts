@@ -5,6 +5,8 @@ import { ProdutoRoutingModule } from './produto-routing.module';
 import { ChopeProdComponent } from './chope-prod/chope-prod.component';
 import { SelfServiceProdComponent } from './self-service-prod/self-service-prod.component';
 import { InsumoProdComponent } from './insumo-prod/insumo-prod.component';
+import { InsumoEntryComponent } from './insumo-entry/insumo-entry.component';
+import { InsumoWithdrawComponent } from './insumo-withdraw/insumo-withdraw.component';
 import { ProdutoListComponent } from './produto-list/produto-list.component';
 import {SharedModule} from "../../shared/shared.module";
 import { InsumoListComponent } from './insumo-list/insumo-list.component';
@@ -20,7 +22,9 @@ import { ChopeListComponent } from './chope-list/chope-list.component';
     ProdutoListComponent,
     InsumoListComponent,
     SelfServiceListComponent,
-    ChopeListComponent
+    ChopeListComponent,
+    InsumoEntryComponent,
+    InsumoWithdrawComponent
   ],
     imports: [
         CommonModule,

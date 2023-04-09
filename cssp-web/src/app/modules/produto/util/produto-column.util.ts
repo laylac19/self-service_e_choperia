@@ -103,4 +103,34 @@ export class ProdutoColumnUtil {
       columnWidth: '132px'
 		},
 	];
+
+  static ENTRY_PRODUCTS_COLUMNS: ColumnUtil[] = [
+    {
+      header: 'Código de Barras',
+      field: 'codigoBarras'
+    },
+    {
+      header: 'Descrição',
+      field: 'descricao',
+    },
+    {
+      header: 'Qtde. Estoque',
+      field: 'qtdeEstoque',
+    }
+  ];
+
+  static WITHDRAW_PRODUCTS_COLUMNS: ColumnUtil[] = [
+    {
+      header: 'Código de Barras',
+      field: 'codigoBarras'
+    },
+    {
+      header: 'Descrição',
+      field: 'descricao',
+    },
+    {
+      header: 'Qtde. Estoque',
+      field: 'qtdeEstoque',
+    }
+  ];
 }

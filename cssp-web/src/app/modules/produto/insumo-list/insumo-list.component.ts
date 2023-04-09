@@ -11,6 +11,8 @@ import {finalize} from "rxjs";
 import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
 import {EntidadeUtil} from "../../../shared/util/entidade.util";
 import {TituloModalInsumoUtil} from "../util/modal/titulo-modal-insumo.util";
+import {InsumoEntryComponent} from "../insumo-entry/insumo-entry.component";
+import {InsumoWithdrawComponent} from "../insumo-withdraw/insumo-withdraw.component";
 
 @Component({
   selector: 'app-insumo-list',
@@ -26,8 +28,11 @@ export class InsumoListComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   @Input() display = false;
+  @Input() displayEntry = false;
+  @Input() displayWithdraw = false;
   @ViewChild(InsumoProdComponent) inputFormComponent: InsumoProdComponent;
-
+  @ViewChild(InsumoEntryComponent) entryFormComponent: InsumoEntryComponent;
+  @ViewChild(InsumoWithdrawComponent) withdrawFormComponent: InsumoWithdrawComponent;
   constructor(private inputService: InsumoService,
               private message: MensagensConfirmacao) {
   }
@@ -38,6 +43,10 @@ export class InsumoListComponent implements OnInit {
 
   listAllInputs(): void {
     this.blockUI.start();
+    this.fetchAll();
+  }
+
+  fetchAll(): void {
     this.inputService.findAll()
       .pipe(finalize(() => this.blockUI.stop()))
       .subscribe({
@@ -61,11 +70,15 @@ export class InsumoListComponent implements OnInit {
   }
 
   giveEntryToProduct(): void {
-
+    this.titleDialog = TituloModalInsumoUtil.setTitulo(TituloModalInsumoUtil.ENTRY.index).header;
+    this.entryFormComponent.formGroup.reset();
+    this.displayEntry = true;
   }
 
   outputInProduct(): void {
-
+    this.titleDialog = TituloModalInsumoUtil.setTitulo(TituloModalInsumoUtil.WITHDRAW.index).header;
+    this.inputFormComponent.formGroup.reset();
+    this.displayWithdraw = true;
   }
 
   printBarcode(): void {
@@ -76,6 +89,36 @@ export class InsumoListComponent implements OnInit {
     this.inputFormComponent.saveInputForm();
     this.listAllInputs();
     this.onClose();
+  }
+
+  callEntryQtd(): void {
+    this.inputService.enterProductInput(
+      this.entryFormComponent.entryList.map((product) => ({ id: product.id, qtdeEstoque: product.qtdeEstoque }))
+    ).subscribe(
+      () => {
+        this.onCloseEntry();
+        this.fetchAll();
+        this.message.showSuccess("Quantidade de estoque atualizada!");
+      },
+      () => {
+        this.message.showError("Falha ao atualizar estoque!", "Error");
+      }
+    );
+  }
+
+  callWithdrawQtd(): void {
+    this.inputService.releaseProductOutput(
+      this.withdrawFormComponent.withdrawList.map((product) => ({ id: product.id, qtdeEstoque: product.qtdeEstoque }))
+    ).subscribe(
+      () => {
+        this.onCloseWithdraw();
+        this.fetchAll();
+        this.message.showSuccess("Quantidade de estoque atualizada!");
+      },
+      () => {
+        this.message.showError("Falha ao atualizar estoque!", "Error");
+      }
+    );
   }
 
   editInput(id: number): void {
@@ -95,6 +138,16 @@ export class InsumoListComponent implements OnInit {
   onClose(): void {
     this.display = false;
     this.inputFormComponent.formGroup.reset();
+  }
+
+  onCloseEntry(): void {
+    this.displayEntry = false;
+    this.entryFormComponent.reset();
+  }
+
+  onCloseWithdraw(): void {
+    this.displayWithdraw = false;
+    this.withdrawFormComponent.reset();
   }
 
 }

@@ -1,0 +1,34 @@
+<div class="item-pagina tabela">
+    <p-table [columns]="colunas"
+             [value]="dados"
+             [paginator]="paginator"
+             [rows]="rows"
+             [responsive]="true"
+             sortMode="multiple">
+        <ng-template pTemplate="header" let-colunas>
+            <tr>
+                <th id="titulo-colunas" *ngFor="let col of colunas" [pSortableColumn]="col.field"
+                    [style]="'width:'+ col.columnWidth">
+                    {{col.header}}
+                    <ng-container>
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </ng-container>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+              {{ rowData[col.field] }}
+            </td>
+          </tr>
+        </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td *ngIf="!dados">
+            Nenhum dado encontrado.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+</div>
