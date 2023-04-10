@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SelfServiceRoutingModule } from './self-service-routing.module';
 import { SelfServiceComponent } from './self-service/self-service.component';
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SelfServiceComponent } from './self-service/self-service.component';
     ],
     imports: [
         CommonModule,
-        SelfServiceRoutingModule
+        SelfServiceRoutingModule,
+        SharedModule
     ]
 })
 export class SelfServiceModule { }

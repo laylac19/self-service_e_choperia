@@ -1,0 +1,45 @@
+div.list-card {
+  display: flex;
+  gap: 5rem;
+  width: 100%;
+  justify-content: center;
+
+  .item {
+    width: 60rem;
+    display: flex;
+    background: var(--cor-tema-3);
+    color: #FFF;
+    height: 16rem;
+    border-radius: 2rem;
+    align-content: center;
+    padding: 0.5rem 2rem;
+    justify-content: space-evenly;
+
+    .body-card {
+      display: flex;
+      padding: 1rem;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .area-field {
+      width: 100%;
+      align-items: flex-end;
+    }
+  }
+
+  span.descricao, .valor {
+    color: var(--cor-tema-5);
+    font-weight: 500;
+    font-family: 'Kreon', Verdana, sans-serif;
+    font-size: 30pt;
+  }
+}
+
+.item-field {
+  padding-left: 0;
+}
+
+.area-field {
+  gap: 1rem;
+}
