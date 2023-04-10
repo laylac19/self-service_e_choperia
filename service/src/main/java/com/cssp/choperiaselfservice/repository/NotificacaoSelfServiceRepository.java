@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface NotificacaoSelfServiceRepository extends JpaRepository<NotificacaoSelfServicePrato, Long> {
-    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.NotificacaoSelfServicePratoListDTO(nss.id, " +
+    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.NotificacaoSelfServicePratoListDTO(nss.id, nss.prato.id," +
             " nss.prato.descricao, nss.statusPrato) " +
             " FROM NotificacaoSelfServicePrato nss WHERE nss.ativo = true " )
     List<NotificacaoSelfServicePratoListDTO> listAll(Pageable pageable);

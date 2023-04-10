@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,13 +42,13 @@ public class CozinhaController {
     }
 
     @PostMapping("/solicitar-reposicao")
-    public ResponseEntity<Void> save(String prato) {
-        service.needToReplacePlate(prato);
+    public ResponseEntity<Void> needToReplacePlate(@RequestBody Long idPrato) {
+        service.needToReplacePlate(idPrato);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/repor-prato")
-    public ResponseEntity<Void> save(Long idPrato) {
+    public ResponseEntity<Void> replacePlate(@RequestBody Long idPrato) {
         service.replacePlate(idPrato);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -29,6 +29,16 @@ export class MensagensConfirmacao {
     });
   }
 
+  public confirmRequestDishReplacement(id: number, alterarSituacao: () => void, description?: string): void {
+    this.confirmMessage.confirm({
+      header: 'Confirmação',
+      message: 'Confirmar solicitação de reposição do prato' + ' - ' + description + '?',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Cancelar',
+      accept: alterarSituacao
+    });
+  }
+
   public confirmExitCustomer(id: number, alterarSituacao: () => void, description?: string): void {
     this.confirmMessage.confirm({
       header: 'Confirmação',

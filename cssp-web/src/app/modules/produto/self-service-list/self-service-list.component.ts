@@ -11,6 +11,8 @@ import {finalize} from "rxjs";
 import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
 import {EntidadeUtil} from "../../../shared/util/entidade.util";
 import {TituloModalSelfServiceUtil} from "../util/modal/titulo-modal-self-service.util";
+import {CozinhaService} from "../../../shared/service/cozinha.service";
+import {MensagensSelfServiceUtil} from "../util/messages/mensagens-self-service.util";
 
 @Component({
   selector: 'app-self-service-list',
@@ -29,6 +31,7 @@ export class SelfServiceListComponent implements OnInit {
   @ViewChild(SelfServiceProdComponent) selfServiceFormComponent: SelfServiceProdComponent;
 
   constructor(private dishService: SelfServiceService,
+              private kitchenservice: CozinhaService,
               private message: MensagensConfirmacao) {
   }
 
@@ -76,8 +79,19 @@ export class SelfServiceListComponent implements OnInit {
     this.dishService.delete(id).subscribe(() => this.listAllIDishes());
   }
 
+  sendRequestDish(id: number): void {
+    this.kitchenservice.needToReplacePlate(id).subscribe(() => {
+      this.message.showSuccess(MensagensSelfServiceUtil.SUCCESS_REQUESTING_REPLACEMENT);
+      this.listAllIDishes()
+    });
+  }
+
   confirmAction(dish: any): void {
     this.message.confirmarDialog(dish.id, () => this.deactivateDish(dish.id), EntidadeUtil.USUARIO, dish.descricao)
+  }
+
+  confirmRequest(dish: any): void {
+    this.message.confirmRequestDishReplacement(dish.id, () => this.sendRequestDish(dish.id), dish.descricao)
   }
 
   onClose(): void {

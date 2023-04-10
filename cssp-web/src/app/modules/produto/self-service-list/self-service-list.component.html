@@ -13,8 +13,8 @@
                 [dados]="dishesList"
                 [paginator]="true"
                 [rows]="12"
-                [editarDado]="true" [desativarDado]="true"
-                (abrirModalHabilitado)="editDish($event)" (deletarDado)="confirmAction($event)">
+                [editarDado]="true" [desativarDado]="true" [repor]="true"
+                (abrirModalHabilitado)="editDish($event)" (deletarDado)="confirmAction($event)" (solicitarReposicao)="confirmRequest($event)">
   </custom-table>
 
 </div>

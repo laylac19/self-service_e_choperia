@@ -5,7 +5,6 @@ import com.cssp.choperiaselfservice.domain.enums.StatusPrato;
 import com.cssp.choperiaselfservice.repository.NotificacaoSelfServiceRepository;
 import com.cssp.choperiaselfservice.service.dto.NotificacaoSelfServicePratoDTO;
 import com.cssp.choperiaselfservice.service.dto.NotificacaoSelfServicePratoListDTO;
-import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.mapper.NotificacaoSelfServiceMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemCozinhaUtil;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -46,16 +44,12 @@ public class CozinhaService {
         repository.save(notification);
     }
 
-    public void needToReplacePlate(String dish) {
-        if (Objects.nonNull(dish)) {
-            NotificacaoSelfServicePrato notification = new NotificacaoSelfServicePrato();
-            notification.setPrato(pratoCozinhaService.findDishByDescription(dish));
-            notification.setStatusPrato(StatusPrato.PENDENTE);
-            notification.setAtivo(true);
-            repository.save(notification);
-
-            throw new BusinessRuleException(MensagemCozinhaUtil.REPLACE_DISH);
-        }
+    public void needToReplacePlate(Long idPrato) {
+        NotificacaoSelfServicePrato notification = new NotificacaoSelfServicePrato();
+        notification.setPrato(pratoCozinhaService.findEntity(idPrato));
+        notification.setStatusPrato(StatusPrato.PENDENTE);
+        notification.setAtivo(true);
+        repository.save(notification);
     }
 
     public void replacePlate(Long idNotification) {

@@ -60,11 +60,18 @@
                       iconPos="left"
                       (click)="this.abrirModalVisualizar.emit(rowData.id)">
               </button>
-              <button *ngIf="editarDado" pButton
+              <button *ngIf="editarDado"
+                      pButton
                       icon="pi pi-pencil"
                       class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
                       iconPos="left"
-                      (click)="this.abrirModalHabilitado.emit(rowData.id)">
+                      (click)="this.abrirModalVisualizar.emit(rowData.id)">
+              </button>
+              <button *ngIf="repor" pButton
+                      icon="bi bi-chat-square-dots"
+                      class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
+                      iconPos="left"
+                      (click)="this.solicitarReposicao.emit(rowData)">
               </button>
               <button *ngIf="entradaCliente"
                       [disabled]="!!rowData.numCartaoRFID"
