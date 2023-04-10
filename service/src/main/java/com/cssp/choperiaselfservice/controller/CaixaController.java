@@ -2,6 +2,7 @@ package com.cssp.choperiaselfservice.controller;
 
 import com.cssp.choperiaselfservice.service.CaixaService;
 import com.cssp.choperiaselfservice.service.dto.CaixaDTO;
+import com.cssp.choperiaselfservice.service.dto.CaixaOtimizadoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CaixaController {
     }
 
     @PostMapping
-    public ResponseEntity<CaixaDTO> save(@RequestBody CaixaDTO dto) {
+    public ResponseEntity<CaixaDTO> save(@RequestBody CaixaOtimizadoDTO dto) {
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);
     }
 
