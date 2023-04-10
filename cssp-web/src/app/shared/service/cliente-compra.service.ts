@@ -2,16 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
-import {ClienteListModel} from "../../model/list/cliente-list.model";
-import {ClienteModel} from "../../model/cliente.model";
-import {Page} from "../util/page";
-import {CaixaModel} from "../../model/caixa-model";
 import {ClienteCompraModel} from "../../model/cliente-compra.model";
 import {ClienteCompraModelList} from "../../model/list/cliente-compra-list.model";
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
 import {ClienteCaixaList} from "../../model/list/cliente-caixa-list";
 
 @Injectable({
