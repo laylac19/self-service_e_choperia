@@ -7,7 +7,7 @@ import {ChopeCompraModel} from "../../model/chope-compra.model";
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class ChopeCompraService {
 
   constructor(private http: HttpClient) {
   }

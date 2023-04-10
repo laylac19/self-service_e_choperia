@@ -6,4 +6,6 @@ export class MensagensSelfServiceUtil {
   static readonly ERROR_UPDATE = 'Erro ao editar prato';
   static readonly SUCCESS_REQUESTING_REPLACEMENT = 'Notificando a cozinha com sucesso para repor prato';
 
+  static readonly PURCHASE_MADE_SUCCESSFUL = 'Compra realizada com sucesso';
+
 }

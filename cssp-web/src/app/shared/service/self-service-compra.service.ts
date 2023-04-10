@@ -7,7 +7,7 @@ import {SelfServiceCompraModel} from "../../model/self-service-compra.model";
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class SelfServiceCompraService {
 
   constructor(private http: HttpClient) {
   }
