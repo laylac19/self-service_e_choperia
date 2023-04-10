@@ -24,7 +24,7 @@ export class UsuarioService {
     return this.http.get<UsuarioModel>(this.resourceUrl + '/' + id);
   }
 
-  insert(entity: UsuarioModel): Observable<UsuarioModel> {
+  save(entity: UsuarioModel): Observable<UsuarioModel> {
     return this.http.post<UsuarioModel>(this.resourceUrl, entity);
   }
 

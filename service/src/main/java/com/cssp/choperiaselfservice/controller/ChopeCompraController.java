@@ -1,7 +1,7 @@
 package com.cssp.choperiaselfservice.controller;
 
-import com.cssp.choperiaselfservice.service.SelfServiceCompraService;
-import com.cssp.choperiaselfservice.service.dto.SelfServiceCompraDTO;
+import com.cssp.choperiaselfservice.service.ChopeCompraService;
+import com.cssp.choperiaselfservice.service.dto.ChopeCompraDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequiredArgsConstructor
 public class ChopeCompraController {
-    private final SelfServiceCompraService service;
+    private final ChopeCompraService service;
 
     @GetMapping("/{idCompra}")
-    public ResponseEntity<SelfServiceCompraDTO> findByID(@PathVariable("idCompra") Long idCompra) {
+    public ResponseEntity<ChopeCompraDTO> findByID(@PathVariable("idCompra") Long idCompra) {
         return new ResponseEntity<>(service.findByID(idCompra), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<SelfServiceCompraDTO> save(@RequestBody SelfServiceCompraDTO dto) {
+    public ResponseEntity<ChopeCompraDTO> save(@RequestBody ChopeCompraDTO dto) {
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);
     }
 

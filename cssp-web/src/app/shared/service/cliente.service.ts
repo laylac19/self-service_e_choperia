@@ -24,12 +24,11 @@ export class ClienteService {
     return this.http.get<ClienteListModel[]>(this.resourceUrl + '/entradas');
   }
 
-
   findById(id: number): Observable<ClienteModel> {
     return this.http.get<ClienteModel>(this.resourceUrl + '/' + id);
   }
 
-  insert(entity: ClienteModel): Observable<ClienteModel> {
+  save(entity: ClienteModel): Observable<ClienteModel> {
     return this.http.post<ClienteModel>(this.resourceUrl, entity);
   }
 

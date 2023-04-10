@@ -54,7 +54,7 @@ export class UsuarioFormComponent implements OnInit {
 
   saveUserForm(): void {
     this.newUser = this.formGroup.getRawValue();
-    this.userService.insert(this.newUser)
+    this.userService.save(this.newUser)
       .subscribe({
         next: () => {
           this.showSuccessMsgAccordingToId(this.newUser.id);

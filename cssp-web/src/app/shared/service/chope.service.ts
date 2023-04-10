@@ -28,7 +28,7 @@ export class ChopeService {
     return this.http.get<ChopeModel>(this.resourceUrl + '/' + id);
   }
 
-  insert(entity: ChopeModel): Observable<ChopeModel> {
+  save(entity: ChopeModel): Observable<ChopeModel> {
     return this.http.post<ChopeModel>(this.resourceUrl, entity);
   }
 

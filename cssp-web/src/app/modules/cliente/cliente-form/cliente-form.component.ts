@@ -43,7 +43,7 @@ export class ClienteFormComponent implements OnInit {
   saveForm(): void {
     this.newCustomer = this.formGroup.getRawValue();
     this.newCustomer.cpf = FuncoesUtil.formatarCpf(this.newCustomer.cpf);
-    this.customerService.insert(this.newCustomer)
+    this.customerService.save(this.newCustomer)
       .subscribe({
         next: () => {
           this.showSuccessMsgAccordingToId(this.newCustomer.id);

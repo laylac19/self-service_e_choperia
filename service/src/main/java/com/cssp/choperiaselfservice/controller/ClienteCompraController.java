@@ -21,7 +21,7 @@ public class ClienteCompraController {
     private final ClienteCompraService service;
 
     @GetMapping("/compras-cliente/{cartaoRFID}")
-    public ResponseEntity<Set<ComprasCaixaListDTO>> findByID(@PathVariable("cartaoRFID") String cartaoRFID) {
+    public ResponseEntity<Set<ComprasCaixaListDTO>> listPurchasedItemsOfCustomer(@PathVariable("cartaoRFID") String cartaoRFID) {
         return new ResponseEntity<>(service.listPurchasedItemsOfCustomer(cartaoRFID), HttpStatus.OK);
     }
 }

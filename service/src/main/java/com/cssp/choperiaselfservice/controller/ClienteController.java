@@ -59,11 +59,6 @@ public class ClienteController {
         return new ResponseEntity<>(service.findClienteByNumCartaoRFIDAndAndAtivoIsTrue(cod), HttpStatus.OK);
     }
 
-//    @GetMapping("pesquisar-codigo-barras/{cod}")
-//    public ResponseEntity<ClienteDTO> findClienteByNumCartaoRFID(@PathVariable("cod") String cod) {
-//        return new ResponseEntity<>(service.findClienteByNumCartaoRFID(cod), HttpStatus.OK);
-//    }
-
     @PostMapping("/resgistrar-entrada-cliente")
     public ResponseEntity<Void> customerEntry(@RequestBody ClienteDTO dto) {
         service.customerEntry(dto);

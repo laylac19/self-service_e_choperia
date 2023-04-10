@@ -24,7 +24,7 @@ export class SelfServiceService {
     return this.http.get<SelfServicePratoModel>(this.resourceUrl + '/' + id);
   }
 
-  insert(entity: SelfServicePratoModel): Observable<SelfServicePratoModel> {
+  save(entity: SelfServicePratoModel): Observable<SelfServicePratoModel> {
     return this.http.post<SelfServicePratoModel>(this.resourceUrl, entity);
   }
 
