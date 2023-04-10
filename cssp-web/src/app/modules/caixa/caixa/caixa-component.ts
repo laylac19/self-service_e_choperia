@@ -100,15 +100,11 @@ export class CaixaComponent implements OnInit{
   }
 
   onPrint(): void {
-    const printContents = this.renderer.selectRootElement('#consumidos')!.innerHTML;
-    const originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
+    const printContents = this.renderer.selectRootElement('#consumidos', true);
+    document.body.innerHTML = printContents.innerHTML;
     window.print();
-    window.onafterprint = (event) => {
-      console.log("teste")
-    }
-    document.body.innerHTML = originalContents;
-
-  }
+    location.reload();
+    this.renderer.selectRootElement('#codCartaoCliente').focus();
+   }
 
 }

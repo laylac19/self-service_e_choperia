@@ -1,14 +1,17 @@
-<div class="form p-fluid p-grid">
+<div class="form p-fluid p-grid container">
   <div class="item-pagina text-center col-12">
     <span class="titulo">Caixa</span>
   </div>
   <form [formGroup]="formGroup">
     <section>
-      <div class="item-form">
-        <label >Cod Cartao Cliente</label>
-        <input type="text" placeholder="Numero cartao cliente" id="codCartaoCliente" formControlName="codCartaoCliente" (change)="addConsumeOnTable($event)" />
+      <div class="item-form pb-3 pt-3">
+        <label class="font-bold">Cód. Cartão Cliente</label>
+        <input pInputText class="" type="text" placeholder="Numero cartao cliente" id="codCartaoCliente" formControlName="codCartaoCliente" (change)="addConsumeOnTable($event)" />
       </div>
-      <app-cliente-caixa class="area-field flex col-12" [nome]="nome" *ngFor="let nome of nomesClientes"></app-cliente-caixa>
+      <div class="flex gap-2 overflow-auto">
+        <app-cliente-caixa [nome]="nome" *ngFor="let nome of nomesClientes"></app-cliente-caixa>
+      </div>
+
     </section>
     <div id="consumidos">
       <h4>Consumidos:</h4>
@@ -22,7 +25,7 @@
       <p>Total da Conta: {{ totalCompra }}</p>
     </div>
     <button pButton type="submit"
-            class="button-action"
+            class="button-action w-3"
             iconPos="left"
             label="Finalizar Compra"
             [disabled]="!(clientes.length > 0)"
