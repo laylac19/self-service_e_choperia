@@ -23,11 +23,11 @@ export class InsumoService {
     return this.http.get<InsumoModel>(this.resourceUrl + '/' + id);
   }
 
-  findByBarCode(barCode: string): Observable<InsumoModel> {
-    return this.http.get<InsumoModel>(this.resourceUrl + '/buscar-cod-barras/' + barCode);
+  findByBarCode(barCode: string): Observable<InsumoListModel> {
+    return this.http.get<InsumoListModel>(this.resourceUrl + '/buscar-cod-barras/' + barCode);
   }
 
-  insert(entity: InsumoModel): Observable<InsumoModel> {
+  save(entity: InsumoModel): Observable<InsumoModel> {
     return this.http.post<InsumoModel>(this.resourceUrl, entity);
   }
 

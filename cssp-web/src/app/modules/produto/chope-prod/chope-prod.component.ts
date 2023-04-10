@@ -44,7 +44,7 @@ export class ChopeProdComponent implements OnInit {
 
   saveForm(): void {
     this.newDraftBeer = this.formGroup.getRawValue();
-    this.draftBeerService.insert(this.newDraftBeer)
+    this.draftBeerService.save(this.newDraftBeer)
       .subscribe({
         next: () => {
           this.showSuccessMsgAccordingToId(this.newDraftBeer.id);

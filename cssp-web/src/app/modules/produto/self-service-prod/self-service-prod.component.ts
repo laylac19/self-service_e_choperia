@@ -39,7 +39,7 @@ export class SelfServiceProdComponent implements OnInit {
 
   saveForm(): void {
     this.newDish = this.formGroup.getRawValue();
-    this.dishService.insert(this.newDish)
+    this.dishService.save(this.newDish)
       .subscribe({
         next: () => {
           this.showSuccessMsgAccordingToId(this.newDish.id);

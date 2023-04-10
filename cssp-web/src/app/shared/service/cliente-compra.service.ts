@@ -8,6 +8,11 @@ import {Page} from "../util/page";
 import {CaixaModel} from "../../model/caixa-model";
 import {ClienteCompraModel} from "../../model/cliente-compra.model";
 import {ClienteCompraModelList} from "../../model/list/cliente-compra-list.model";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
+import {ClienteCaixaList} from "../../model/list/cliente-caixa-list";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +23,10 @@ export class ClienteCompraService {
   }
 
   resourceUrl = environment.apiUrl + '/cliente-compra';
+
+  listPurchasedItemsOfCustomer(cardRFID: string): Observable<ClienteCaixaList[]> {
+    return this.http.get<ClienteCaixaList[]>(this.resourceUrl + '/compras-cliente/' + cardRFID);
+  }
 
   findById(id: number): Observable<ClienteCompraModel> {
     return this.http.get<ClienteCompraModel>(this.resourceUrl + '/' + id);

@@ -23,14 +23,6 @@ export class CozinhaService {
     return this.http.get<NotificacaoCozinhaModel>(this.resourceUrl + '/' + id);
   }
 
-  insert(entity: NotificacaoCozinhaModel): Observable<NotificacaoCozinhaModel> {
-    return this.http.post<NotificacaoCozinhaModel>(this.resourceUrl, entity);
-  }
-
-  update(entity: NotificacaoCozinhaModel): Observable<NotificacaoCozinhaModel> {
-    return this.http.put<NotificacaoCozinhaModel>(this.resourceUrl, entity);
-  }
-
   delete(id: number): Observable<NotificacaoCozinhaModel> {
     return this.http.delete<NotificacaoCozinhaModel>(this.resourceUrl + '/' + id);
   }
@@ -41,6 +33,14 @@ export class CozinhaService {
 
   replacePlate(id: number): Observable<void> {
     return this.http.post<void>(this.resourceUrl + '/repor-prato', id)
+  }
+
+  save(entity: NotificacaoCozinhaModel): Observable<NotificacaoCozinhaModel> {
+    return this.http.post<NotificacaoCozinhaModel>(this.resourceUrl, entity);
+  }
+
+  update(entity: NotificacaoCozinhaModel): Observable<NotificacaoCozinhaModel> {
+    return this.http.put<NotificacaoCozinhaModel>(this.resourceUrl, entity);
   }
 
 }

@@ -28,6 +28,8 @@ public class ChopeService {
 
     private final ProdutoService productService;
     private final ClienteCompraService purchaseService;
+    private final ChopeCompraService draftBeerPurchaseService;
+
 
     public Chope findEntity(Long id) {
         return repository.findById(id).orElseThrow(
@@ -74,6 +76,6 @@ public class ChopeService {
     public void removalBeerMugByTheCustomer(ChopeCompraDTO purchaseDTO) {
         purchaseService.findCustomerByID(purchaseDTO.getIdCliente());
         withdrawalMovementInChoppStock(purchaseDTO.getIdChope());
-        purchaseService.save(purchaseDTO);
+        draftBeerPurchaseService.save(purchaseDTO);
     }
 }

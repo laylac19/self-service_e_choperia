@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 public interface ChopeCompraMapper extends EntityMapper<ChopeCompraDTO, ChopeCompra> {
     @Override
     @Mapping(source = "cliente.id", target = "idCliente")
+    @Mapping(source = "chope.id", target = "idChope")
     ChopeCompraDTO toDto(ChopeCompra entity);
 
     @Override

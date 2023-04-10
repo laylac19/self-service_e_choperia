@@ -44,7 +44,7 @@ export class InsumoProdComponent implements OnInit {
 
   saveInputForm(): void {
     this.newInput = this.formGroup.getRawValue();
-    this.inputService.insert(this.newInput)
+    this.inputService.save(this.newInput)
       .subscribe({
         next: () => {
           this.showSuccessMsgAccordingToId(this.newInput.id);

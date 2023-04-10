@@ -56,10 +56,6 @@ public class ClienteService {
         return dto;
     }
 
-//    public ClienteDTO findClienteByNumCartaoRFID(String barCode) {
-//        return repository.findClienteByNumCartaoRFID(barCode);
-//    }
-
     public void customerEntry(ClienteDTO dto) {
         Cliente client = findEntity(dto.getId());
         client.setNumCartaoRFID(dto.getNumCartaoRFID());
