@@ -27,8 +27,8 @@ export class CozinhaService {
     return this.http.delete<NotificacaoCozinhaModel>(this.resourceUrl + '/' + id);
   }
 
-  needToReplacePlate(description: string): Observable<void> {
-    return this.http.post<void>(this.resourceUrl + '/solicitar-reposicao', description)
+  needToReplacePlate(id: number): Observable<void> {
+    return this.http.post<void>(this.resourceUrl + '/solicitar-reposicao', id)
   }
 
   replacePlate(id: number): Observable<void> {

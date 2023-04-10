@@ -20,6 +20,7 @@ export class CustomTableComponent implements OnInit {
   @Input() visualizarDado: boolean;
   @Input() entradaCliente: boolean;
   @Input() saidaCliente: boolean;
+  @Input() repor: boolean;
 
   @Output() public abrirModalEntrada: EventEmitter<number> = new EventEmitter<number>();
   @Output() public abrirModalSaida: EventEmitter<number> = new EventEmitter<number>();
@@ -27,6 +28,7 @@ export class CustomTableComponent implements OnInit {
   @Output() public abrirModalVisualizar: EventEmitter<number> = new EventEmitter<number>();
   @Output() public deletarDado: EventEmitter<number> = new EventEmitter<number>();
   @Output() public reativar: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public solicitarReposicao: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
   }
