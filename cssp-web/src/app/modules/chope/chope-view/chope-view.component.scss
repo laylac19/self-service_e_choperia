@@ -1,0 +1,54 @@
+div.list-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
+  width: 100%;
+  justify-content: space-evenly;
+
+  .item {
+    width: 30rem;
+    display: flex;
+    background: var(--cor-tema-3);
+    color: #FFF;
+    height: 12rem;
+    align-items: center;
+    border-radius: 2rem;
+    flex-wrap: wrap;
+    //justify-content: space-between;
+    align-content: flex-start;
+    padding: 0.5rem 2rem;
+
+    .body-card {
+      display: flex;
+      padding: 1rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .valor {
+      padding-top: 0;
+      width: 100%;
+
+      .valor {
+        text-align: end;
+      }
+    }
+
+    span.descricao, .valor {
+      color: var(--cor-tema-5);
+      font-weight: 500;
+      font-family: 'Kreon', Verdana, sans-serif;
+      font-size: 30pt;
+    }
+    .logo {
+      width: 22%;
+
+      .img-logo {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+      }
+    }
+  }
+}

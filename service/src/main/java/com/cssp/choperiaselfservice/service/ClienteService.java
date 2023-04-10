@@ -4,6 +4,7 @@ import com.cssp.choperiaselfservice.domain.Cliente;
 import com.cssp.choperiaselfservice.repository.ClienteRepository;
 import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteListDTO;
+import com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO;
 import com.cssp.choperiaselfservice.service.mapper.ClienteMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemClienteUtil;
 import jakarta.persistence.EntityNotFoundException;
@@ -50,8 +51,9 @@ public class ClienteService {
         repository.save(cliente);
     }
 
-    public ClienteDTO findClienteByNumCartaoRFIDAndAndAtivoIsTrue(String barCode) {
-        return repository.findClienteByNumCartaoRFIDLikeAndAtivoIsTrue(barCode);
+    public ClienteSearchDTO findClienteByNumCartaoRFIDAndAndAtivoIsTrue(String barCode) {
+        ClienteSearchDTO dto = repository.findClienteByNumCartaoRFIDLikeAndAtivoIsTrue(barCode);
+        return dto;
     }
 
 //    public ClienteDTO findClienteByNumCartaoRFID(String barCode) {

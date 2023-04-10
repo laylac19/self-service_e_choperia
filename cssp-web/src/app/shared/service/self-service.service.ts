@@ -34,7 +34,6 @@ export class SelfServiceService {
 
   delete(id: number): Observable<SelfServicePratoModel> {
     return this.http.delete<SelfServicePratoModel>(this.resourceUrl + '/' + id);
-
   }
 
 }

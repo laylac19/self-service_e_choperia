@@ -20,8 +20,8 @@ export class ChopeService {
     return this.http.get<Page<ChopeListModel[]>>(this.resourceUrl);
   }
 
-  listAllDraftBeers(): Observable<Page<ChopeViewModel[]>> {
-    return this.http.get<Page<ChopeViewModel[]>>(this.resourceUrl + '/listar-para-cliente');
+  listAllDraftBeers(): Observable<ChopeViewModel[]> {
+    return this.http.get<ChopeViewModel[]>(this.resourceUrl + '/listar-para-cliente');
   }
 
   findById(id: number): Observable<ChopeModel> {

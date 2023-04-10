@@ -1,1 +1,26 @@
-<p>chope-view works!</p>
+<div class="list-card">
+  <div *ngFor="let item of draftBeers">
+    <div class="item">
+
+      <div class="logo">
+        <img class="img-logo" src="assets/images/amstel-pilsner-.png" *ngIf="item.descricao.toLowerCase() === 'amstel'" alt="">
+        <img class="img-logo" src="assets/images/budweiser.png" *ngIf="item.descricao.toLowerCase() === 'budweiser'" alt="">
+        <img class="img-logo" src="assets/images/corona.png" *ngIf="item.descricao.toLowerCase() === 'corona'" alt="">
+        <img class="img-logo" src="assets/images/heineken.png" *ngIf="item.descricao.toLowerCase() === 'heineken'" alt="">
+        <img class="img-logo" src="assets/images/logo-brahma.png" *ngIf="item.descricao.toLowerCase() === 'brahma'" alt="">
+        <img class="img-logo" src="assets/images/skol.png" *ngIf="item.descricao.toLowerCase() === 'skol'" alt="">
+        <img class="img-logo" src="assets/images/stella.png" *ngIf="item.descricao.toLowerCase() === 'stella'" alt="">
+      </div>
+
+      <div class="body-card">
+        <span class="descricao"> {{item.descricao.toUpperCase()}}</span>
+        <span>Disponível: {{item.qtdeEstoque}} Barris</span>
+      </div>
+      <div class="body-card valor">
+        <span class="valor">{{item.precoVenda | currency: 'BRL'}}</span>
+      </div>
+    </div>
+
+
+  </div>
+</div>

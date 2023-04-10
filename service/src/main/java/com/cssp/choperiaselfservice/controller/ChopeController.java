@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/chope")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -33,8 +35,8 @@ public class ChopeController {
     }
 
     @GetMapping("/listar-para-cliente")
-    public ResponseEntity<Page<ChopeViewDTO>> listAllDraftBeers(Pageable pageable) {
-        return new ResponseEntity<>(service.listAllDraftBeers(pageable), HttpStatus.OK);
+    public ResponseEntity<List<ChopeViewDTO>> listAllDraftBeers() {
+        return new ResponseEntity<>(service.listAllDraftBeers(), HttpStatus.OK);
     }
 
     @GetMapping("/{idChope}")

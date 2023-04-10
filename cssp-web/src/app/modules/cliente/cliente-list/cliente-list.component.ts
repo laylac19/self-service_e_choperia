@@ -12,6 +12,7 @@ import {Page} from "../../../shared/util/page";
 import {finalize} from "rxjs";
 import {ClienteEntradaComponent} from "../cliente-entrada/cliente-entrada.component";
 import {TituloModalClienteUtil} from "../util/titulo-modal-cliente.util";
+import {MensagensClienteUtil} from "../util/mensagens-cliente.util";
 
 @Component({
   selector: 'app-cliente-list',
@@ -29,8 +30,11 @@ export class ClienteListComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   @Input() display: boolean = false;
   @Input() displayEntry: boolean = false;
+  @Input() displayExit: boolean = false;
   @ViewChild(ClienteFormComponent) customerFormComponent: ClienteFormComponent;
   @ViewChild(ClienteEntradaComponent) customerEntryComponent: ClienteEntradaComponent;
+
+  // @ViewChild(ClienteSaidaComponent) customerExitComponent: ClienteSaidaComponent;
 
   constructor(private customerService: ClienteService,
               private message: MensagensConfirmacao) {
@@ -114,13 +118,24 @@ export class ClienteListComponent implements OnInit {
   }
 
   checkIn(id: number) {
-    this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.EXIT.index).header;
+    this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.ENTRY.index).header;
     this.customerEntryComponent.findCustomerByID(id);
     this.displayEntry = true;
   }
 
-  checkOut(customer: any) {
+  onCloseReleaseCard(): void {
+    this.displayExit = false
+  }
 
+  customerExit(id: number): void {
+    this.customerService.customerExit(id).subscribe(() => {
+      this.message.showSuccess(MensagensClienteUtil.SUCCESS_EXIT);
+      this.listAllCustomers();
+    });
+  }
+
+  confirmActionExit(customer: any): void {
+    this.message.confirmExitCustomer(customer.id, () => this.customerExit(customer.id), customer.nome)
   }
 
 }
