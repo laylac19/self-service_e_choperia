@@ -1,22 +1,16 @@
 package com.cssp.choperiaselfservice.domain;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "cliente")
@@ -39,7 +33,7 @@ public class Cliente implements Serializable {
     @Column(name = "telefone", nullable = false)
     private String telefone;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "cpf", nullable = false)
@@ -47,9 +41,4 @@ public class Cliente implements Serializable {
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "compras_cliente")
-    private Set<ClienteCompra> clienteCompras = new LinkedHashSet<>();
-
 }

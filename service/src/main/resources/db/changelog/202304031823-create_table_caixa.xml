@@ -6,11 +6,18 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
 
-    <changeSet id="1680540168895-1" author="layla.couto">
+    <changeSet id="1682518434364-1" author="layla.couto">
+
         <createSequence incrementBy="1" sequenceName="seq_caixa" startValue="1"/>
         <createTable tableName="caixa">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_caixa"/>
+            </column>
+            <column name="compra_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_cliente_principal" type="BIGINT">
+                <constraints nullable="false"/>
             </column>
             <column name="total_conta" type="DOUBLE">
                 <constraints nullable="false"/>
@@ -26,6 +33,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <addForeignKeyConstraint baseColumnNames="compra_id" baseTableName="caixa" constraintName="FK_CAIXA_ON_COMPRA"
+                                 referencedColumnNames="id" referencedTableName="cliente_compra_produto"/>
     </changeSet>
-
 </databaseChangeLog>

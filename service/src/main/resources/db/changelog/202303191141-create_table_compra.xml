@@ -6,26 +6,20 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
 
-    <changeSet id="1680004775373-1" author="layla.couto">
-        <createSequence incrementBy="1" sequenceName="seq_compra" startValue="1"/>
-        <createTable tableName="cliente_compra">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_cliente_compra"/>
+    <changeSet id="1682518395754-1" author="layla.couto">
+        <createTable tableName="compra_caixa">
+            <column name="compra_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_compra_caixa"/>
             </column>
-            <column name="valor_compra" type="DOUBLE">
-                <constraints nullable="false"/>
+            <column name="caixa_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_compra_caixa"/>
             </column>
-            <column name="cliente_compra_id" type="BIGINT"/>
-            <column name="ativo" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-            <column name="compras_cliente" type="BIGINT"/>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="cliente_compra_id" baseTableName="cliente_compra"
-                                 constraintName="FK_CLIENTE_COMPRA_ON_CLIENTE_COMPRA" referencedColumnNames="id"
-                                 referencedTableName="cliente"/>
-        <addForeignKeyConstraint baseColumnNames="compras_cliente" baseTableName="cliente_compra"
-                                 constraintName="FK_CLIENTE_COMPRA_ON_COMPRAS_CLIENTE" referencedColumnNames="id"
-                                 referencedTableName="cliente"/>
+        <addForeignKeyConstraint baseColumnNames="caixa_id" baseTableName="compra_caixa"
+                                 constraintName="FK_COMPRA_CAIXA_ON_CAIXA" referencedColumnNames="id"
+                                 referencedTableName="caixa"/>
+        <addForeignKeyConstraint baseColumnNames="compra_id" baseTableName="compra_caixa"
+                                 constraintName="FK_COMPRA_CAIXA_ON_COMPRA" referencedColumnNames="id"
+                                 referencedTableName="cliente_compra_produto"/>
     </changeSet>
 </databaseChangeLog>

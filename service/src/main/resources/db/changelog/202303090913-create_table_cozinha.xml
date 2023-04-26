@@ -6,13 +6,15 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
 
-    <changeSet id="1680004681786-1" author="layla.couto">
-        <createSequence incrementBy="1" sequenceName="seq_prato" startValue="1"/>
+    <changeSet id="1682518321208-1" author="layla.couto">
+        <createSequence incrementBy="1" sequenceName="seq_notificacao" startValue="1"/>
         <createTable tableName="notificacao_cozinha">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_notificacao_cozinha"/>
             </column>
-            <column name="prato_id" type="BIGINT"/>
+            <column name="descricao_prato" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="status_prato" type="INT">
                 <constraints nullable="false"/>
             </column>
@@ -20,8 +22,5 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="prato_id" baseTableName="notificacao_cozinha"
-                                 constraintName="FK_NOTIFICACAO_COZINHA_ON_PRATO" referencedColumnNames="id"
-                                 referencedTableName="prato_cozinha"/>
     </changeSet>
 </databaseChangeLog>

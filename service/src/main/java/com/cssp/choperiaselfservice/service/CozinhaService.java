@@ -1,6 +1,6 @@
 package com.cssp.choperiaselfservice.service;
 
-import com.cssp.choperiaselfservice.domain.NotificacaoSelfServicePrato;
+import com.cssp.choperiaselfservice.domain.NotificacaoReposicaoCozinha;
 import com.cssp.choperiaselfservice.domain.enums.StatusPrato;
 import com.cssp.choperiaselfservice.repository.NotificacaoSelfServiceRepository;
 import com.cssp.choperiaselfservice.service.dto.NotificacaoSelfServicePratoDTO;
@@ -20,12 +20,10 @@ import java.util.List;
 @Transactional
 public class CozinhaService {
     private final NotificacaoSelfServiceRepository repository;
-
     private final NotificacaoSelfServiceMapper mapper;
 
-    private final PratoCozinhaService pratoCozinhaService;
 
-    public NotificacaoSelfServicePrato findEntity(Long id) {
+    public NotificacaoReposicaoCozinha findEntity(Long id) {
         return repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(MensagemCozinhaUtil.ENTITY_NOT_FOUND));
     }
@@ -39,21 +37,21 @@ public class CozinhaService {
     }
 
     public void delete(Long id) {
-        NotificacaoSelfServicePrato notification = findEntity(id);
+        NotificacaoReposicaoCozinha notification = findEntity(id);
         notification.setAtivo(false);
         repository.save(notification);
     }
 
-    public void needToReplacePlate(Long idPrato) {
-        NotificacaoSelfServicePrato notification = new NotificacaoSelfServicePrato();
-        notification.setPrato(pratoCozinhaService.findEntity(idPrato));
+    public void needToReplacePlate(String dish) {
+        NotificacaoReposicaoCozinha notification = new NotificacaoReposicaoCozinha();
+        notification.setDescricaoPrato(dish);
         notification.setStatusPrato(StatusPrato.PENDENTE);
         notification.setAtivo(true);
         repository.save(notification);
     }
 
     public void replacePlate(Long idNotification) {
-        NotificacaoSelfServicePrato notification = findEntity(idNotification);
+        NotificacaoReposicaoCozinha notification = findEntity(idNotification);
         notification.setStatusPrato(StatusPrato.PRONTO);
         notification.setAtivo(false);
         repository.save(notification);

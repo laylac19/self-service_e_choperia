@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -18,7 +16,6 @@ import java.io.Serializable;
 @Table(name = "produto")
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto implements Serializable {
 
     @Id
@@ -27,10 +24,16 @@ public class Produto implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "qtde_estoque", nullable = false)
+    @Column(name = "codigo_barras")
+    private String codigoBarras;
+
+    @Column(name = "etiqueta_rfid")
+    private String etiquetaRFID;
+
+    @Column(name = "qtde_estoque")
     private Double qtdeEstoque;
 
-    @Column(name = "preco_compra", nullable = false)
+    @Column(name = "preco_compra")
     private Double precoCompra;
 
     @Column(name = "descricao", nullable = false)
@@ -39,7 +42,7 @@ public class Produto implements Serializable {
     @Column(name = "unidade", nullable = false)
     private String unidade;
 
-    @Column(name = "ponto_encomenda", nullable = false)
+    @Column(name = "ponto_encomenda")
     private Double pontoEncomenda;
 
     @Column(name = "preco_venda", nullable = false)

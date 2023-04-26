@@ -42,8 +42,8 @@ public class CozinhaController {
     }
 
     @PostMapping("/solicitar-reposicao")
-    public ResponseEntity<Void> needToReplacePlate(@RequestBody Long idPrato) {
-        service.needToReplacePlate(idPrato);
+    public ResponseEntity<Void> needToReplacePlate(@RequestBody String dish) {
+        service.needToReplacePlate(dish);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

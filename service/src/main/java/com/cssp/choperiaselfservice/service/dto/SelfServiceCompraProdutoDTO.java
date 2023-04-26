@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SelfServiceCompraDTO extends ClienteCompraDTO implements Serializable {
+public class SelfServiceCompraProdutoDTO extends ClienteCompraProdutoDTO implements Serializable {
 
     @NotNull(message = MensagemClienteCompraUtil.NULL_WEIGHT)
     private Double peso;

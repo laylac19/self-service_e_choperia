@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+
+    <changeSet id="1682518357859-1" author="layla.couto">
+        <createSequence incrementBy="1" sequenceName="seq_compra" startValue="1"/>
+        <createTable tableName="cliente_compra_produto">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_cliente_compra_produto"/>
+            </column>
+            <column name="cliente_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="produto_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor_compra" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="peso_prato" type="DOUBLE"/>
+            <column name="ativo" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="cliente_id" baseTableName="cliente_compra_produto"
+                                 constraintName="FK_CLIENTE_COMPRA_PRODUTO_ON_CLIENTE" referencedColumnNames="id"
+                                 referencedTableName="cliente"/>
+        <addForeignKeyConstraint baseColumnNames="produto_id" baseTableName="cliente_compra_produto"
+                                 constraintName="FK_CLIENTE_COMPRA_PRODUTO_ON_PRODUTO" referencedColumnNames="id"
+                                 referencedTableName="produto"/>
+    </changeSet>
+</databaseChangeLog>

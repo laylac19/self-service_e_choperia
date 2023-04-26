@@ -29,6 +29,7 @@ public class ClienteDTO implements Serializable {
     @NotEmpty(message = MensagemClienteUtil.PHONE_EMPTY)
     private String telefone;
 
+    @NotNull
     private String email;
 
     @NotNull(message = MensagemClienteUtil.CPF_NULL)

@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
 
 
-    <changeSet id="1680004728811-1" author="layla.couto">
+    <changeSet id="1682518344229-1" author="layla.couto">
         <createSequence incrementBy="1" sequenceName="seq_cliente" startValue="1"/>
         <createTable tableName="cliente">
             <column name="id" type="BIGINT">
@@ -16,20 +16,18 @@
             <column name="nome" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="telefone" type="VARCHAR(15)">
+            <column name="telefone" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="VARCHAR(255)"/>
-            <column name="cpf" type="VARCHAR(11)">
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cpf" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="ativo" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
-            <column name="contas_clientes" type="BIGINT"/>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="contas_clientes" baseTableName="cliente"
-                                 constraintName="FK_CLIENTE_ON_CONTAS_CLIENTES" referencedColumnNames="id"
-                                 referencedTableName="caixa"/>
     </changeSet>
 </databaseChangeLog>

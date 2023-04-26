@@ -1,24 +1,20 @@
 package com.cssp.choperiaselfservice.domain;
 
 import com.cssp.choperiaselfservice.domain.enums.FormaPagamento;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "caixa")
@@ -32,9 +28,12 @@ public class Caixa implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "contas_clientes")
-    private Set<Cliente> clientes = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "compra_id", nullable = false)
+    private ClienteCompraProduto clienteCompraProduto;
+
+    @Column(name = "id_cliente_principal", nullable = false)
+    private Long idClientePrincipal;
 
     @Column(name = "total_conta", nullable = false)
     private Double totalConta;

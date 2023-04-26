@@ -15,7 +15,6 @@ import java.io.Serializable;
 public class NotificacaoSelfServicePratoListDTO implements Serializable {
 
     private Long id;
-    private Long idPrato;
     private String prato;
     private StatusPrato statusPrato;
 }
