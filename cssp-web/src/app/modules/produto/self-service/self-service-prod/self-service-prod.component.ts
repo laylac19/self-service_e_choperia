@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {SelfServicePratoModel} from "../../../model/self-service-prato.model";
-import {SelfServiceService} from "../../../shared/service/self-service.service";
-import {MensagensSelfServiceUtil} from "../util/messages/mensagens-self-service.util";
+import {MensagensConfirmacao} from "../../../../shared/util/msgConfirmacaoDialog.util";
+import {SelfServicePratoModel} from "../../../../model/self-service-prato.model";
+import {SelfServiceService} from "../../../../shared/service/self-service.service";
+import {MensagensSelfServiceUtil} from "../../util/messages/mensagens-self-service.util";
 
 @Component({
   selector: 'app-self-service-prod',

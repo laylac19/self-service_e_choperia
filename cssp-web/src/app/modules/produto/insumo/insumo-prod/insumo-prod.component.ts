@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ProdutoModel} from "../../../model/produto.model";
-import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {ProdutoService} from "../../../shared/service/produto.service";
-import {MensagensInsumoUtil} from "../util/messages/mensagens-insumo.util";
+import {ProdutoModel} from "../../../../model/produto.model";
+import {MensagensConfirmacao} from "../../../../shared/util/msgConfirmacaoDialog.util";
+import {ProdutoService} from "../../../../shared/service/produto.service";
+import {MensagensInsumoUtil} from "../../util/messages/mensagens-insumo.util";
 
 @Component({
   selector: 'app-insumo-prod',

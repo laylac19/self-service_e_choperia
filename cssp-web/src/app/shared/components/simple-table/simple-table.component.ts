@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ColumnUtil} from "../../util/columnUtil";
 
 @Component({
@@ -12,6 +12,7 @@ export class SimpleTableComponent implements OnInit {
     @Input() dados: any;
     @Input() rows: number;
     @Input() paginator: boolean;
+    @Input() chope: boolean;
 
     @Output() public abrirModalHabilitado: EventEmitter<number> = new EventEmitter<number>();
     @Output() public abrirModalVisualizar: EventEmitter<number> = new EventEmitter<number>();

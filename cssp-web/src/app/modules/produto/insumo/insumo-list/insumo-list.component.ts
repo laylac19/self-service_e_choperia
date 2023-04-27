@@ -1,16 +1,16 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ColumnUtil} from "../../../shared/util/columnUtil";
-import {Page} from "../../../shared/util/page";
+import {ColumnUtil} from "../../../../shared/util/columnUtil";
+import {Page} from "../../../../shared/util/page";
 import {BlockUI, NgBlockUI} from "ng-block-ui";
-import {ProdutoColumnUtil} from "../util/produto-column.util";
-import {InsumoListModel} from "../../../model/list/insumo-list.model";
+import {ProdutoColumnUtil} from "../../util/produto-column.util";
+import {InsumoListModel} from "../../../../model/list/insumo-list.model";
 import {InsumoProdComponent} from "../insumo-prod/insumo-prod.component";
-import {ProdutoService} from "../../../shared/service/produto.service";
-import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
+import {ProdutoService} from "../../../../shared/service/produto.service";
+import {MensagensConfirmacao} from "../../../../shared/util/msgConfirmacaoDialog.util";
 import {finalize} from "rxjs";
-import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
-import {EntidadeUtil} from "../../../shared/util/entidade.util";
-import {TituloModalInsumoUtil} from "../util/modal/titulo-modal-insumo.util";
+import {MensagensProntasUtil} from "../../../../shared/util/messages/MensagensProntas.util";
+import {EntidadeUtil} from "../../../../shared/util/entidade.util";
+import {TituloModalInsumoUtil} from "../../util/modal/titulo-modal-insumo.util";
 import {InsumoEntryComponent} from "../insumo-entry/insumo-entry.component";
 import {InsumoWithdrawComponent} from "../insumo-withdraw/insumo-withdraw.component";
 
@@ -127,7 +127,7 @@ export class InsumoListComponent implements OnInit {
   }
 
   onClose(): void {
-    this.updateListAfterCreate()
+    this.updateListAfterCreate();
     this.inputFormComponent.formGroup.reset();
   }
 

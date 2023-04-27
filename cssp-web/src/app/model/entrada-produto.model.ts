@@ -1,4 +1,4 @@
-export class EntradaPrdotuoModel {
+export class EntradaProdutoModel {
   id: number;
   codigoBarras: string;
 }

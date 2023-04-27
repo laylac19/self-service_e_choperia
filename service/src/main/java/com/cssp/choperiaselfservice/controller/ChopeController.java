@@ -4,6 +4,7 @@ import com.cssp.choperiaselfservice.service.ChopeService;
 import com.cssp.choperiaselfservice.service.dto.ChopeListDTO;
 import com.cssp.choperiaselfservice.service.dto.ChopeViewDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO;
+import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ChopeController {
     private final ChopeService service;
+
+    @GetMapping("/buscar-chope/{rfid}")
+    public ResponseEntity<ChopeListDTO> findDraftBeerByRFID(@PathVariable("rfid") String rfid) {
+        return new ResponseEntity<>(service.findDraftBeerByRFID(rfid), HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity<Page<ChopeListDTO>> listAll(Pageable pageable) {

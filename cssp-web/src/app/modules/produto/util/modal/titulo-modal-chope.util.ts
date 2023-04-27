@@ -3,12 +3,14 @@ export class TituloModalChopeUtil {
     static readonly VIEW = new TituloModalChopeUtil(1, 'Visualizar Dados Chope');
     static readonly EDIT = new TituloModalChopeUtil(2, 'Editar Chope');
     static readonly DELETE = new TituloModalChopeUtil(3, 'Excluir Chope');
+  static readonly ENTRY = new TituloModalChopeUtil(4, 'Entrada de Insumo');
 
     static values = [
       TituloModalChopeUtil.NEW,
       TituloModalChopeUtil.VIEW,
       TituloModalChopeUtil.EDIT,
       TituloModalChopeUtil.DELETE,
+      TituloModalChopeUtil.ENTRY
     ];
 
     private constructor(

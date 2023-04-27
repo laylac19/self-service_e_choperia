@@ -17,14 +17,6 @@
     </button>
 
     <button pButton type="button"
-            icon="bi bi-layer-backward"
-            class="button-action"
-            iconPos="left"
-            label="Saída de Chope"
-            (click)="outputInProduct()">
-    </button>
-
-    <button pButton type="button"
             icon="bi bi-upc"
             class="button-action"
             iconPos="left"
@@ -48,4 +40,11 @@
                (answerForm)="onSave()"
                (closeDialog)="onClose()">
   <app-chope-prod></app-chope-prod>
+</custom-dialog>
+
+<custom-dialog [display]="displayEntry"
+               [header]="titleDialog"
+               (answerForm)="callEntryQtd()"
+               (closeDialog)="onCloseEntry()">
+  <app-chope-entry></app-chope-entry>
 </custom-dialog>

@@ -133,4 +133,24 @@ export class ProdutoColumnUtil {
       field: 'qtdeEstoque',
     }
   ];
+
+  static ENTRY_DRAFF_BEER_COLUMNS: ColumnUtil[] = [
+    {
+      header: 'Etiqueta RFID',
+      field: 'etiquetaRFID'
+    },
+    {
+      header: 'Descrição',
+      field: 'descricao',
+    },
+    {
+      header: 'Quantidade',
+      field: 'qtdeEstoque',
+    },
+    {
+      header: 'Total Litros',
+      field: 'litros',
+    }
+  ];
+
 }

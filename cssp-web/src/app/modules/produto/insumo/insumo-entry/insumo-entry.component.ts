@@ -1,21 +1,20 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {ProdutoService} from "../../../shared/service/produto.service";
-import {ColumnUtil} from "../../../shared/util/columnUtil";
-import {ProdutoColumnUtil} from "../util/produto-column.util";
-import {ProdutoModel} from "../../../model/produto.model";
+import {MensagensConfirmacao} from "../../../../shared/util/msgConfirmacaoDialog.util";
+import {ProdutoService} from "../../../../shared/service/produto.service";
+import {ColumnUtil} from "../../../../shared/util/columnUtil";
+import {ProdutoColumnUtil} from "../../util/produto-column.util";
 import {finalize} from "rxjs";
+import {ProdutoModel} from "../../../../model/produto.model";
 
 @Component({
-  selector: 'app-insumo-withdraw',
-  templateUrl: './insumo-withdraw.component.html',
-  styleUrls: ['./insumo-withdraw.component.scss']
+  selector: 'app-insumo-entry',
+  templateUrl: './insumo-entry.component.html',
+  styleUrls: ['./insumo-entry.component.scss']
 })
-export class InsumoWithdrawComponent implements OnInit {
-
-  columns: ColumnUtil[] = ProdutoColumnUtil.WITHDRAW_PRODUCTS_COLUMNS;
-  withdrawList: ProdutoModel[] = [];
+export class InsumoEntryComponent implements OnInit {
+  columns: ColumnUtil[] = ProdutoColumnUtil.ENTRY_PRODUCTS_COLUMNS;
+  entryList: ProdutoModel[] = [];
   formGroup: FormGroup;
 
   ngOnInit(): void {
@@ -23,7 +22,7 @@ export class InsumoWithdrawComponent implements OnInit {
   }
 
   constructor(private builder: FormBuilder,
-              private withdrawInsumoService: ProdutoService,
+              private entryInsumoService: ProdutoService,
               private message: MensagensConfirmacao,
               private renderer: Renderer2) {
   }
@@ -36,7 +35,7 @@ export class InsumoWithdrawComponent implements OnInit {
   }
 
   addProductOnTable(event: any){
-    this.withdrawInsumoService.findInputByBarCode(event.target.value)
+    this.entryInsumoService.findInputByBarCode(event.target.value)
       .pipe(
         finalize(() => {
           this.formGroup.reset();
@@ -46,15 +45,15 @@ export class InsumoWithdrawComponent implements OnInit {
       .subscribe(
         (insumo) => {
           if (insumo) {
-            let index = this.withdrawList.findIndex((ins) => ins.id === insumo.id);
+            let index = this.entryList.findIndex((ins) => ins.id === insumo.id);
             if (index < 0) {
               let newInsumo: any = {
                 ...insumo,
                 qtdeEstoque: 1
               }
-              this.withdrawList = [...this.withdrawList, newInsumo];
+              this.entryList = [...this.entryList, newInsumo];
             } else {
-              this.withdrawList = this.withdrawList.map((product) => {
+              this.entryList = this.entryList.map((product) => {
                 if (product.id === insumo.id) {
                   product.qtdeEstoque++;
                 }
@@ -72,7 +71,8 @@ export class InsumoWithdrawComponent implements OnInit {
   }
 
   reset(): void {
-    this.withdrawList = [];
+    this.entryList = [];
     this.formGroup.reset();
   }
+
 }

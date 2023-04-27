@@ -1,18 +1,18 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ColumnUtil} from "../../../shared/util/columnUtil";
-import {ProdutoColumnUtil} from "../util/produto-column.util";
-import {SelfServicePratoListModel} from "../../../model/list/self-service-prato-list.model";
-import {Page} from "../../../shared/util/page";
+import {ColumnUtil} from "../../../../shared/util/columnUtil";
+import {ProdutoColumnUtil} from "../../util/produto-column.util";
+import {SelfServicePratoListModel} from "../../../../model/list/self-service-prato-list.model";
+import {Page} from "../../../../shared/util/page";
 import {BlockUI, NgBlockUI} from "ng-block-ui";
 import {SelfServiceProdComponent} from "../self-service-prod/self-service-prod.component";
-import {SelfServiceService} from "../../../shared/service/self-service.service";
-import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
+import {SelfServiceService} from "../../../../shared/service/self-service.service";
+import {MensagensConfirmacao} from "../../../../shared/util/msgConfirmacaoDialog.util";
 import {finalize} from "rxjs";
-import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
-import {EntidadeUtil} from "../../../shared/util/entidade.util";
-import {TituloModalSelfServiceUtil} from "../util/modal/titulo-modal-self-service.util";
-import {CozinhaService} from "../../../shared/service/cozinha.service";
-import {MensagensSelfServiceUtil} from "../util/messages/mensagens-self-service.util";
+import {MensagensProntasUtil} from "../../../../shared/util/messages/MensagensProntas.util";
+import {EntidadeUtil} from "../../../../shared/util/entidade.util";
+import {TituloModalSelfServiceUtil} from "../../util/modal/titulo-modal-self-service.util";
+import {CozinhaService} from "../../../../shared/service/cozinha.service";
+import {MensagensSelfServiceUtil} from "../../util/messages/mensagens-self-service.util";
 
 @Component({
   selector: 'app-self-service-list',

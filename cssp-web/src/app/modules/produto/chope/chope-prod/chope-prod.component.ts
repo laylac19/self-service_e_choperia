@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {ChopeModel} from "../../../model/chope.model";
-import {ChopeService} from "../../../shared/service/chope.service";
-import {MensagensChopeUtil} from "../util/messages/mensagens-chope.util";
+import {MensagensConfirmacao} from "../../../../shared/util/msgConfirmacaoDialog.util";
+import {ChopeModel} from "../../../../model/chope.model";
+import {MensagensChopeUtil} from "../../util/messages/mensagens-chope.util";
+import {ProdutoService} from "../../../../shared/service/produto.service";
+import {ProdutoModel} from "../../../../model/produto.model";
 
 @Component({
   selector: 'app-chope-prod',
@@ -16,12 +17,12 @@ export class ChopeProdComponent implements OnInit {
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
 
   formGroup: FormGroup;
-  newDraftBeer: ChopeModel;
+  newDraftBeer: ProdutoModel;
 
   list: boolean = false;
 
   constructor(private builder: FormBuilder,
-              private draftBeerService: ChopeService,
+              private draftBeerService: ProdutoService,
               private message: MensagensConfirmacao) {
   }
 

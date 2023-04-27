@@ -65,4 +65,12 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
                 " AND P.ativo = true ")
     List<ChopeViewDTO> listAllDraftBeerToClient();
 
+    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ChopeListDTO(" +
+            " P.id, P.qtdeEstoque, P.descricao, P.etiquetaRFID) " +
+            " FROM Produto P " +
+            " WHERE P.etiquetaRFID IS NOT NULL " +
+            " AND P.ativo = true " +
+            " AND P.etiquetaRFID LIKE :rfid ")
+    ChopeListDTO findDraftBeerByRFID(@Param("rfid") String rfid);
+
 }

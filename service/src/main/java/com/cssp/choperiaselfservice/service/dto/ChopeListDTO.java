@@ -9,8 +9,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ChopeListDTO extends ProdutoListDTO implements Serializable {
 
     private String etiquetaRFID;
@@ -18,6 +16,11 @@ public class ChopeListDTO extends ProdutoListDTO implements Serializable {
     public ChopeListDTO(Long id, Double qtdeEstoque, Double precoCompra, String descricao, String unidade,
                         Double pontoEncomenda, Double precoVenda, String etiquetaRFID) {
         super(id, qtdeEstoque, precoCompra, descricao, unidade, pontoEncomenda, precoVenda);
+        this.etiquetaRFID = etiquetaRFID;
+    }
+
+    public ChopeListDTO(Long id, Double qtdeEstoque, String descricao, String etiquetaRFID) {
+        super(id, qtdeEstoque, descricao);
         this.etiquetaRFID = etiquetaRFID;
     }
 }

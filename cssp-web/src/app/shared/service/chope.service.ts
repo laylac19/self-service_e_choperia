@@ -16,28 +16,16 @@ export class ChopeService {
 
   resourceUrl = environment.apiUrl + '/chope';
 
+  findDraftBeerByRFID(rfid: string): Observable<ChopeListModel> {
+    return this.http.get<ChopeListModel>(this.resourceUrl + '/buscar-chope/' + rfid);
+  }
+
   findAll(): Observable<Page<ChopeListModel[]>> {
     return this.http.get<Page<ChopeListModel[]>>(this.resourceUrl);
   }
 
   listAllDraftBeers(): Observable<ChopeViewModel[]> {
     return this.http.get<ChopeViewModel[]>(this.resourceUrl + '/listar-para-cliente');
-  }
-
-  findById(id: number): Observable<ChopeModel> {
-    return this.http.get<ChopeModel>(this.resourceUrl + '/' + id);
-  }
-
-  save(entity: ChopeModel): Observable<ChopeModel> {
-    return this.http.post<ChopeModel>(this.resourceUrl, entity);
-  }
-
-  update(entity: ChopeModel): Observable<ChopeModel> {
-    return this.http.put<ChopeModel>(this.resourceUrl, entity);
-  }
-
-  delete(id: number): Observable<ChopeModel> {
-    return this.http.delete<ChopeModel>(this.resourceUrl + '/' + id);
   }
 
   enterProductDraftBeers(draftBeers: ChopeModel[]): Observable<ChopeModel[]> {
