@@ -1,16 +1,16 @@
 <div class="form p-fluid p-grid">
   <form [formGroup]="formGroup">
 
-    <div class="area-field flex pt-2">
+    <div class="area-field flex pt-2 col-12">
 
-      <div class="item-field col-5">
+      <div class="item-field col-6">
         <span class="item-form">
           <label class="campo" for="codBarras">Código de Barras</label>
           <input type="text" id="codBarras" pInputText formControlName="codigoBarras">
         </span>
       </div>
 
-      <div class="item-field col-7">
+      <div class="item-field col-6">
         <span class="item-form">
           <label class="campo" for="descricao">Descrição</label>
           <input type="text" id="descricao" pInputText formControlName="descricao">
@@ -21,7 +21,7 @@
 
     <div class="area-field flex col-12">
 
-      <div class="item-field col-4">
+      <div class="item-field col-6">
         <span class="item-form">
           <label class="campo">Preço de Compra R$</label>
           <p-inputNumber formControlName="precoCompra" mode="currency" locale="pt-BR" currency="BRL" [min]="0">
@@ -29,17 +29,10 @@
         </span>
       </div>
 
-      <div class="item-field col-4">
+      <div class="item-field col-6">
         <span class="item-form">
           <label class="campo" for="unidade">Unidade</label>
           <input type="text" id="unidade" pInputText formControlName="unidade">
-        </span>
-      </div>
-
-      <div class="item-field col-4">
-        <span class="item-form">
-          <label class="campo" for="qtdeEstoque">Quantidade</label>
-          <input type="text" id="qtdeEstoque" pInputText formControlName="qtdeEstoque">
         </span>
       </div>
 
@@ -47,15 +40,14 @@
 
     <div class="area-field flex">
 
-      <div class="item-field col-4">
+      <div class="item-field col-6">
         <span class="item-form">
-          <label class="campo">Preço de Venda R$</label>
-          <p-inputNumber formControlName="precoVenda" mode="currency" locale="pt-BR" currency="BRL" [min]="0">
-          </p-inputNumber>
+          <label class="campo" for="qtdeEstoque">Quantidade</label>
+          <input type="text" id="qtdeEstoque" pInputText formControlName="qtdeEstoque">
         </span>
       </div>
 
-      <div class="item-field col-4">
+      <div class="item-field col-6">
         <span class="item-form">
           <label class="campo" for="pontoEncomenda">Ponto de Encomenda</label>
           <input type="text" id="pontoEncomenda" pInputText formControlName="pontoEncomenda">

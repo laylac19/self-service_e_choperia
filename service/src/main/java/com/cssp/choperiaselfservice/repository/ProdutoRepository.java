@@ -54,7 +54,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ChopeListDTO(P.id, P.qtdeEstoque, " +
             " P.precoCompra, P.descricao, P.unidade, P.pontoEncomenda, P.precoVenda, P.etiquetaRFID) " +
             " FROM Produto P " +
-            " WHERE P.ativo = true ")
+            " WHERE P.etiquetaRFID IS NOT NULL " +
+                " AND P.ativo = true ")
     Page<ChopeListDTO> listAllBeers(Pageable pageable);
 
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ChopeViewDTO(P.id, " +
@@ -62,6 +63,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
             " FROM Produto P " +
             " WHERE P.etiquetaRFID IS NOT NULL " +
                 " AND P.ativo = true ")
-    List<ChopeViewDTO> listAllDraftBeer();
+    List<ChopeViewDTO> listAllDraftBeerToClient();
 
 }

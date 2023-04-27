@@ -28,7 +28,7 @@ public class ChopeController {
 
     @GetMapping
     public ResponseEntity<Page<ChopeListDTO>> listAll(Pageable pageable) {
-        return new ResponseEntity<>(service.listAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(service.listAllBeers(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/listar-para-cliente")

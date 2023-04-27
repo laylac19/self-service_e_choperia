@@ -19,13 +19,11 @@
             <column name="descricao" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="unidade" type="VARCHAR(255)">
+            <column name="unidade" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="ponto_encomenda" type="DOUBLE"/>
-            <column name="preco_venda" type="DOUBLE">
-                <constraints nullable="false"/>
-            </column>
+            <column name="preco_venda" type="DOUBLE"/>
             <column name="ativo" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>

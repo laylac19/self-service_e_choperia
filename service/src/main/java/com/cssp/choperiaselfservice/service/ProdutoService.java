@@ -2,12 +2,16 @@ package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.Produto;
 import com.cssp.choperiaselfservice.repository.ProdutoRepository;
+import com.cssp.choperiaselfservice.service.dto.EntradaProdutoDTO;
+import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
 import com.cssp.choperiaselfservice.service.dto.ProdutoDTO;
 import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
 import com.cssp.choperiaselfservice.service.mapper.ProdutoMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemProdutoUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +34,10 @@ public class ProdutoService {
         return mapper.toDto(findEntity(id));
     }
 
+    public InsumoListDTO findInputByBarCode(String barCode) {
+        return repository.findInputByBarCode(barCode);
+    }
+
     public ProdutoDTO save(ProdutoDTO dto) {
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
@@ -40,30 +48,27 @@ public class ProdutoService {
         repository.save(product);
     }
 
-
-    public void enterProduct(ProdutoDTO dto) {
+    public void enterProduct(EntradaProdutoDTO dto) {
         Produto product = findEntity(dto.getId());
         product.setQtdeEstoque(product.getQtdeEstoque() + dto.getQtdeEstoque());
-        product.setPrecoCompra(dto.getPrecoCompra());
-        product.setPrecoVenda(dto.getPrecoVenda());
         repository.save(product);
     }
 
-    public void productWithdrawal(ProdutoDTO dto) {
+    public void productWithdrawal(EntradaProdutoDTO dto) {
         Produto product = findEntity(dto.getId());
         product.setQtdeEstoque(validadeStockWithdrawal(product.getQtdeEstoque(), dto.getQtdeEstoque()));
         validateStockQuantity(product.getQtdeEstoque(), product.getPontoEncomenda());
         repository.save(product);
     }
 
-    public void enterListOfProducts(Set<ProdutoDTO> productDTOList) {
+    public void enterListOfProducts(Set<EntradaProdutoDTO> productDTOList) {
         if (Objects.isNull(productDTOList)) {
             throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
         }
         productDTOList.forEach(this::enterProduct);
     }
 
-    public void withdrawalListOfProducts(Set<ProdutoDTO> productDTOList) {
+    public void withdrawalListOfProducts(Set<EntradaProdutoDTO> productDTOList) {
         if (Objects.isNull(productDTOList)) {
             throw new BusinessRuleException(MensagemProdutoUtil.LIST_NOT_VALID);
         }
@@ -81,5 +86,9 @@ public class ProdutoService {
         if (Objects.equals(stockQuantity, pointOrder)) {
             throw new BusinessRuleException(MensagemProdutoUtil.PRODUCT_REACHED_REORDER_POINT);
         }
+    }
+
+    public Page<InsumoListDTO> listAllInputs(Pageable pageable) {
+        return repository.listAllInputs(pageable);
     }
 }

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {InsumoModel} from "../../../model/insumo.model";
+import {ProdutoModel} from "../../../model/produto.model";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {InsumoService} from "../../../shared/service/insumo.service";
+import {ProdutoService} from "../../../shared/service/produto.service";
 import {MensagensInsumoUtil} from "../util/messages/mensagens-insumo.util";
 
 @Component({
@@ -12,16 +12,16 @@ import {MensagensInsumoUtil} from "../util/messages/mensagens-insumo.util";
 })
 export class InsumoProdComponent implements OnInit {
 
-  @Input() inputModel: InsumoModel;
+  @Input() inputModel: ProdutoModel;
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
 
   formGroup: FormGroup;
-  newInput: InsumoModel;
+  newInput: ProdutoModel;
 
   list: boolean = false;
 
   constructor(private builder: FormBuilder,
-              private inputService: InsumoService,
+              private inputService: ProdutoService,
               private message: MensagensConfirmacao) {
   }
 
@@ -38,7 +38,6 @@ export class InsumoProdComponent implements OnInit {
       descricao: [null, [Validators.required]],
       unidade: [null, [Validators.required]],
       pontoEncomenda: [null, [Validators.required]],
-      precoVenda: [null, [Validators.required]],
     });
   }
 

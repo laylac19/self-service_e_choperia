@@ -1,13 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output, Renderer2} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {InsumoWithdrawModel} from "../../../model/insumo-withdraw.model";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {InsumoService} from "../../../shared/service/insumo.service";
+import {ProdutoService} from "../../../shared/service/produto.service";
 import {ColumnUtil} from "../../../shared/util/columnUtil";
 import {ProdutoColumnUtil} from "../util/produto-column.util";
-import {Page} from "../../../shared/util/page";
-import {InsumoWithdrawListModel} from "../../../model/list/insumo-withdraw-list.model";
-import {InsumoModel} from "../../../model/insumo.model";
+import {ProdutoModel} from "../../../model/produto.model";
 import {finalize} from "rxjs";
 
 @Component({
@@ -18,7 +15,7 @@ import {finalize} from "rxjs";
 export class InsumoWithdrawComponent implements OnInit {
 
   columns: ColumnUtil[] = ProdutoColumnUtil.WITHDRAW_PRODUCTS_COLUMNS;
-  withdrawList: InsumoModel[] = [];
+  withdrawList: ProdutoModel[] = [];
   formGroup: FormGroup;
 
   ngOnInit(): void {
@@ -26,7 +23,7 @@ export class InsumoWithdrawComponent implements OnInit {
   }
 
   constructor(private builder: FormBuilder,
-              private withdrawInsumoService: InsumoService,
+              private withdrawInsumoService: ProdutoService,
               private message: MensagensConfirmacao,
               private renderer: Renderer2) {
   }
@@ -39,7 +36,7 @@ export class InsumoWithdrawComponent implements OnInit {
   }
 
   addProductOnTable(event: any){
-    this.withdrawInsumoService.findByBarCode(event.target.value)
+    this.withdrawInsumoService.findInputByBarCode(event.target.value)
       .pipe(
         finalize(() => {
           this.formGroup.reset();

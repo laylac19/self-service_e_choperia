@@ -5,7 +5,7 @@ import {BlockUI, NgBlockUI} from "ng-block-ui";
 import {ProdutoColumnUtil} from "../util/produto-column.util";
 import {InsumoListModel} from "../../../model/list/insumo-list.model";
 import {InsumoProdComponent} from "../insumo-prod/insumo-prod.component";
-import {InsumoService} from "../../../shared/service/insumo.service";
+import {ProdutoService} from "../../../shared/service/produto.service";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
 import {finalize} from "rxjs";
 import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
@@ -33,21 +33,18 @@ export class InsumoListComponent implements OnInit {
   @ViewChild(InsumoProdComponent) inputFormComponent: InsumoProdComponent;
   @ViewChild(InsumoEntryComponent) entryFormComponent: InsumoEntryComponent;
   @ViewChild(InsumoWithdrawComponent) withdrawFormComponent: InsumoWithdrawComponent;
-  constructor(private inputService: InsumoService,
+
+  constructor(private inputService: ProdutoService,
               private message: MensagensConfirmacao) {
   }
 
   ngOnInit(): void {
-    this.listAllInputs();
-  }
-
-  listAllInputs(): void {
-    this.blockUI.start();
     this.fetchAll();
   }
 
   fetchAll(): void {
-    this.inputService.findAll()
+    this.blockUI.start();
+    this.inputService.listAllInputs()
       .pipe(finalize(() => this.blockUI.stop()))
       .subscribe({
         next: (result) => {
@@ -56,11 +53,7 @@ export class InsumoListComponent implements OnInit {
         error: () => {
           this.message.showInfo(MensagensProntasUtil.ERROS_LIST_ALL, MensagensProntasUtil.ERROR);
         }
-      })
-  }
-
-  private resultRequestList(result: Page<InsumoListModel[]>): void {
-    result.content ? this.inputsList = result : this.inputsList = [];
+      });
   }
 
   registerInput() {
@@ -87,17 +80,15 @@ export class InsumoListComponent implements OnInit {
 
   onSaveRegister(): void {
     this.inputFormComponent.saveInputForm();
-    this.listAllInputs();
     this.onClose();
   }
 
   callEntryQtd(): void {
     this.inputService.enterProductInput(
-      this.entryFormComponent.entryList.map((product) => ({ id: product.id, qtdeEstoque: product.qtdeEstoque }))
+      this.entryFormComponent.entryList.map((product) => ({id: product.id, qtdeEstoque: product.qtdeEstoque}))
     ).subscribe(
       () => {
         this.onCloseEntry();
-        this.fetchAll();
         this.message.showSuccess("Quantidade de estoque atualizada!");
       },
       () => {
@@ -108,7 +99,7 @@ export class InsumoListComponent implements OnInit {
 
   callWithdrawQtd(): void {
     this.inputService.releaseProductOutput(
-      this.withdrawFormComponent.withdrawList.map((product) => ({ id: product.id, qtdeEstoque: product.qtdeEstoque }))
+      this.withdrawFormComponent.withdrawList.map((product) => ({id: product.id, qtdeEstoque: product.qtdeEstoque}))
     ).subscribe(
       () => {
         this.onCloseWithdraw();
@@ -136,18 +127,49 @@ export class InsumoListComponent implements OnInit {
   }
 
   onClose(): void {
-    this.display = false;
+    this.updateListAfterCreate()
     this.inputFormComponent.formGroup.reset();
   }
 
   onCloseEntry(): void {
-    this.displayEntry = false;
+    this.updateListAfterEntry();
     this.entryFormComponent.reset();
   }
 
   onCloseWithdraw(): void {
-    this.displayWithdraw = false;
+    this.updateListAfterWithdraw();
     this.withdrawFormComponent.reset();
+  }
+
+  private listAllInputs(): void {
+    this.inputService.listAllInputs().subscribe((resp) => {
+      this.resultRequestList(resp)
+    });
+  }
+
+  private resultRequestList(result: Page<InsumoListModel[]>): void {
+    result.content ? this.inputsList = result : this.inputsList = [];
+  }
+
+  private updateListAfterCreate() {
+    if (this.inputFormComponent.list) {
+      this.listAllInputs();
+    }
+    this.display = false;
+  }
+
+  private updateListAfterEntry() {
+    if (this.entryFormComponent.entryList) {
+      this.listAllInputs();
+    }
+    this.displayEntry = false;
+  }
+
+  private updateListAfterWithdraw() {
+    if (this.withdrawFormComponent.withdrawList) {
+      this.listAllInputs();
+    }
+    this.displayWithdraw = false;
   }
 
 }

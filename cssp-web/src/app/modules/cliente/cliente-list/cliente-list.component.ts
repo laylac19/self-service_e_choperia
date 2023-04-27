@@ -41,11 +41,11 @@ export class ClienteListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listAllCustomers();
-    this.listCustomersWhoHaveEntered();
+    this.findAllCustomers();
+    this.findCustomersWhoHaveEntered();
   }
 
-  listAllCustomers(): void {
+  findAllCustomers(): void {
     this.blockUI.start();
     this.customerService.findAll()
       .pipe(finalize(() => this.blockUI.stop()))
@@ -59,7 +59,7 @@ export class ClienteListComponent implements OnInit {
       })
   }
 
-  listCustomersWhoHaveEntered(): void {
+  findCustomersWhoHaveEntered(): void {
     this.customerService.listCustomersWhoHaveEntered()
       .subscribe(
         (result) => {
@@ -83,13 +83,13 @@ export class ClienteListComponent implements OnInit {
 
   onSave(): void {
     this.customerFormComponent.saveForm();
-    this.listAllCustomers();
+    this.findAllCustomers();
     this.onClose();
   }
 
   onSaveEntry(): void {
     this.customerEntryComponent.saveForm();
-    this.listAllCustomers();
+    this.findAllCustomers();
     this.onCloseEntryDialog();
   }
 
@@ -100,7 +100,7 @@ export class ClienteListComponent implements OnInit {
   }
 
   deactivateCustomer(id: number): void {
-    this.customerService.delete(id).subscribe(() => this.listAllCustomers());
+    this.customerService.delete(id).subscribe(() => this.findAllCustomers());
   }
 
   confirmAction(customer: any): void {
@@ -130,7 +130,7 @@ export class ClienteListComponent implements OnInit {
   customerExit(id: number): void {
     this.customerService.customerExit(id).subscribe(() => {
       this.message.showSuccess(MensagensClienteUtil.SUCCESS_EXIT);
-      this.listAllCustomers();
+      this.findAllCustomers();
     });
   }
 

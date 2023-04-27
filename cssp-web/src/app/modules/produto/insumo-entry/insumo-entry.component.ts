@@ -1,11 +1,11 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {InsumoService} from "../../../shared/service/insumo.service";
+import {ProdutoService} from "../../../shared/service/produto.service";
 import {ColumnUtil} from "../../../shared/util/columnUtil";
 import {ProdutoColumnUtil} from "../util/produto-column.util";
 import {finalize} from "rxjs";
-import {InsumoModel} from "../../../model/insumo.model";
+import {ProdutoModel} from "../../../model/produto.model";
 
 @Component({
   selector: 'app-insumo-entry',
@@ -14,7 +14,7 @@ import {InsumoModel} from "../../../model/insumo.model";
 })
 export class InsumoEntryComponent implements OnInit {
   columns: ColumnUtil[] = ProdutoColumnUtil.ENTRY_PRODUCTS_COLUMNS;
-  entryList: InsumoModel[] = [];
+  entryList: ProdutoModel[] = [];
   formGroup: FormGroup;
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class InsumoEntryComponent implements OnInit {
   }
 
   constructor(private builder: FormBuilder,
-              private entryInsumoService: InsumoService,
+              private entryInsumoService: ProdutoService,
               private message: MensagensConfirmacao,
               private renderer: Renderer2) {
   }
@@ -35,7 +35,7 @@ export class InsumoEntryComponent implements OnInit {
   }
 
   addProductOnTable(event: any){
-    this.entryInsumoService.findByBarCode(event.target.value)
+    this.entryInsumoService.findInputByBarCode(event.target.value)
       .pipe(
         finalize(() => {
           this.formGroup.reset();

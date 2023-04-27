@@ -31,15 +31,12 @@ export class UsuarioListComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   @Input() display = false;
   @ViewChild(UsuarioFormComponent) userFormComponent: UsuarioFormComponent;
+
   constructor(private userService: UsuarioService,
               private message: MensagensConfirmacao) {
   }
 
   ngOnInit(): void {
-    this.listAllUsers();
-  }
-
-  listAllUsers(): void {
     this.blockUI.start();
     this.userService.findAll()
       .pipe(finalize(() => this.blockUI.stop()))
@@ -50,7 +47,13 @@ export class UsuarioListComponent implements OnInit {
         error: () => {
           this.message.showInfo(MensagensUsuarioUtil.ERROS_LIST_ALL, MensagensProntasUtil.ERROR);
         }
-      })
+      });
+  }
+
+  listAllUsers(): void {
+    this.userService.findAll().subscribe((resp) => {
+      this.resultRequestList(resp)
+    });
   }
 
   private resultRequestList(result: Page<UsuarioListModel[]>): void {
@@ -65,7 +68,6 @@ export class UsuarioListComponent implements OnInit {
 
   onSave(): void {
     this.userFormComponent.saveUserForm();
-    this.listAllUsers();
     this.onClose();
   }
 
@@ -88,8 +90,15 @@ export class UsuarioListComponent implements OnInit {
   }
 
   onClose(): void {
-    this.display = false;
+    this.updateList();
     this.userFormComponent.formGroup.reset();
+  }
+
+  private updateList() {
+    if (this.userFormComponent.list) {
+      this.listAllUsers();
+    }
+    this.display = false;
   }
 
 }

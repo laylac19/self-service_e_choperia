@@ -28,6 +28,7 @@ public class ClienteCompraProdutoDTO implements Serializable {
     @NotEmpty(message = MensagemClienteCompraUtil.PURCHASE_VALUE_EMPTY)
     private Double valorCompra;
 
+    private Double pesoPrato;
     private Boolean ativo = true;
 
 }

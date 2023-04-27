@@ -1,4 +1,4 @@
-export class InsumoModel {
+export class ProdutoModel {
   id: number;
   codigoBarras: string;
   qtdeEstoque: number;

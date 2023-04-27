@@ -70,9 +70,9 @@ export class CaixaComponent implements OnInit{
 
   get clientesCompras(): ClienteCompraModelList[] {
     let compras: ClienteCompraModelList[] = [];
-    this.clientes.forEach(cliente => {
-      cliente.compras?.forEach(compra => compras.push(compra));
-    })
+    // this.clientes.forEach(cliente => {
+    //   cliente.compras?.forEach(compra => compras.push(compra));
+    // })
     return compras;
   }
 

@@ -45,7 +45,7 @@ public class Produto implements Serializable {
     @Column(name = "ponto_encomenda")
     private Double pontoEncomenda;
 
-    @Column(name = "preco_venda", nullable = false)
+    @Column(name = "preco_venda")
     private Double precoVenda;
 
     @Column(name = "ativo", nullable = false)

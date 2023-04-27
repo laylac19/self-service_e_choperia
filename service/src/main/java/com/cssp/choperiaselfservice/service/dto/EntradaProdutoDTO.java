@@ -1,7 +1,5 @@
 package com.cssp.choperiaselfservice.service.dto;
 
-import com.cssp.choperiaselfservice.service.util.MensagemProdutoUtil;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +12,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InsumoEntryDTO implements Serializable{
+public class EntradaProdutoDTO implements Serializable{
     @NotNull
     private Long id;
     @NotNull

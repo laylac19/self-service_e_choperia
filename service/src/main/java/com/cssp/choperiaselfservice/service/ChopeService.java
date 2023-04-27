@@ -23,13 +23,12 @@ public class ChopeService {
     private final ClienteCompraService purchaseService;
     private final ProdutoRepository repository;
 
-
-    public Page<ChopeListDTO> listAll(Pageable pageable) {
+    public Page<ChopeListDTO> listAllBeers(Pageable pageable) {
         return repository.listAllBeers(pageable);
     }
 
     public List<ChopeViewDTO> listAllDraftBeers() {
-        return repository.listAllDraftBeer();
+        return repository.listAllDraftBeerToClient();
     }
 
     public void withdrawalMovementInChoppStock(Long idBeer) {

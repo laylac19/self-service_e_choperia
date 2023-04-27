@@ -1,4 +1,4 @@
-export class InsumoEntryModel {
+export class EntradaPrdotuoModel {
   id: number;
   codigoBarras: string;
 }

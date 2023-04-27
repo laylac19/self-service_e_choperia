@@ -18,7 +18,7 @@ public class NotificacaoSelfServicePratoDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Long idPrato;
+    private String descricaoPrato;
 
     private StatusPrato statusPrato = StatusPrato.PENDENTE;
     private Boolean ativo = true;

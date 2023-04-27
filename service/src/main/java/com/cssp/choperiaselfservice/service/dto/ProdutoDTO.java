@@ -18,6 +18,10 @@ public class ProdutoDTO implements Serializable {
 
     private Long id;
 
+    private String codigoBarras;
+
+    private String etiquetaRFID;
+
     @NotNull(message = MensagemProdutoUtil.NULL_STOCK_QUANTITY)
     private Double qtdeEstoque;
 
@@ -34,7 +38,6 @@ public class ProdutoDTO implements Serializable {
     @NotNull(message = MensagemProdutoUtil.NULL_ORDER_POINT)
     private Double pontoEncomenda;
 
-    @NotNull(message = MensagemProdutoUtil.NULL_SALE_PRICE)
     private Double precoVenda;
 
     private Boolean ativo = true;
