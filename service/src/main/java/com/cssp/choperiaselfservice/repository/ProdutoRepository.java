@@ -4,9 +4,7 @@ import com.cssp.choperiaselfservice.domain.Produto;
 import com.cssp.choperiaselfservice.service.dto.ChopeListDTO;
 import com.cssp.choperiaselfservice.service.dto.ChopeViewDTO;
 import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
-import com.cssp.choperiaselfservice.service.dto.PratoDTO;
-import com.cssp.choperiaselfservice.service.dto.PratoListDTO;
-import com.cssp.choperiaselfservice.service.dto.ProdutoListDTO;
+import com.cssp.choperiaselfservice.service.dto.ProdutoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,12 +16,6 @@ import java.util.List;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
-
-    @Query(" SELECT NEW com.cssp.choperiaselfservice.service.dto.ProdutoListDTO(" +
-                " P.id, P.qtdeEstoque, P.precoCompra, P.descricao, P.unidade, P.pontoEncomenda, P.precoVenda) " +
-            " FROM Produto P " +
-            " WHERE P.ativo = true ")
-    Page<ProdutoListDTO> listAll(Pageable pageable);
 
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.InsumoListDTO(" +
                 " P.id, P.qtdeEstoque, P.precoCompra, P.descricao, " +
@@ -41,25 +33,15 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
                 " AND P.codigoBarras LIKE :barCode")
     InsumoListDTO findInputByBarCode(@Param("barCode") String barCode);
 
-    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.PratoListDTO(P.id, P.descricao, P.precoVenda) " +
-            " FROM Produto P " +
-            " WHERE P.ativo = true ")
-    Page<PratoListDTO> listAllDishes(Pageable pageable);
-
-    @Query(" SELECT NR.id, NR.descricaoPrato" +
-            " FROM NotificacaoReposicaoCozinha NR " +
-            " WHERE NR.ativo = true AND NR.descricaoPrato = :description ")
-    PratoDTO findDishByDescription(@Param("description") String description);
-
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ChopeListDTO(P.id, P.qtdeEstoque, " +
-            " P.precoCompra, P.descricao, P.unidade, P.pontoEncomenda, P.precoVenda, P.etiquetaRFID) " +
+            " P.precoCompra, P.descricao, P.unidade, P.pontoEncomenda, P.precoVenda, P.litro_chope, P.etiquetaRFID) " +
             " FROM Produto P " +
             " WHERE P.etiquetaRFID IS NOT NULL " +
                 " AND P.ativo = true ")
     Page<ChopeListDTO> listAllBeers(Pageable pageable);
 
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ChopeViewDTO(P.id, " +
-            " P.descricao, P.qtdeEstoque, P.precoVenda) " +
+            " P.descricao, P.qtdeEstoque, P.litro_chope, P.precoVenda) " +
             " FROM Produto P " +
             " WHERE P.etiquetaRFID IS NOT NULL " +
                 " AND P.ativo = true ")
@@ -72,5 +54,12 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
             " AND P.ativo = true " +
             " AND P.etiquetaRFID LIKE :rfid ")
     ChopeListDTO findDraftBeerByRFID(@Param("rfid") String rfid);
+    @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ProdutoDTO(" +
+                " P.id, P.descricao, P.unidade, P.precoVenda)" +
+            " FROM Produto P" +
+            " WHERE P.codigoBarras IS NULL " +
+                " AND P.etiquetaRFID IS NULL " +
+                " AND P.ativo = true " )
+    ProdutoDTO findSelfServiceProduct();
 
 }

@@ -40,6 +40,9 @@ public class ClienteCompraProduto implements Serializable {
     @Column(name = "peso_prato")
     private Double pesoPrato;
 
+    @Column(name = "caneca_ml")
+    private Double canencaML;
+
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
 

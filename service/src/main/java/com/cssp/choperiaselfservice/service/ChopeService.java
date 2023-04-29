@@ -5,10 +5,8 @@ import com.cssp.choperiaselfservice.repository.ProdutoRepository;
 import com.cssp.choperiaselfservice.service.dto.ChopeListDTO;
 import com.cssp.choperiaselfservice.service.dto.ChopeViewDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO;
-import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
 import com.cssp.choperiaselfservice.service.util.ConstantesUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,12 +20,11 @@ import java.util.List;
 public class ChopeService {
 
     private final ProdutoService productService;
-    private final ClienteCompraService purchaseService;
+    private final ClienteCompraProdutoService purchaseService;
     private final ProdutoRepository repository;
 
     public ChopeListDTO findDraftBeerByRFID(String rfid) {
-        var teste = repository.findDraftBeerByRFID(rfid);
-        return teste;
+        return repository.findDraftBeerByRFID(rfid);
     }
 
     public Page<ChopeListDTO> listAllBeers(Pageable pageable) {

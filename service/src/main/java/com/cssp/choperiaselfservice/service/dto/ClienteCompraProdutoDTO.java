@@ -29,6 +29,7 @@ public class ClienteCompraProdutoDTO implements Serializable {
     private Double valorCompra;
 
     private Double pesoPrato;
+    private Double canecaML;
     private Boolean ativo = true;
 
 }

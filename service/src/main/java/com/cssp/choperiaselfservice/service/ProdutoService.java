@@ -38,6 +38,10 @@ public class ProdutoService {
         return repository.findInputByBarCode(barCode);
     }
 
+    public ProdutoDTO findSelfServiceProduct() {
+        return repository.findSelfServiceProduct();
+    }
+
     public ProdutoDTO save(ProdutoDTO dto) {
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }

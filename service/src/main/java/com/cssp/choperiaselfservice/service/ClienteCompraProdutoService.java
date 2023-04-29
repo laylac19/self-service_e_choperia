@@ -18,7 +18,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ClienteCompraService {
+public class ClienteCompraProdutoService {
 
     private final ClienteCompraProdutoRepository repository;
     private final ClienteService customerService;

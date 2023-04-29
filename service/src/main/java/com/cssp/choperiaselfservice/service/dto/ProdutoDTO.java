@@ -40,6 +40,14 @@ public class ProdutoDTO implements Serializable {
 
     private Double precoVenda;
 
+    private Double litro_chope;
+
     private Boolean ativo = true;
 
+    public ProdutoDTO(Long id, String descricao, String unidade, Double precoVenda) {
+        this.id = id;
+        this.descricao = descricao;
+        this.unidade = unidade;
+        this.precoVenda = precoVenda;
+    }
 }

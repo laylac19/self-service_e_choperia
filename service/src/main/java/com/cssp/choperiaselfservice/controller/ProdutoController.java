@@ -38,6 +38,11 @@ public class ProdutoController {
         return new ResponseEntity<>(service.findInputByBarCode(codigoBarras), HttpStatus.OK);
     }
 
+    @GetMapping("/buscar-self-service")
+    public ResponseEntity<ProdutoDTO> findSelfServiceProduct() {
+        return new ResponseEntity<>(service.findSelfServiceProduct(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<ProdutoDTO> save(@RequestBody ProdutoDTO dto) {
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);

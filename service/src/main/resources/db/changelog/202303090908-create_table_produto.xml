@@ -29,4 +29,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="1682780609123-1" author="layla.couto">
+        <addColumn tableName="produto">
+            <column name="litro_chope" type="DOUBLE"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

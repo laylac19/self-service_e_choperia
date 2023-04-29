@@ -33,4 +33,9 @@
                                  constraintName="FK_CLIENTE_COMPRA_PRODUTO_ON_PRODUTO" referencedColumnNames="id"
                                  referencedTableName="produto"/>
     </changeSet>
+    <changeSet id="1682780502902-1" author="layla.couto">
+        <addColumn tableName="cliente_compra_produto">
+            <column name="caneca_ml" type="DOUBLE"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -17,5 +17,6 @@ public class ChopeViewDTO implements Serializable {
     private String descricao;
     private Double qtdeEstoque;
     private Double precoVenda;
+    private Double litro_chope;
 
 }

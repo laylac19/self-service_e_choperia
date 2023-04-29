@@ -48,6 +48,9 @@ public class Produto implements Serializable {
     @Column(name = "preco_venda")
     private Double precoVenda;
 
+    @Column(name = "litro_chope")
+    private Double litro_chope;
+
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
 

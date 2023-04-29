@@ -43,4 +43,8 @@ export class ProdutoService {
     return this.http.put<any>(this.resourceUrl + '/saida-produto', inputs);
   }
 
+  findSelfServiceProduct(): Observable<ProdutoModel> {
+    return this.http.get<ProdutoModel>(this.resourceUrl + '/buscar-self-service');
+  }
+
 }

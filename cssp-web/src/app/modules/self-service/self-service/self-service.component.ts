@@ -1,12 +1,14 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
-import {SelfServiceCompraModel} from "../../../model/self-service-compra.model";
 import {MensagensUsuarioUtil} from "../../usuario/util/mensagens-usuario.util";
 import {ClienteService} from "../../../shared/service/cliente.service";
 import {ClienteModel} from "../../../model/cliente.model";
 import {MensagensClienteUtil} from "../../cliente/util/mensagens-cliente.util";
-import {SelfServiceCompraService} from "../../../shared/service/self-service-compra.service";
+import {ClienteCompraService} from "../../../shared/service/cliente-compra.service";
+import {ClienteCompraProdutoModel} from "../../../model/cliente-compra-produto.model";
+import {ProdutoService} from "../../../shared/service/produto.service";
+import {ProdutoModel} from "../../../model/produto.model";
 import {MensagensSelfServiceUtil} from "../../produto/util/messages/mensagens-self-service.util";
 
 @Component({
@@ -17,7 +19,9 @@ import {MensagensSelfServiceUtil} from "../../produto/util/messages/mensagens-se
 export class SelfServiceComponent implements OnInit {
 
   formGroup: FormGroup;
-  selfServiceBuy: SelfServiceCompraModel;
+  selfServiceBuy: ClienteCompraProdutoModel;
+
+  seflService: ProdutoModel;
 
   list: boolean = false;
   nameCustomer: string;
@@ -26,23 +30,26 @@ export class SelfServiceComponent implements OnInit {
 
 
   constructor(private builder: FormBuilder,
-              private ssBuyService: SelfServiceCompraService,
+              private ssBuyService: ClienteCompraService,
               private customerService: ClienteService,
+              private productService: ProdutoService,
               private message: MensagensConfirmacao) {
   }
 
   ngOnInit(): void {
     this.newForm();
+    this.findSelfServiceProduct();
   }
 
   newForm(): void {
     this.formGroup = this.builder.group({
       id: [null],
       idCliente: [null, Validators.required],
+      idProduto: [null, Validators.required],
       nomeClinte: [null],
       numCartaoRFID: [null],
       valorCompra: [null, Validators.required],
-      peso: [null, Validators.required],
+      pesoPrato: [null, Validators.required],
     });
   }
 
@@ -71,15 +78,24 @@ export class SelfServiceComponent implements OnInit {
   }
 
   setPurchaseValue(event: any): void {
-    const peso: number = 14.99;
-    const total: number = peso * event.target.value;
-    this.formGroup.get('peso')?.setValue(peso);
-    this.formGroup.get('valorCompra')?.setValue(total);
+    this.formGroup.get('idProduto')?.setValue(this.seflService.id);
+
+    const peso: number = event.target.value;
+    this.formGroup.get('pesoPrato')?.setValue(peso);
+
+    const total: number = this.seflService.precoVenda * peso;
+    this.formGroup.get('valorCompra')?.setValue(total.toPrecision(4));
   }
 
   closeForm(): void {
     this.formGroup.reset();
     this.answerForm.emit();
+  }
+
+  private findSelfServiceProduct(): void {
+    this.productService.findSelfServiceProduct().subscribe((resp: ProdutoModel)=> {
+      this.seflService = resp;
+    });
   }
 
   private showMsgAccordingToValidatingAnswer(response: ClienteModel): void {
