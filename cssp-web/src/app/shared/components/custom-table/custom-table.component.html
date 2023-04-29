@@ -62,13 +62,17 @@
               </button>
               <button *ngIf="editarDado"
                       pButton
+                      pTooltip="Editar"
+                      tooltipPosition="top"
                       icon="pi pi-pencil"
                       class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
                       iconPos="left"
-                      (click)="this.abrirModalVisualizar.emit(rowData.id)">
+                      (click)="this.abrirModalHabilitado.emit(rowData.id)">
               </button>
               <button *ngIf="repor" pButton
                       icon="bi bi-chat-square-dots"
+                      pTooltip="Solicitar Reposição"
+                      tooltipPosition="top"
                       class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
                       iconPos="left"
                       (click)="this.solicitarReposicao.emit(rowData)">
@@ -76,18 +80,24 @@
               <button *ngIf="entradaCliente"
                       [disabled]="!!rowData.numCartaoRFID"
                       pButton
+                      pTooltip="Entrada"
+                      tooltipPosition="top"
                       icon="bi bi-clipboard-check"
                       class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
                       (click)="this.abrirModalEntrada.emit(rowData.id)">
               </button>
               <button *ngIf="saidaCliente"
                       pButton
+                      pTooltip="Saída"
+                      tooltipPosition="top"
                       icon="bi bi-clipboard-x"
                       class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
                       (click)="this.abrirModalSaida.emit(rowData)">
               </button>
               <button *ngIf="desativarDado"
                       pButton
+                      pTooltip="Excluir"
+                      tooltipPosition="top"
                       icon="pi pi-trash"
                       class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
                       (click)="this.deletarDado.emit(rowData)">

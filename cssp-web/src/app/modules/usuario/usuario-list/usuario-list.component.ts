@@ -81,8 +81,8 @@ export class UsuarioListComponent implements OnInit {
     this.userService.delete(id).subscribe(() => this.listAllUsers());
   }
 
-  confirmAction(id: number): void {
-    this.message.confirmarDialog(id, () => this.deactivateUser(id), EntidadeUtil.USUARIO)
+  confirmAction(info: any): void {
+    this.message.confirmarDialog(info.id, () => this.deactivateUser(info.id), EntidadeUtil.USUARIO, info.nome)
   }
 
   resetForm(): void {

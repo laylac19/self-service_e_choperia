@@ -8,5 +8,5 @@ export class ProdutoModel {
   unidade: string;
   pontoEncomenda: number;
   precoVenda: number;
-  litros: number;
+  litro_chope: number;
 }

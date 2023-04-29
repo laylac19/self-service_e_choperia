@@ -30,34 +30,6 @@ export class ProdutoColumnUtil {
 			field: 'pontoEncomenda'
 		},
     {
-			header: 'Preço de Venda',
-			field: 'precoVenda',
-      type: 'price',
-      pipe: 'currency',
-		},
-    {
-			header: 'Ações',
-			field: 'acoes',
-      columnWidth: '132px'
-		},
-	];
-
-  static SELF_SERVICE_COLUMNS: ColumnUtil[] = [
-		{
-			header: 'ID',
-			field: 'id'
-		},
-		{
-			header: 'Descrição',
-			field: 'descricao',
-		},
-		{
-			header: 'Preço Kg',
-			field: 'precoKg',
-      type: 'price',
-      pipe: 'currency',
-		},
-    {
 			header: 'Ações',
 			field: 'acoes',
       columnWidth: '132px'
@@ -76,6 +48,11 @@ export class ProdutoColumnUtil {
 		{
 			header: 'Qtde. Estoque',
 			field: 'qtdeEstoque',
+		},
+    {
+			header: 'Total Litros',
+			field: 'litro_chope',
+      type: 'litro'
 		},
 		{
 			header: 'Preço Compra',
@@ -149,7 +126,7 @@ export class ProdutoColumnUtil {
     },
     {
       header: 'Total Litros',
-      field: 'litros',
+      field: 'litro_chope',
     }
   ];
 

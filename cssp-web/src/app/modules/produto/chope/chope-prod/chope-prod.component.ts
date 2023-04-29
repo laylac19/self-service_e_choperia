@@ -45,6 +45,7 @@ export class ChopeProdComponent implements OnInit {
 
   saveForm(): void {
     this.newDraftBeer = this.formGroup.getRawValue();
+    this.newDraftBeer.litro_chope  = this.newDraftBeer.qtdeEstoque * 100;
     this.draftBeerService.save(this.newDraftBeer)
       .subscribe({
         next: () => {
