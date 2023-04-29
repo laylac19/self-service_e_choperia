@@ -108,12 +108,12 @@ export class ClienteListComponent implements OnInit {
   }
 
   onClose(): void {
-    this.display = false;
+    this.updateList();
     this.customerFormComponent.formGroup.reset();
   }
 
   onCloseEntryDialog(): void {
-    this.displayEntry = false;
+    this.updateListOfEntrys();
     this.customerEntryComponent.formGroup.reset();
   }
 
@@ -130,12 +130,40 @@ export class ClienteListComponent implements OnInit {
   customerExit(id: number): void {
     this.customerService.customerExit(id).subscribe(() => {
       this.message.showSuccess(MensagensClienteUtil.SUCCESS_EXIT);
-      this.findAllCustomers();
+      this.updateList();
+      this.updateListOfEntrys();
     });
   }
 
   confirmActionExit(customer: any): void {
     this.message.confirmExitCustomer(customer.id, () => this.customerExit(customer.id), customer.nome)
+  }
+
+  private listAllClients(): void {
+    this.customerService.findAll().subscribe((resp) => {
+      this.resultRequestList(resp);
+    });
+  }
+
+  private listAllEntrys(): void {
+    this.customerService.listCustomersWhoHaveEntered().subscribe((resp) => {
+      this.resultRequestEntriesList(resp);
+    });
+  }
+
+  private updateList() {
+    if (this.customerFormComponent.list) {
+      this.listAllClients();
+    }
+    this.display = false;
+  }
+
+  private updateListOfEntrys() {
+    if (this.customerEntryComponent.list) {
+      this.listAllClients();
+      this.listAllEntrys();
+    }
+    this.displayEntry = false;
   }
 
 }
