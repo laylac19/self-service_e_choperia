@@ -1,6 +1,5 @@
 export class NotificacaoCozinhaModel {
   id: number;
-  idPrato: number;
-  descricaoPrato: string;
+  descricaoPrato: number;
   statusPrato: string;
 }

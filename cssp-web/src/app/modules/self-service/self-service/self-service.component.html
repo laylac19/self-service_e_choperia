@@ -1,5 +1,22 @@
 <div class="list-card">
   <div class="item">
+
+    <div class="repo">
+      <div class="logo-ss">
+        <img class="icone-pers" src="assets/images/icone%20comida.png">
+      </div>
+
+
+      <div class="botao-repor">
+        <button pButton type="button"
+                class="button-action ui-button-success button-save-new"
+                label="Solicitar Reposição"
+                (click)="requestReplacement()">
+        </button>
+      </div>
+    </div>
+
+
     <div class="body-card">
       <div class="form p-fluid p-grid">
         <form [formGroup]="formGroup">
@@ -8,7 +25,8 @@
             <div class="item-field col-5">
               <span class="item-form">
                 <label class="campo">Cartão RFID</label>
-                <input type="text" id="numCartaoRFID" pInputText formControlName="numCartaoRFID" (change)="findClienteByRFID($event)"/>
+                <input type="text" id="numCartaoRFID" pInputText formControlName="numCartaoRFID"
+                       (change)="findClienteByRFID($event)"/>
               </span>
             </div>
             <div class="item-field col-7">
@@ -23,7 +41,8 @@
             <div class="item-field col-4">
               <span class="item-form">
                 <label class="campo">Peso</label>
-                <input type="text" id="peso" pInputText formControlName="pesoPrato" (change)="setPurchaseValue($event)"/>
+                <input type="text" id="peso" pInputText formControlName="pesoPrato"
+                       (change)="setPurchaseValue($event)"/>
               </span>
             </div>
 
@@ -35,12 +54,12 @@
             </div>
 
             <div class="item-field col-3">
-                <button pButton type="button"
-                        class="button-action ui-button-success button-save-new"
-                        iconPos="left"
-                        label="Registrar Comprar"
-                        (click)="saveForm()">
-                </button>
+              <button pButton type="button"
+                      class="button-action ui-button-success button-save-new"
+                      iconPos="left"
+                      label="Registrar Comprar"
+                      (click)="saveForm()">
+              </button>
             </div>
           </div>
         </form>
@@ -48,3 +67,10 @@
     </div>
   </div>
 </div>
+
+<custom-dialog [display]="display"
+               [header]="titleDialog"
+               (answerForm)="onRequestSent()"
+               (closeDialog)="onCloseRequest()">
+  <app-reposicao-self-service></app-reposicao-self-service>
+</custom-dialog>

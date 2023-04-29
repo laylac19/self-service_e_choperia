@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
 import {MensagensUsuarioUtil} from "../../usuario/util/mensagens-usuario.util";
@@ -10,6 +10,9 @@ import {ClienteCompraProdutoModel} from "../../../model/cliente-compra-produto.m
 import {ProdutoService} from "../../../shared/service/produto.service";
 import {ProdutoModel} from "../../../model/produto.model";
 import {MensagensSelfServiceUtil} from "../../produto/util/messages/mensagens-self-service.util";
+import {BlockUI, NgBlockUI} from "ng-block-ui";
+import {InsumoProdComponent} from "../../produto/insumo/insumo-prod/insumo-prod.component";
+import {ReposicaoSelfServiceComponent} from "../reposicao-self-service/reposicao-self-service.component";
 
 @Component({
   selector: 'app-self-service',
@@ -20,13 +23,15 @@ export class SelfServiceComponent implements OnInit {
 
   formGroup: FormGroup;
   selfServiceBuy: ClienteCompraProdutoModel;
-
   seflService: ProdutoModel;
 
+  titleDialog: string;
   list: boolean = false;
-  nameCustomer: string;
 
+  @BlockUI() blockUI: NgBlockUI;
+  @Input() display = false;
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild(ReposicaoSelfServiceComponent) notifyComponent: ReposicaoSelfServiceComponent;
 
 
   constructor(private builder: FormBuilder,
@@ -113,4 +118,19 @@ export class SelfServiceComponent implements OnInit {
     this.formGroup.get('numCartaoRFID')?.setValue(response.numCartaoRFID);
   }
 
+  requestReplacement() {
+    this.titleDialog = "SOLICITAR REPOSIÇÃO";
+    this.notifyComponent.formGroup.reset();
+    this.display = true;
+  }
+
+  onRequestSent() {
+    this.notifyComponent.sendRequestDish();
+    this.display = false;
+  }
+
+  onCloseRequest() {
+    this.display = false;
+    this.notifyComponent.formGroup.reset();
+  }
 }

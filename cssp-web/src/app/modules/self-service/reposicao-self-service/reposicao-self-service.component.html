@@ -1,0 +1,14 @@
+<div class="form p-fluid p-grid">
+  <form [formGroup]="formGroup">
+
+    <div class="item-field col-12">
+      <span class="titulo">Informe a cozinha o prato que falta</span>
+    </div>
+    <div class="item-field col-12">
+      <span class="item-form">
+        <input type="text" id="descricao" pInputText formControlName="descricaoPrato">
+      </span>
+    </div>
+  </form>
+</div>
+<ng-content></ng-content>

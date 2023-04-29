@@ -78,3 +78,11 @@ body > app-root > div > div > div > div > {
 app-cliente-list > p-dialog > div > div {
   width: fit-content !important;
 }
+
+div.repo > div.botao-repor > button {
+  background-color: var(--cor-tema-6);
+}
+
+app-self-service > custom-dialog > p-dialog > div > div {
+  width: 25vw !important;
+}

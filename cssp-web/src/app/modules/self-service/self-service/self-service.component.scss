@@ -5,11 +5,11 @@ div.list-card {
   justify-content: center;
 
   .item {
-    width: 60rem;
+    width: 80rem;
     display: flex;
     background: var(--cor-tema-3);
     color: #FFF;
-    height: 16rem;
+    height: 22rem;
     border-radius: 2rem;
     align-content: center;
     padding: 0.5rem 2rem;
@@ -20,6 +20,22 @@ div.list-card {
       padding: 1rem;
       justify-content: space-between;
       gap: 0.5rem;
+    }
+
+    .repo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      width: 20%;
+      padding: 1rem;
+      align-items: center;
+
+      .logo-ss {
+        background-color: var(--cor-tema-4);
+        border-radius: 40rem;
+      }
+
     }
 
     .area-field {
@@ -42,4 +58,10 @@ div.list-card {
 
 .area-field {
   gap: 1rem;
+}
+
+.icone-pers {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
 }
