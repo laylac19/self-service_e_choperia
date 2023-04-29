@@ -41,7 +41,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     Page<ChopeListDTO> listAllBeers(Pageable pageable);
 
     @Query( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ChopeViewDTO(P.id, " +
-            " P.descricao, P.qtdeEstoque, P.litro_chope, P.precoVenda) " +
+            " P.descricao, P.qtdeEstoque, P.precoVenda, P.litro_chope) " +
             " FROM Produto P " +
             " WHERE P.etiquetaRFID IS NOT NULL " +
                 " AND P.ativo = true ")
