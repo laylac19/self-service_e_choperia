@@ -38,4 +38,12 @@
             <column name="caneca_ml" type="DOUBLE"/>
         </addColumn>
     </changeSet>
+    <changeSet id="1683039786689-1" author="layla.couto">
+        <addColumn tableName="cliente_compra_produto">
+            <column name="data_compra" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

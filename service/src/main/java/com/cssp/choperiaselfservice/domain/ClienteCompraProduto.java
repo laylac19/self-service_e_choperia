@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "cliente_compra_produto")
@@ -42,6 +43,9 @@ public class ClienteCompraProduto implements Serializable {
 
     @Column(name = "caneca_ml")
     private Double canencaML;
+
+    @Column(name = "data_compra", nullable = false)
+    private LocalDate dataCompra;
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
