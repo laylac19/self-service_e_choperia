@@ -19,11 +19,46 @@
         <span *ngIf="item.qtdeEstoque > 1">Disponível: {{item.qtdeEstoque}} Barris (100l)</span>
         <span *ngIf="item.qtdeEstoque == 0">Em processo de reposição</span>
       </div>
-      <div class="body-card valor">
-        <span class="valor">{{item.precoVenda | currency: 'BRL'}}</span>
+      <div class="body-card bottom">
+        <div>
+          <span class="valor">{{item.precoVenda | currency: 'BRL'}}</span>
+        </div>
+        <div class="buy-button">
+          <button pButton
+                  icon="icone bi bi-cart-fill"
+                  class="empty-background flex align-items-center justify-content-center m-1"
+                  iconPos="left"
+                  (click)="buyBeer(item)">
+          </button>
+        </div>
       </div>
+
     </div>
 
 
   </div>
 </div>
+
+<custom-dialog [display]="display"
+               [header]="titleDialog"
+               (answerForm)="onSave()"
+               (closeDialog)="onClose()">
+  <form [formGroup]="formGroup">
+
+    <div class="area-field search flex flex-column">
+      <div class="item-field">
+              <span class="item-form rfid">
+                <label class="campo">Cartão RFID</label>
+                <input type="text" id="numCartaoRFID" pInputText formControlName="numCartaoRFID"
+                       (change)="findClienteByRFID($event)"/>
+              </span>
+      </div>
+      <div class="item-field">
+              <span class="item-form">
+                <label class="campo">Nome Cliente: </label>
+                <span class="descricao">{{client ? client.nome.toUpperCase() : ''}}</span>
+              </span>
+      </div>
+    </div>
+  </form>
+</custom-dialog>

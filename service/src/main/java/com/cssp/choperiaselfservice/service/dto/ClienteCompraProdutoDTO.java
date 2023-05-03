@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -30,6 +31,9 @@ public class ClienteCompraProdutoDTO implements Serializable {
 
     private Double pesoPrato;
     private Double canecaML;
+
+    private LocalDate dataCompra = LocalDate.now();
+
     private Boolean ativo = true;
 
 }

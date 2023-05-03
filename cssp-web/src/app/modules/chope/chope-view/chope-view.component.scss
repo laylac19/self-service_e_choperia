@@ -26,9 +26,11 @@ div.list-card {
       flex-direction: column;
       gap: 0.5rem;
     }
-    .valor {
+    .bottom {
       padding-top: 0;
       width: 100%;
+      flex-direction: row-reverse;
+      align-items: center;
 
       .valor {
         text-align: end;
@@ -52,3 +54,28 @@ div.list-card {
     }
   }
 }
+
+div.area-field {
+  &.search {
+    padding: 1rem;
+    width: fit-content;
+    gap: 1.5rem;
+
+    div.item-field {
+      span.item-form.rfid{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      span.descricao {
+        color: var(--cor-tema-5);
+        font-weight: 500;
+        font-family: 'Kreon', Verdana, sans-serif;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+//form > div > div:nth-child(1) > span
+

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ChopeRoutingModule } from './chope-routing.module';
 import { ChopeViewComponent } from './chope-view/chope-view.component';
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ChopeViewComponent } from './chope-view/chope-view.component';
     ],
     imports: [
         CommonModule,
-        ChopeRoutingModule
+        ChopeRoutingModule,
+        SharedModule
     ]
 })
 export class ChopeModule { }

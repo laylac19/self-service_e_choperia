@@ -86,3 +86,21 @@ div.repo > div.botao-repor > button {
 app-self-service > custom-dialog > p-dialog > div > div {
   width: 25vw !important;
 }
+
+app-chope-view > custom-dialog > p-dialog > div > div {
+  width: 35vw !important;
+}
+
+div.buy-button > button {
+  &.empty-background, &.empty-background:hover, &:enabled:not(:focus):hover {
+    background-color: #00000000;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+div.buy-button > button > span {
+  font-size: 20pt;
+}
