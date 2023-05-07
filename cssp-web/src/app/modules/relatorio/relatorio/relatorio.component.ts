@@ -9,7 +9,7 @@ import {RelatorioEnviarEmailComponent} from "../relatorio-enviar-email/relatorio
 })
 export class RelatorioComponent {
 
-  titleDialog: "RELATÓRIO - Envio de E-mail"
+  // titleDialog: ""
 
   @BlockUI() blockUI: NgBlockUI;
   @Input() display = false;
