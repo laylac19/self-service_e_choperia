@@ -6,7 +6,6 @@ import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.ut
 import {ClienteModel} from "../../../model/cliente.model";
 import {ClienteService} from "../../../shared/service/cliente.service";
 import {CaixaService} from "../../../shared/service/caixa.service";
-import {finalize, map, switchMap} from "rxjs";
 import {ClienteCompraService} from "../../../shared/service/cliente-compra.service";
 import {ClienteCompraModelList} from "../../../model/list/cliente-compra-list.model";
 
@@ -41,31 +40,31 @@ export class CaixaComponent implements OnInit{
   }
 
   addConsumeOnTable(event: any) {
-    this.clienteService.findById(Number(event.target.value))
-      .pipe(
-        switchMap((cliente) => {
-          return this.clienteCompraService.findByRFID(cliente.numCartaoRFID).pipe(
-            map((clienteCompras) => {
-              return { ...cliente, compras: clienteCompras };
-            })
-          )
-        }),
-        finalize(() => {
-          this.formGroup.reset();
-          this.renderer.selectRootElement('#codCartaoCliente').focus();
-        })
-      )
-      .subscribe(
-        (cliente) => {
-          const clientIndexFound = this.clientes.findIndex((c) => c.id === cliente.id);
-          if (clientIndexFound < 0) {
-            this.clientes = [...this.clientes, cliente];
-            this.nomesClientes = [...this.nomesClientes, cliente.nome];
-          } else {
-            this.message.showWarn("O cliente já consta na lista!", "Atenção");
-          }
-        }
-      );
+    // this.clienteService.findById(Number(event.target.value))
+    //   .pipe(
+    //     switchMap((cliente) => {
+    //       return this.clienteCompraService.findByRFID(cliente.numCartaoRFID).pipe(
+    //         map((clienteCompras) => {
+    //           return { ...cliente, compras: clienteCompras };
+    //         })
+    //       )
+    //     }),
+    //     finalize(() => {
+    //       this.formGroup.reset();
+    //       this.renderer.selectRootElement('#codCartaoCliente').focus();
+    //     })
+    //   )
+    //   .subscribe(
+    //     (cliente) => {
+    //       const clientIndexFound = this.clientes.findIndex((c) => c.id === cliente.id);
+    //       if (clientIndexFound < 0) {
+    //         this.clientes = [...this.clientes, cliente];
+    //         this.nomesClientes = [...this.nomesClientes, cliente.nome];
+    //       } else {
+    //         this.message.showWarn("O cliente já consta na lista!", "Atenção");
+    //       }
+    //     }
+    //   );
   }
 
   get clientesCompras(): ClienteCompraModelList[] {

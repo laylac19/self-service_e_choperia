@@ -2,16 +2,21 @@ package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.ClienteCompraProduto;
 import com.cssp.choperiaselfservice.repository.ClienteCompraProdutoRepository;
+import com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO;
 import com.cssp.choperiaselfservice.service.dto.ComprasCaixaListDTO;
+import com.cssp.choperiaselfservice.service.dto.EmailClienteCompraDTO;
+import com.cssp.choperiaselfservice.service.dto.RelatorioEnviarEmailDTO;
 import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
 import com.cssp.choperiaselfservice.service.mapper.ClienteCompraProdutoMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemClienteCompraUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.var;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,6 +28,8 @@ public class ClienteCompraProdutoService {
     private final ClienteCompraProdutoRepository repository;
     private final ClienteService customerService;
     private final ClienteCompraProdutoMapper mapper;
+
+    private final EnviarEmailService emailService;
 
 
     public ClienteCompraProduto findEntity(Long id) {
@@ -54,6 +61,24 @@ public class ClienteCompraProdutoService {
         ClienteCompraProduto purchase = findEntity(id);
         purchase.setAtivo(false);
         repository.save(purchase);
+    }
+
+    public void sendEmail(RelatorioEnviarEmailDTO report) {
+        var clients = searchCustomersWhoPurchasedBetweenDates(report.getDataInicial(), report.getDataFinal());
+        clients.forEach(clienteDTO -> {
+            EmailClienteCompraDTO email = new EmailClienteCompraDTO();
+            email.setBuild(createEmail(clienteDTO));
+            email.setMensagem(report.getMensagem());
+            emailService.purchasesMade(email);
+        });
+    }
+
+    private Set<ClienteCompraProdutoDTO> searchCustomersWhoPurchasedBetweenDates(LocalDate initialDate, LocalDate finalDate) {
+        return repository.searchCustomersWhoPurchasedBetweenDates(initialDate, finalDate);
+    }
+
+    private BuildEmailPurchadeDTO createEmail(ClienteCompraProdutoDTO dto) {
+        return repository.buildEmail(dto.getIdCliente(), dto.getId());
     }
 
 }

@@ -3,6 +3,7 @@ package com.cssp.choperiaselfservice.controller;
 import com.cssp.choperiaselfservice.service.ClienteCompraProdutoService;
 import com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO;
 import com.cssp.choperiaselfservice.service.dto.ComprasCaixaListDTO;
+import com.cssp.choperiaselfservice.service.dto.RelatorioEnviarEmailDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,12 @@ public class ClienteCompraProdutoController {
     @PostMapping
     public ResponseEntity<ClienteCompraProdutoDTO> save(@RequestBody ClienteCompraProdutoDTO dto) {
         return new ResponseEntity<>(service.save(dto), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/relatorio/enviar-email")
+    public ResponseEntity<Void> sendEmail(@RequestBody RelatorioEnviarEmailDTO report) {
+        service.sendEmail(report);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

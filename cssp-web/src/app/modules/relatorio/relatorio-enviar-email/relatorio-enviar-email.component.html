@@ -1,0 +1,44 @@
+<div class="form p-fluid p-grid">
+  <form [formGroup]="formGroup">
+    <div class="area-field flex">
+      <span>Período</span>
+      <div class="item-field col-6">
+          <span class="item">
+              <label class="campo-form">Data Inicial</label>
+              <p-calendar
+                class="calendario"
+                placeholder="DD/MM/AAAA"
+                formControlName="dataInicial"
+                dateFormat="dd/mm/yy"
+                appendTo="body"
+                [defaultDate]="dataInicial"
+                [yearNavigator]="true"
+                [showIcon]="true"
+              ></p-calendar>
+          </span>
+      </div>
+      <div class="item-field col-6">
+          <span class="item">
+              <label class="campo-form">Data Final</label>
+              <p-calendar
+                class="calendario"
+                placeholder="DD/MM/AAAA"
+                formControlName="dataFinal"
+                dateFormat="dd/mm/yy"
+                appendTo="body"
+                [defaultDate]="dataFinal"
+                [yearNavigator]="true"
+                [showIcon]="true"
+              ></p-calendar>
+          </span>
+      </div>
+    </div>
+    <div class="field pt-2">
+      <span class="item-form">
+        <label class="campo">Mensagem</label>
+      <textarea rows="5" cols="30" pInputTextarea [autoResize]="false" formControlName="mensagem"></textarea>
+      </span>
+    </div>
+  </form>
+</div>
+<ng-content></ng-content>

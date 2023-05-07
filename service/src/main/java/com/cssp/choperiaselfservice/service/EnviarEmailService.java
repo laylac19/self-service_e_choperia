@@ -1,6 +1,7 @@
 package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.enums.DiretoriaExecutiva;
+import com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO;
 import com.cssp.choperiaselfservice.service.dto.EmailClienteCompraDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +17,29 @@ public class EnviarEmailService {
 
     public void purchasesMade(EmailClienteCompraDTO emailDTO) {
         log.info("Enviando Email");
-        SimpleMailMessage mensagem = new SimpleMailMessage();
-        mensagem.setTo(DiretoriaExecutiva.findEmails());
-        mensagem.setSubject("CSSP Compras");
-        mensagem.setText("Olá " + emailDTO.getNomeCliente() +
+        SimpleMailMessage message = new SimpleMailMessage();
+        BuildEmailPurchadeDTO build = emailDTO.getBuild();
+        message.setTo(DiretoriaExecutiva.findEmails());
+        message.setSubject("CSSP Compras");
+        message.setText("Olá " + build.getNomeCliente() + "," +
                 "\n\n" + emailDTO.getMensagem() +
-                "\n\n\n Consulta: " + emailDTO.getDtInicioPeriodo() + " - " + emailDTO.getDtFimPeriodo());
-        envioEmailJava.send(mensagem);
+                "\n\n Data Compra: " + build.getDataCompra() + " - Valor Compra: " + build.getValorCompra() +
+                "\n\n\n\n Obrigada pela prefeência!!!");
+        envioEmailJava.send(message);
         log.info("Enviado");
     }
+
+//    public void purchasesMade(EmailClienteCompraDTO emailDTO) {
+//        log.info("Enviando Email");
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        BuildEmailPurchadeDTO build = emailDTO.getBuild();
+//        message.setTo(build.getEmailCliente());
+//        message.setSubject("CSSP Compras");
+//        message.setText("Olá " + build.getNomeCliente() + "," +
+//                "\n\n" + emailDTO.getMensagem() +
+//                "\n\n Data Compra: " + build.getDataCompra() + " - Valor Compra: " + build.getValorCompra() +
+//                "\n\n\n\n Obrigada pela prefeência!!!");
+//        envioEmailJava.send(message);
+//        log.info("Enviado");
+//    }
 }

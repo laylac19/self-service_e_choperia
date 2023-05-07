@@ -59,7 +59,7 @@ export class ClienteEntradaComponent implements OnInit {
           this.list = true;
         },
         error: () => {
-          this.message.showInfo(MensagensProntasUtil.ERROS_LIST_ALL, MensagensProntasUtil.ERROR);
+          this.message.showInfo(MensagensProntasUtil.SUB_MESSAGE_ERROR, MensagensProntasUtil.ERROR);
         }
       });
   }

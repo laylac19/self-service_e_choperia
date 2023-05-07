@@ -3,7 +3,7 @@ application:
 
 spring:
   mail:
-    host: stmp.gmail.com
+    host: smtp.gmail.com
     port: 587
     username: laylamscouto@gmail.com
     password: fpkxhuxqvisdxcrs

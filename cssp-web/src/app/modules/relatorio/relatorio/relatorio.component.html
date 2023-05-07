@@ -43,7 +43,7 @@
       </p-card>
     </div>
     <div class="container menu col-4">
-      <p-card class="card-item-menu">
+      <p-card class="card-item-menu" (click)="openRequestToSendEmail()">
         <em class="icon bi bi-info-circle"
             pTooltip="Envio de email para todos os clientes que compraram em um determinado período de tempo.">
         </em>
@@ -60,3 +60,11 @@
     </div>
   </div>
 </div>
+
+
+<custom-dialog [display]="display"
+               [header]="titleDialog"
+               (answerForm)="sendEmail()"
+               (closeDialog)="onClose()">
+  <app-relatorio-enviar-email></app-relatorio-enviar-email>
+</custom-dialog>
