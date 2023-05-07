@@ -4,7 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
   {path: '', loadChildren: () => import('./modules/painel-adm/painel-adm.module').then(m => m.PainelAdmModule)},
   {path: 'Usuarios', loadChildren: () => import('./modules/usuario/usuario.module').then(m => m.UsuarioModule)},
-  {path: 'Relatorio', loadChildren: () => import('./modules/relatorio/relatorio.module').then(m => m.RelatorioModule)},
+  {path: 'Relatorios', loadChildren: () => import('./modules/relatorio/relatorio.module').then(m => m.RelatorioModule)},
   {path: 'Produtos', loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule)},
   {path: 'Clientes', loadChildren: () => import('./modules/cliente/cliente.module').then(m => m.ClienteModule)},
   {path: 'Caixa', loadChildren: () => import('./modules/caixa/caixa.module').then(m => m.CaixaModule)},
