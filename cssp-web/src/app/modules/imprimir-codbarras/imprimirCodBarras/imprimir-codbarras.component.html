@@ -1,0 +1,53 @@
+<div class="item-pagina tabela mt-8">
+  <div class="my-2">
+    <button pButton pRipple label="Imprimir Selecionados" icon="pi pi-print"
+            class="p-button-raised p-button-success mr-2" (click)="imprimirBarCodes()"
+            [disabled]="selectedProducts.length <= 0"></button>
+  </div>
+  <p-table [columns]="columns"
+           [value]="entryList.content"
+           [paginator]="paginator"
+           [rows]="rows"
+           [responsive]="true"
+           [(selection)]="selectedProducts"
+           sortMode="multiple">
+    <ng-template pTemplate="header" let-colunas>
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th id="titulo-colunas" *ngFor="let col of colunas" [pSortableColumn]="col.field"
+            [style]="'width:'+ col.columnWidth">
+          {{col.header}}
+          <ng-container>
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </ng-container>
+        </th>
+        <th style="text-align: center">Quantidade</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+        <td>
+          <p-inputNumber [(ngModel)]="rowData.quantidade" [showButtons]="true" [min]="0" [maxFractionDigits]="0"
+                         [inputId]="'inputProductAmount' + rowData.id"></p-inputNumber>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td *ngIf="!entryList">
+          Nenhum dado encontrado.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+

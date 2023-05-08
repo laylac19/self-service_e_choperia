@@ -24,6 +24,7 @@ import { ChopeEntryComponent } from './chope/chope-entry/chope-entry.component';
     InsumoWithdrawComponent,
     ChopeEntryComponent
   ],
+
     imports: [
         CommonModule,
         ProdutoRoutingModule,

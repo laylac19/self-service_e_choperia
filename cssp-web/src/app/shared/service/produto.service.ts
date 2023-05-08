@@ -47,4 +47,8 @@ export class ProdutoService {
     return this.http.get<ProdutoModel>(this.resourceUrl + '/buscar-self-service');
   }
 
+  getWeightValue(): Observable<any> {
+    return this.http.get("http://192.168.229.20/peso");
+  }
+
 }

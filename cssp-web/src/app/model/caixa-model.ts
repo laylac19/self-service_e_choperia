@@ -1,5 +1,5 @@
 export class CaixaModel {
-  id: number;
+  id: number | null;
   idCompra: number;
   idClientePrincipal: number;
   totalConta:number;

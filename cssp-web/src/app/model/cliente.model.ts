@@ -1,3 +1,5 @@
+import {ClienteCaixaList} from "./list/cliente-caixa-list";
+
 export interface ClienteModel {
   id: number;
   numCartaoRFID: string;
@@ -5,4 +7,5 @@ export interface ClienteModel {
   telefone: string;
   email: string;
   cpf: string;
+  compras: ClienteCaixaList[];
 }

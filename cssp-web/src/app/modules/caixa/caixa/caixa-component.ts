@@ -8,6 +8,8 @@ import {ClienteService} from "../../../shared/service/cliente.service";
 import {CaixaService} from "../../../shared/service/caixa.service";
 import {ClienteCompraService} from "../../../shared/service/cliente-compra.service";
 import {ClienteCompraModelList} from "../../../model/list/cliente-compra-list.model";
+import {finalize, map, switchMap} from "rxjs";
+import {CaixaModel} from "../../../model/caixa-model";
 
 @Component({
   selector: 'app-caixa',
@@ -40,38 +42,40 @@ export class CaixaComponent implements OnInit{
   }
 
   addConsumeOnTable(event: any) {
-    // this.clienteService.findById(Number(event.target.value))
-    //   .pipe(
-    //     switchMap((cliente) => {
-    //       return this.clienteCompraService.findByRFID(cliente.numCartaoRFID).pipe(
-    //         map((clienteCompras) => {
-    //           return { ...cliente, compras: clienteCompras };
-    //         })
-    //       )
-    //     }),
-    //     finalize(() => {
-    //       this.formGroup.reset();
-    //       this.renderer.selectRootElement('#codCartaoCliente').focus();
-    //     })
-    //   )
-    //   .subscribe(
-    //     (cliente) => {
-    //       const clientIndexFound = this.clientes.findIndex((c) => c.id === cliente.id);
-    //       if (clientIndexFound < 0) {
-    //         this.clientes = [...this.clientes, cliente];
-    //         this.nomesClientes = [...this.nomesClientes, cliente.nome];
-    //       } else {
-    //         this.message.showWarn("O cliente já consta na lista!", "Atenção");
-    //       }
-    //     }
-    //   );
+    this.clienteService.findClienteByNumCartaoRFID(event.target.value)
+      .pipe(
+        switchMap((cliente) => {
+          return this.clienteCompraService.listPurchasedItemsOfCustomer(cliente.numCartaoRFID).pipe(
+            map((clienteCompras) => {
+              return { ...cliente, compras: clienteCompras };
+            })
+          )
+        }),
+        finalize(() => {
+          this.formGroup.reset();
+          this.renderer.selectRootElement('#codCartaoCliente').focus();
+        })
+      )
+      .subscribe(
+        (cliente) => {
+          const clientIndexFound = this.clientes.findIndex((c) => c.id === cliente.id);
+          if (clientIndexFound < 0) {
+            this.clientes = [...this.clientes, cliente];
+            this.nomesClientes = [...this.nomesClientes, cliente.nome];
+            console.log(this.clientes)
+          } else {
+            this.message.showWarn("O cliente já consta na lista!", "Atenção");
+          }
+        }
+      );
   }
 
   get clientesCompras(): ClienteCompraModelList[] {
     let compras: ClienteCompraModelList[] = [];
-    // this.clientes.forEach(cliente => {
-    //   cliente.compras?.forEach(compra => compras.push(compra));
-    // })
+    this.clientes.forEach(cliente => {
+      cliente.compras?.forEach(compra => compras.push(compra));
+    })
+    console.log(this.clientes)
     return compras;
   }
 
@@ -83,10 +87,19 @@ export class CaixaComponent implements OnInit{
 
   finalizeOrder(){
     const idResponsavel = this.clientes[0].id;
-    this.caixaService.insert({
-      idClienteResponsavelCompra: idResponsavel,
-      idClientesConjuntos: this.clientes.filter(cliente => cliente.id != idResponsavel).map(cliente => cliente.id)
-    })
+    let order: CaixaModel = {
+      id: null,
+      desconto: 0.0,
+      formaPagamento: 'PIX',
+      valorFinal: this.totalCompra,
+      idClientePrincipal: idResponsavel,
+      totalConta: this.totalCompra,
+      idCompra: this.clientes[0].compras[0].idCompra,
+    }
+    //Adicionar aqui infos do dto Caixa
+    // idClienteResponsavelCompra: idResponsavel,
+    // idClientesConjuntos: this.clientes.filter(cliente => cliente.id != idResponsavel).map(cliente => cliente.id)
+    this.caixaService.insert(order)
       .subscribe(
         () => {
           this.clientes = [];

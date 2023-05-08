@@ -21,7 +21,7 @@ export class CaixaService {
     return this.http.get<CaixaModel>(this.resourceUrl + '/' + id);
   }
 
-  insert(entity: { idClienteResponsavelCompra: number, idClientesConjuntos: number[] }): Observable<CaixaModel> {
+  insert(entity: CaixaModel): Observable<CaixaModel> {
     return this.http.post<CaixaModel>(this.resourceUrl, entity);
   }
 

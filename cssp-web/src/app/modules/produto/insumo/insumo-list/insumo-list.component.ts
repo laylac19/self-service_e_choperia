@@ -13,6 +13,8 @@ import {EntidadeUtil} from "../../../../shared/util/entidade.util";
 import {TituloModalInsumoUtil} from "../../util/modal/titulo-modal-insumo.util";
 import {InsumoEntryComponent} from "../insumo-entry/insumo-entry.component";
 import {InsumoWithdrawComponent} from "../insumo-withdraw/insumo-withdraw.component";
+import {ImprimirCodbarrasComponent} from "../../../imprimir-codbarras/imprimirCodBarras/imprimir-codbarras.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-insumo-list',
@@ -33,9 +35,11 @@ export class InsumoListComponent implements OnInit {
   @ViewChild(InsumoProdComponent) inputFormComponent: InsumoProdComponent;
   @ViewChild(InsumoEntryComponent) entryFormComponent: InsumoEntryComponent;
   @ViewChild(InsumoWithdrawComponent) withdrawFormComponent: InsumoWithdrawComponent;
+  @ViewChild(ImprimirCodbarrasComponent) imprimirCodbarrasComponent: ImprimirCodbarrasComponent;
 
   constructor(private inputService: ProdutoService,
-              private message: MensagensConfirmacao) {
+              private message: MensagensConfirmacao,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -75,7 +79,7 @@ export class InsumoListComponent implements OnInit {
   }
 
   printBarcode(): void {
-
+    this.router.navigate(['ImprimirBarCode']);
   }
 
   onSaveRegister(): void {
