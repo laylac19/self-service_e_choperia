@@ -12,6 +12,7 @@ import {BlockUI, NgBlockUI} from "ng-block-ui";
 import {ColumnUtil} from "../../../shared/util/columnUtil";
 import {ImprimirCodBarrasTable} from "../imprimir-cod-barras-table";
 import {FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 interface produtoImprimirCodBarras extends ProdutoModel {
   quantidade?: number;
@@ -56,7 +57,8 @@ export class ImprimirCodbarrasComponent implements OnInit{
   constructor(
     private service: ProdutoService,
     private location: Location,
-    private inputService: ProdutoService
+    private inputService: ProdutoService,
+    private router: Router
   ) {
 
   }
@@ -117,6 +119,11 @@ export class ImprimirCodbarrasComponent implements OnInit{
     pdf.autoPrint();
     pdf.output('dataurlnewwindow');
   }
+
+  backToProductPage(): void{
+    this.router.navigate(['Produtos']);
+  }
+
 
   // togglePrintingBarcodeMode(): void {
   //   this.selectedProducts = [];

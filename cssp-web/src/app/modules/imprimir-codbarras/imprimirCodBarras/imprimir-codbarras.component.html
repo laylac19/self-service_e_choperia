@@ -1,7 +1,10 @@
 <div class="item-pagina tabela mt-8">
   <div class="my-2">
+    <button pButton pRipple label="Voltar" icon="pi pi-back"
+            class="p-button-raised p-button-secondary ml-2" (click)="backToProductPage()"></button>
+
     <button pButton pRipple label="Imprimir Selecionados" icon="pi pi-print"
-            class="p-button-raised p-button-success mr-2" (click)="imprimirBarCodes()"
+            class="p-button-raised p-button-success ml-2 mr-2" (click)="imprimirBarCodes()"
             [disabled]="selectedProducts.length <= 0"></button>
   </div>
   <p-table [columns]="columns"
