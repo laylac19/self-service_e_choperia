@@ -1,14 +1,20 @@
 package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.Caixa;
+import com.cssp.choperiaselfservice.domain.Cliente;
 import com.cssp.choperiaselfservice.repository.CaixaRepository;
 import com.cssp.choperiaselfservice.service.dto.CaixaDTO;
+import com.cssp.choperiaselfservice.service.dto.CaixaOtimizadoDTO;
 import com.cssp.choperiaselfservice.service.mapper.CaixaMapper;
 import com.cssp.choperiaselfservice.service.util.CaixaUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
@@ -59,6 +65,10 @@ public class CaixaService {
 //        //caixa.setClientes();
 //        return mapper.toDto(repository.save(caixa));
 //    }
+
+    public CaixaDTO save(CaixaDTO dto) {
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
+    }
 
     public void delete(Long id) {
         Caixa cashier = findEntity(id);
