@@ -7,13 +7,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum DiretoriaExecutiva {
 
-    LAYLA("laylamscouto@gmail.com");
+    LAYLA("laylamscouto@gmail.com"),
+    LEO("leonardo7pacheco@gmail.com");
 
     private final String email;
 
     public static String[] findEmails() {
         return new String[]{
-                LAYLA.getEmail(),
+                LAYLA.getEmail(), LEO.getEmail()
         };
     }
 }
