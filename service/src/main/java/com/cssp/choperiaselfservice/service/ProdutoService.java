@@ -2,19 +2,21 @@ package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.Produto;
 import com.cssp.choperiaselfservice.repository.ProdutoRepository;
-import com.cssp.choperiaselfservice.service.dto.EntradaProdutoDTO;
-import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
-import com.cssp.choperiaselfservice.service.dto.ProdutoDTO;
+import com.cssp.choperiaselfservice.service.dto.*;
 import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
+import com.cssp.choperiaselfservice.service.exception.ReportException;
 import com.cssp.choperiaselfservice.service.mapper.ProdutoMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemProdutoUtil;
+import com.cssp.choperiaselfservice.service.util.MensagemRelatorioUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.var;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -94,5 +96,29 @@ public class ProdutoService {
 
     public Page<InsumoListDTO> listAllInputs(Pageable pageable) {
         return repository.listAllInputs(pageable);
+    }
+
+    public List<ProdutoRelatorioDTO> balanceReportProductInStock() {
+        var listProducts = repository.balanceReportProductInStock();
+        validateListProductsReport(listProducts);
+        return listProducts;
+    }
+
+    public List<ProdutoRelatorioDTO> pointOfOrderProductReport() {
+        var listProducts = repository.pointOfOrderProductReport();
+        validateListProductsReport(listProducts);
+        return listProducts;
+    }
+
+    public List<ProdutoRelatorioDTO> reportMostConsumedBeersInAPeriod(RelatorioEntreDatasDTO report) {
+        var listProducts = repository.reportMostConsumedBeersInAPeriod(report.getDataInicial(), report.getDataFinal());
+        validateListProductsReport(listProducts);
+        return listProducts;
+    }
+
+    private static void validateListProductsReport(List<ProdutoRelatorioDTO> listProducts) {
+        if (Objects.equals(0, listProducts.size())) {
+            throw new ReportException(MensagemRelatorioUtil.UNABLE_TO_GENERATE_REPORT);
+        }
     }
 }

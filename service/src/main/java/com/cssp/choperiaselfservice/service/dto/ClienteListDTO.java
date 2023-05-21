@@ -1,6 +1,5 @@
 package com.cssp.choperiaselfservice.service.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +7,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class ClienteListDTO implements Serializable {
 
     private Long id;
@@ -23,5 +21,14 @@ public class ClienteListDTO implements Serializable {
         this.numCartaoRFID = numCartaoRFID;
         this.nome = nome;
         this.cpf = cpf;
+    }
+
+    public ClienteListDTO(Long id, String numCartaoRFID, String nome, String cpf, String telefone, String email) {
+        this.id = id;
+        this.numCartaoRFID = numCartaoRFID;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
     }
 }

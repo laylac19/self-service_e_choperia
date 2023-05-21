@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RelatorioEnviarEmailDTO implements Serializable {
+public class RelatorioEntreDatasDTO implements Serializable {
     private LocalDate dataInicial;
     private LocalDate dataFinal;
     private String mensagem;

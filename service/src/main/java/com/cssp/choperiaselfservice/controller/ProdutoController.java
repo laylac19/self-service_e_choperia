@@ -1,9 +1,7 @@
 package com.cssp.choperiaselfservice.controller;
 
 import com.cssp.choperiaselfservice.service.ProdutoService;
-import com.cssp.choperiaselfservice.service.dto.EntradaProdutoDTO;
-import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
-import com.cssp.choperiaselfservice.service.dto.ProdutoDTO;
+import com.cssp.choperiaselfservice.service.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -69,5 +68,20 @@ public class ProdutoController {
     @GetMapping("/listar-insumos")
     public ResponseEntity<Page<InsumoListDTO>> listAllInputs(Pageable pageable) {
         return new ResponseEntity<>(service.listAllInputs(pageable), HttpStatus.OK);
+    }
+
+    @PostMapping("/relatorio-estoque-produtos")
+    public ResponseEntity<List<ProdutoRelatorioDTO>> balanceReportProductInStock() {
+        return new ResponseEntity<>(service.balanceReportProductInStock(), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/relatorio-ponto-encomenda-produtos")
+    public ResponseEntity<List<ProdutoRelatorioDTO>> pointOfOrderProductReport() {
+        return new ResponseEntity<>(service.pointOfOrderProductReport(), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/relatorio-chopes-populares")
+    public ResponseEntity<List<ProdutoRelatorioDTO>> reportMostConsumedBeersInAPeriod(@RequestBody RelatorioEntreDatasDTO report) {
+        return new ResponseEntity<>(service.reportMostConsumedBeersInAPeriod(report), HttpStatus.CREATED);
     }
 }

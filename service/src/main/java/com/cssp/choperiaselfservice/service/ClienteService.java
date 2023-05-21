@@ -2,19 +2,21 @@ package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.Cliente;
 import com.cssp.choperiaselfservice.repository.ClienteRepository;
-import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
-import com.cssp.choperiaselfservice.service.dto.ClienteListDTO;
-import com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO;
+import com.cssp.choperiaselfservice.service.dto.*;
+import com.cssp.choperiaselfservice.service.exception.ReportException;
 import com.cssp.choperiaselfservice.service.mapper.ClienteMapper;
 import com.cssp.choperiaselfservice.service.util.MensagemClienteUtil;
+import com.cssp.choperiaselfservice.service.util.MensagemRelatorioUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.var;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -52,8 +54,7 @@ public class ClienteService {
     }
 
     public ClienteSearchDTO findClienteByNumCartaoRFIDAndAndAtivoIsTrue(String barCode) {
-        ClienteSearchDTO dto = repository.findClienteByNumCartaoRFIDLikeAndAtivoIsTrue(barCode);
-        return dto;
+        return repository.findClienteByNumCartaoRFIDLikeAndAtivoIsTrue(barCode);
     }
 
     public void customerEntry(ClienteDTO dto) {
@@ -74,5 +75,17 @@ public class ClienteService {
         Cliente client = findEntity(idCLient);
         client.setNumCartaoRFID(null);
         repository.save(client);
+    }
+
+    public List<ClienteRelatorioDTO> customerReportWithAmountPurchasedInPeriod(RelatorioEntreDatasDTO report) {
+        var listClients = repository.customerReportWithAmountPurchasedInPeriod(report.getDataInicial(), report.getDataFinal());
+        validateListProductsReport(listClients);
+        return listClients;
+    }
+
+    private static void validateListProductsReport(List<ClienteRelatorioDTO> listClients) {
+        if (Objects.equals(0, listClients.size())) {
+            throw new ReportException(MensagemRelatorioUtil.UNABLE_TO_GENERATE_REPORT);
+        }
     }
 }
