@@ -38,25 +38,15 @@ export class ModalDatasRelatorioComponent implements OnInit {
   }
 
   getFormDates(): any {
-    console.log(1)
-    console.log(this.report)
-    console.log(this.formGroup)
     this.report = this.formGroup.getRawValue()
-    console.log(2)
-    console.log(this.report.dataInicial)
-    console.log(this.report.dataFinal)
     this.report.dataInicial = FuncoesUtil.convertToDate(this.report.dataInicial);
     this.report.dataFinal = FuncoesUtil.convertToDate(this.report.dataFinal);
-    console.log(3)
-    console.log(this.report)
-    console.log('_____________________________________________________')
     return this.report;
   }
 
   closeForm(): void {
     this.formGroup.reset();
     this.answerForm.emit();
-    console.log('LIMPA TUDO')
   }
 
 }
