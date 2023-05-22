@@ -26,11 +26,13 @@ export class RelatorioComponent implements OnInit {
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
   @ViewChild(ModalDatasRelatorioComponent) datesReportComponent: ModalDatasRelatorioComponent;
 
+
   constructor(private builder: FormBuilder,
               private reportService: RelatorioService,
               private clientPurchaseService: ClienteCompraService,
               private message: MensagensConfirmacao) {
   }
+
 
   ngOnInit(): void {
   }
@@ -56,7 +58,11 @@ export class RelatorioComponent implements OnInit {
   generateBalanceReportProductInStock(): void {
     this.reportService.balanceReportProductInStock()
       .subscribe({
-        next: () => {
+        next: (response: any) => {
+          this.displayModalPopularBeer = false;
+          const blob = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(blob);
+          window.open(url);
           this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
         },
         error: (error) => {
@@ -68,7 +74,10 @@ export class RelatorioComponent implements OnInit {
   generatePointOfOrderProductReport(): void {
     this.reportService.pointOfOrderProductReport()
       .subscribe({
-        next: () => {
+        next: (response: any) => {
+          const blob = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(blob);
+          window.open(url);
           this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
         },
         error: (error) => {
@@ -80,24 +89,24 @@ export class RelatorioComponent implements OnInit {
 
   generateReportMostConsumedBeersInAPeriod(): void {
     this.report = this.datesReportComponent.getFormDates();
-    // console.log(this.report);
-    // this.reportService.reportMostConsumedBeersInAPeriod(this.report)
-    //   .subscribe({
-    //     next: () => {
-    //       this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
-    //       this.datesReportComponent.closeForm();
-    //       this.onClose();
-    //     },
-    //     error: (error) => {
-    //       console.log(error)
-    //       this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
-    //     }
-    //   });
+    this.validateDatesOfRefport(this.report);
+    this.reportService.reportMostConsumedBeersInAPeriod(this.report)
+      .subscribe({
+        next: (response: any) => {
+          this.displayModalPopularBeer = false;
+          const blob = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(blob);
+          window.open(url);
+        },
+        error: (error) => {
+          console.log(error)
+          this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
+        }
+      });
   }
 
   sendEmail() {
     this.report = this.datesReportComponent.getFormSendEmail();
-    console.log(this.report);
     this.clientPurchaseService.sendEmail(this.report)
       .subscribe({
         next: () => {
@@ -113,19 +122,22 @@ export class RelatorioComponent implements OnInit {
 
   generateCustomerReportWithAmountPurchasedInPeriod() {
     this.report = this.datesReportComponent.getFormDates();
-    // console.log(this.report);
-    // this.reportService.customerReportWithAmountPurchasedInPeriod(this.report)
-    //   .subscribe({
-    //     next: () => {
-    //       this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
-    //       this.datesReportComponent.closeForm();
-    //       this.onClose();
-    //     },
-    //     error: (error) => {
-    //       console.log(error);
-    //       this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
-    //     }
-    //   });
+    this.validateDatesOfRefport(this.report);
+    this.reportService.customerReportWithAmountPurchasedInPeriod(this.report)
+      .subscribe({
+        next: (response: any) => {
+          const blob = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(blob);
+          window.open(url);
+          this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
+          this.datesReportComponent.closeForm();
+          this.onClose();
+        },
+        error: (error) => {
+          console.log(error);
+          this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
+        }
+      });
   }
 
   onClose(): void {
@@ -133,6 +145,13 @@ export class RelatorioComponent implements OnInit {
     this.displayDialogEmail = false;
     this.displayCustomerPurchases = false;
     this.displayModalPopularBeer = false;
+  }
+
+  private validateDatesOfRefport(report: RelatorioEntreDatasModel) {
+    if (this.report.dataInicial && this.report.dataFinal && this.report.dataFinal < this.report.dataInicial) {
+      this.message.showError('Datas Inválidas', 'A data inicial não pode ser menor do que a final');
+      return;
+    }
   }
 
 }

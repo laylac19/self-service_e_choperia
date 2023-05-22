@@ -2,32 +2,36 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
-import {ProdutoEstoqueReportModel} from "../../model/report/produto-estoque-report.model";
-import {ProdutoPontoEncomendaReportModel} from "../../model/report/produto-ponto-encomenda-report.model";
+import {RelatorioEntreDatasModel} from "../../model/report/relatorio-entre-datas.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RelatorioService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   resourceUrl = environment.apiUrl + '/relatorio';
 
-  balanceReportProductInStock(): Observable<ProdutoEstoqueReportModel[]> {
-    return this.http.get<ProdutoEstoqueReportModel[]>(this.resourceUrl + '/relatorio-estoque-produtos');
+  balanceReportProductInStock(): Observable<any> {
+    return this.http.get(`${this.resourceUrl}/relatorio-estoque-produtos`, {responseType: 'arraybuffer'});
   }
 
-  pointOfOrderProductReport(): Observable<ProdutoPontoEncomendaReportModel[]> {
-    return this.http.get<ProdutoPontoEncomendaReportModel[]>(this.resourceUrl + '/relatorio-ponto-encomenda-produtos');
+  pointOfOrderProductReport(): Observable<any> {
+    return this.http.get(`${this.resourceUrl}/relatorio-ponto-encomenda-produtos`, {responseType: 'arraybuffer'});
   }
 
-  // reportMostConsumedBeersInAPeriod(report: RelatorioEntreDatasModel): Observable<ChopesPopularesReportModel[]> {
-  //   return this.http.get<ChopesPopularesReportModel[]>($`{this.resourceUrl/relatorio-chopes-populare}`);
-  // }
-  //
-  // customerReportWithAmountPurchasedInPeriod(report: RelatorioEntreDatasModel): Observable<TotalComprasClientesReportModel[]> {
-  //   return this.http.get<TotalComprasClientesReportModel[]>(this.resourceUrl + '/relatorio-total-compras-clientes', report);
-  // }
+  reportMostConsumedBeersInAPeriod(report: RelatorioEntreDatasModel): Observable<any> {
+    return this.http.get(
+      `${this.resourceUrl}/relatorio-chopes-populares?dataInicio=${report.dataInicial}&dataFinal=${report.dataFinal}`,
+      {responseType: 'arraybuffer'});
+  }
+
+  customerReportWithAmountPurchasedInPeriod(report: RelatorioEntreDatasModel): Observable<any> {
+    return this.http.get(
+      `${this.resourceUrl}/relatorio-total-compras-clientes?dataInicio=${report.dataInicial}&dataFinal=${report.dataFinal}`,
+      {responseType: 'arraybuffer'});
+  }
 
 }

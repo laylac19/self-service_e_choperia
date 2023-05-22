@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RelatorioEntreDatasModel} from "../../../model/report/relatorio-entre-datas.model";
+import {FuncoesUtil} from "../../../shared/util/funcoes.util";
 
 @Component({
   selector: 'app-modal-datas-relatorio',
@@ -37,7 +38,10 @@ export class ModalDatasRelatorioComponent implements OnInit {
   }
 
   getFormDates(): any {
-    return this.report = this.formGroup.getRawValue();
+    this.report = this.formGroup.getRawValue()
+    this.report.dataInicial = FuncoesUtil.convertToDate(this.report.dataInicial);
+    this.report.dataFinal = FuncoesUtil.convertToDate(this.report.dataFinal);
+    return this.report;
   }
 
   closeForm(): void {

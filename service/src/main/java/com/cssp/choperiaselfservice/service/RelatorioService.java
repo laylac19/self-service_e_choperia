@@ -1,6 +1,5 @@
 package com.cssp.choperiaselfservice.service;
 
-import com.cssp.choperiaselfservice.service.dto.RelatorioEntreDatasDTO;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.*;
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +51,7 @@ public class RelatorioService {
         return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 
-    public byte[] reportMostConsumedBeersInAPeriod(RelatorioEntreDatasDTO report) throws JRException, SQLException {
+    public byte[] reportMostConsumedBeersInAPeriod(Date dataInicial, Date dataFinal) throws JRException, SQLException {
         Connection connection = getConnection();
         JasperReport jasperReport = JasperCompileManager.compileReport(
                 getClass().getResourceAsStream("/report/relatorio-chopes-populares.jrxml")
@@ -59,15 +59,15 @@ public class RelatorioService {
 
         Map<String, Object> params = new HashMap<>();
         params.put(JRParameter.REPORT_CONNECTION, connection);
-        params.put("DataInicial", report.getDataInicial());
-        params.put("DataFinal", report.getDataFinal());
+        params.put("DataInicial", dataInicial);
+        params.put("DataFinal", dataFinal);
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
         connection.close();
         return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 
-    public byte[] customerReportWithAmountPurchasedInPeriod(RelatorioEntreDatasDTO report) throws JRException, SQLException {
+    public byte[] customerReportWithAmountPurchasedInPeriod(Date dataInicial, Date dataFinal) throws JRException, SQLException {
         Connection connection = getConnection();
         JasperReport jasperReport = JasperCompileManager.compileReport(
                 getClass().getResourceAsStream("/report/relatorio-total-compras-clientes.jrxml")
@@ -75,8 +75,8 @@ public class RelatorioService {
 
         Map<String, Object> params = new HashMap<>();
         params.put(JRParameter.REPORT_CONNECTION, connection);
-        params.put("DataInicial", report.getDataInicial());
-        params.put("DataFinal", report.getDataFinal());
+        params.put("DataInicial", dataInicial);
+        params.put("DataFinal", dataFinal);
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
         connection.close();

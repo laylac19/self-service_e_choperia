@@ -1,7 +1,6 @@
 package com.cssp.choperiaselfservice.controller;
 
 import com.cssp.choperiaselfservice.service.RelatorioService;
-import com.cssp.choperiaselfservice.service.dto.RelatorioEntreDatasDTO;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 @RestController
@@ -43,8 +43,9 @@ public class RelatorioController {
     }
 
     @GetMapping("/relatorio-chopes-populares")
-    public ResponseEntity<byte[]> reportMostConsumedBeersInAPeriod(@RequestBody RelatorioEntreDatasDTO report) throws JRException, SQLException {
-        byte[] pdf = service.reportMostConsumedBeersInAPeriod(report);
+    public ResponseEntity<byte[]> reportMostConsumedBeersInAPeriod(@RequestParam("dataInicio") Date dataInicio,
+                                                                   @RequestParam("dataFinal") Date dataFinal) throws JRException, SQLException {
+        byte[] pdf = service.reportMostConsumedBeersInAPeriod(dataInicio, dataFinal);
 
         org.springframework.http.HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
@@ -54,8 +55,9 @@ public class RelatorioController {
     }
 
     @GetMapping("/relatorio-total-compras-clientes")
-    public ResponseEntity<byte[]> customerReportWithAmountPurchasedInPeriod(@RequestBody RelatorioEntreDatasDTO report) throws JRException, SQLException {
-        byte[] pdf = service.customerReportWithAmountPurchasedInPeriod(report);
+    public ResponseEntity<byte[]> customerReportWithAmountPurchasedInPeriod(@RequestParam("dataInicio") Date dataInicio,
+                                                                            @RequestParam("dataFinal") Date dataFinal) throws JRException, SQLException {
+        byte[] pdf = service.customerReportWithAmountPurchasedInPeriod(dataInicio, dataFinal);
 
         org.springframework.http.HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
