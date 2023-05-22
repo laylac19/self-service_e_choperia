@@ -5,6 +5,10 @@ import {Observable} from "rxjs";
 import {Page} from "../util/page";
 import {InsumoListModel} from "../../model/list/insumo-list.model";
 import {ProdutoModel} from "../../model/produto.model";
+import {ProdutoEstoqueReportModel} from "../../model/report/produto-estoque-report.model";
+import {ProdutoPontoEncomendaReportModel} from "../../model/report/produto-ponto-encomenda-report.model";
+import {RelatorioEntreDatasModel} from "../../model/report/relatorio-entre-datas.model";
+import {ChopesPopularesReportModel} from "../../model/report/chopes-populares-report.model";
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +53,18 @@ export class ProdutoService {
 
   getWeightValue(): Observable<any> {
     return this.http.get("http://192.168.229.20/peso");
+  }
+
+  balanceReportProductInStock(): Observable<ProdutoEstoqueReportModel[]> {
+    return this.http.post<ProdutoEstoqueReportModel[]>(this.resourceUrl + '/relatorio-estoque-produtos', null);
+  }
+
+  pointOfOrderProductReport(): Observable<ProdutoPontoEncomendaReportModel[]> {
+    return this.http.post<ProdutoPontoEncomendaReportModel[]>(this.resourceUrl + '/relatorio-ponto-encomenda-produtos', null);
+  }
+
+  reportMostConsumedBeersInAPeriod(report: RelatorioEntreDatasModel): Observable<ChopesPopularesReportModel[]> {
+    return this.http.post<ChopesPopularesReportModel[]>(this.resourceUrl + '/relatorio-chopes-populares', report);
   }
 
 }

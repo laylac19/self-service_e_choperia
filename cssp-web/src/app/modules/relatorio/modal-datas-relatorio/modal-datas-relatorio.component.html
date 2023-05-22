@@ -33,7 +33,7 @@
           </span>
       </div>
     </div>
-    <div class="field pt-2">
+    <div class="field pt-2" *ngIf="message">
       <span class="item-form">
         <label class="campo">Mensagem</label>
       <textarea rows="5" cols="30" pInputTextarea [autoResize]="false" formControlName="mensagem"></textarea>

@@ -1,4 +1,4 @@
-export class RelatorioEnviarEmailModel {
+export class RelatorioEntreDatasModel {
   dataInicial: Date | string;
   dataFinal: Date | string;
   mensagem: string;
