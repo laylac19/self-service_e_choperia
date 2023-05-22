@@ -4,7 +4,7 @@ import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {ClienteCompraProdutoModel} from "../../model/cliente-compra-produto.model";
 import {ClienteCaixaList} from "../../model/list/cliente-caixa-list";
-import {RelatorioEnviarEmailModel} from "../../model/relatorio-enviar-email.model";
+import {RelatorioEntreDatasModel} from "../../model/report/relatorio-entre-datas.model";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class ClienteCompraService {
     return this.http.post<ClienteCompraProdutoModel>(this.resourceUrl, entity);
   }
 
-  sendEmail(report: RelatorioEnviarEmailModel): Observable<void> {
+  sendEmail(report: RelatorioEntreDatasModel): Observable<void> {
     return this.http.post<void>(this.resourceUrl + '/relatorio/enviar-email', report);
   }
 

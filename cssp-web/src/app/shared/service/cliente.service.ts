@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {ClienteListModel} from "../../model/list/cliente-list.model";
 import {ClienteModel} from "../../model/cliente.model";
 import {Page} from "../util/page";
+import {RelatorioEntreDatasModel} from "../../model/report/relatorio-entre-datas.model";
+import {TotalComprasClientesReportModel} from "../../model/report/total-compras-clientes-report.model";
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,10 @@ export class ClienteService {
 
   customerExit(id: number): Observable<ClienteModel> {
     return this.http.put<ClienteModel>(this.resourceUrl + '/resgistrar-saida-cliente/' + id, id);
+  }
+
+  customerReportWithAmountPurchasedInPeriod(report: RelatorioEntreDatasModel): Observable<TotalComprasClientesReportModel[]> {
+    return this.http.post<TotalComprasClientesReportModel[]>(this.resourceUrl + '/relatorio-total-compras-clientes', report);
   }
 
 }

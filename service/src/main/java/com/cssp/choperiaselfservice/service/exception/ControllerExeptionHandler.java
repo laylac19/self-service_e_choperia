@@ -16,7 +16,7 @@ public class ControllerExeptionHandler {
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("Resource not found");
+        error.setError("Entity not found");
         error.setMessage(exception.getMessage());
         error.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(error);
@@ -29,6 +29,18 @@ public class ControllerExeptionHandler {
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
         error.setError("Resource not found");
+        error.setMessage(exception.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(ReportException.class)
+    public ResponseEntity<StandardError> ReportException(BusinessRuleException exception, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Unable to generate report");
         error.setMessage(exception.getMessage());
         error.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(error);

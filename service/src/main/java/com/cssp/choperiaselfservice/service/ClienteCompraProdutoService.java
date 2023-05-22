@@ -6,7 +6,7 @@ import com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO;
 import com.cssp.choperiaselfservice.service.dto.ComprasCaixaListDTO;
 import com.cssp.choperiaselfservice.service.dto.EmailClienteCompraDTO;
-import com.cssp.choperiaselfservice.service.dto.RelatorioEnviarEmailDTO;
+import com.cssp.choperiaselfservice.service.dto.RelatorioEntreDatasDTO;
 import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
 import com.cssp.choperiaselfservice.service.mapper.ClienteCompraProdutoMapper;
@@ -63,7 +63,7 @@ public class ClienteCompraProdutoService {
         repository.save(purchase);
     }
 
-    public void sendEmail(RelatorioEnviarEmailDTO report) {
+    public void sendEmail(RelatorioEntreDatasDTO report) {
         var clients = searchCustomersWhoPurchasedBetweenDates(report.getDataInicial(), report.getDataFinal());
         clients.forEach(clienteDTO -> {
             EmailClienteCompraDTO email = new EmailClienteCompraDTO();

@@ -1,10 +1,7 @@
 package com.cssp.choperiaselfservice.repository;
 
 import com.cssp.choperiaselfservice.domain.Produto;
-import com.cssp.choperiaselfservice.service.dto.ChopeListDTO;
-import com.cssp.choperiaselfservice.service.dto.ChopeViewDTO;
-import com.cssp.choperiaselfservice.service.dto.InsumoListDTO;
-import com.cssp.choperiaselfservice.service.dto.ProdutoDTO;
+import com.cssp.choperiaselfservice.service.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -61,5 +59,47 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
                 " AND P.etiquetaRFID IS NULL " +
                 " AND P.ativo = true " )
     ProdutoDTO findSelfServiceProduct();
+
+    @Query (" SELECT NEW com.cssp.choperiaselfservice.service.dto.ProdutoRelatorioDTO(" +
+                " P.id, " +
+                " P.codigoBarras," +
+                " P.etiquetaRFID, " +
+                " P.descricao," +
+                " P.qtdeEstoque, " +
+                " P.unidade) " +
+            " FROM Produto  P " +
+            " WHERE         P.ativo = true " +
+                " AND       P.etiquetaRFID IS NOT NULL " +
+                " OR        P.codigoBarras IS NOT NULL ")
+    List<ProdutoRelatorioDTO> balanceReportProductInStock();
+
+    @Query (" SELECT NEW com.cssp.choperiaselfservice.service.dto.ProdutoRelatorioDTO(" +
+                " P.id, " +
+                " P.codigoBarras," +
+                " P.etiquetaRFID, " +
+                " P.descricao," +
+                " P.qtdeEstoque, " +
+                " P.unidade," +
+                " P.pontoEncomenda ) " +
+            " FROM Produto  P " +
+            " WHERE         P.ativo = true " +
+                " AND       P.qtdeEstoque <= P.pontoEncomenda ")
+    List<ProdutoRelatorioDTO> pointOfOrderProductReport();
+
+    @Query ( " SELECT NEW com.cssp.choperiaselfservice.service.dto.ProdutoRelatorioDTO(" +
+                " P.id," +
+                " P.etiquetaRFID," +
+                " P.descricao," +
+                " P.qtdeEstoque," +
+                " P.precoCompra," +
+                " P.precoVenda), COUNT(*) AS totalConsumido" +
+            " FROM Produto                         P " +
+            " JOIN ClienteCompraProduto CCP     ON CCP.produto.id = P.id " +
+            " WHERE CCP.dataCompra BETWEEN :initialDate AND :finalDate" +
+            " GROUP BY P.id" +
+            " ORDER BY totalConsumido DESC")
+    List<ProdutoRelatorioDTO> reportMostConsumedBeersInAPeriod(@Param("initialDate") LocalDate initialDate,
+                                                               @Param("finalDate") LocalDate finalDate);
+
 
 }

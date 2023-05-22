@@ -1,9 +1,7 @@
 package com.cssp.choperiaselfservice.controller;
 
 import com.cssp.choperiaselfservice.service.ClienteService;
-import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
-import com.cssp.choperiaselfservice.service.dto.ClienteListDTO;
-import com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO;
+import com.cssp.choperiaselfservice.service.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -69,6 +67,11 @@ public class ClienteController {
     public ResponseEntity<Void> customerExit(@PathVariable("idCliente") Long idCliente) {
         service.customerExit(idCliente);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/relatorio-total-compras-clientes")
+    public ResponseEntity<List<ClienteRelatorioDTO>> customerReportWithAmountPurchasedInPeriod(@RequestBody RelatorioEntreDatasDTO report) {
+        return new ResponseEntity<>(service.customerReportWithAmountPurchasedInPeriod(report), HttpStatus.CREATED);
     }
 
 }
