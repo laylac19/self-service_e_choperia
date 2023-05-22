@@ -18,7 +18,7 @@ FROM produto p
 	JOIN cliente_compra_produto ccp ON 
 	 p.id = ccp.produto_id 
 WHERE ccp.data_compra BETWEEN $P{DataInicial} AND $P{DataFinal} 
-GROUP BY p.id,
+AND (p.codigo_barras IS NOT NULL OR p.etiqueta_rfid IS NOT NULL)GROUP BY p.id,
 	p.descricao
 ORDER BY total_consumido DESC]]>
 	</queryString>
