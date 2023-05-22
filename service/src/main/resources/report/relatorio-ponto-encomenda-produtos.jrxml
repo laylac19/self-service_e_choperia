@@ -5,9 +5,9 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
 		<![CDATA[select *
-from produto p 
-where p.ativo = true
-and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
+from produto p  
+where p.ativo = true 
+and p.qtde_estoque <= p.ponto_encomenda]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -91,9 +91,9 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="46" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<textField>
-				<reportElement x="430" y="0" width="124" height="46" uuid="d06b4ac3-c853-4c35-96fa-1846398a7533"/>
+				<reportElement x="430" y="0" width="124" height="36" uuid="d416a217-0edc-4822-bcb3-3006773954b9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -104,9 +104,10 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 				<textFieldExpression><![CDATA["Data : " + new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="430" height="46" uuid="abd2bf71-b2e2-4ad4-b200-cb3d1e0fd9d0"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Saldo de cada produto do estoque da cozinha e do chope.]]></text>
+				<reportElement x="0" y="0" width="430" height="36" uuid="622c9909-c385-4f5e-94d9-5d7e604d3f17"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Produtos que estão com estoque no ponto de encomenda.
+]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -129,7 +130,7 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 				<text><![CDATA[Nome Produto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="454" y="0" width="100" height="30" forecolor="#219EBC" uuid="8c3bd50c-97fa-48b5-90fe-8e9b64f2e30e">
+				<reportElement x="390" y="0" width="164" height="30" forecolor="#219EBC" uuid="8c3bd50c-97fa-48b5-90fe-8e9b64f2e30e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -142,10 +143,10 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Preço Compra]]></text>
+				<text><![CDATA[Ponto Encomenda]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="284" y="0" width="70" height="30" forecolor="#219EBC" uuid="d15ac32e-2066-43d3-8879-9ce97c0371f5">
+				<reportElement x="284" y="0" width="106" height="30" forecolor="#219EBC" uuid="d15ac32e-2066-43d3-8879-9ce97c0371f5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -176,28 +177,12 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 				</textElement>
 				<text><![CDATA[ID]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="354" y="0" width="100" height="30" forecolor="#219EBC" uuid="f2ca889f-c596-46e9-95a0-02a61e9d1668">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
-				</reportElement>
-				<box>
-					<pen lineColor="#FB8500"/>
-					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FB8500"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="1.0" lineStyle="Dotted" lineColor="#FB8500"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Qtde. Estoque]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="284" y="0" width="70" height="30" uuid="285b8a60-879a-480d-8196-8207d1fc0bca"/>
+				<reportElement x="284" y="0" width="106" height="30" uuid="285b8a60-879a-480d-8196-8207d1fc0bca"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{unidade}]]></textFieldExpression>
 			</textField>
@@ -218,30 +203,25 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="354" y="0" width="100" height="30" uuid="9364b4aa-25c5-4de5-9d97-da7d6b53ac06"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{qtde_estoque}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="454" y="0" width="100" height="30" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
+				<reportElement x="390" y="0" width="164" height="30" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
 				<box>
 					<rightPen lineWidth="1.0" lineColor="#FB8500"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{preco_compra} *100.0)/100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ponto_encomenda}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="30">
 			<rectangle>
-				<reportElement x="1" y="14" width="553" height="11" backcolor="#FB8500" uuid="3300421b-a2e6-432c-925f-7eee7d06d8b7"/>
+				<reportElement x="1" y="14" width="553" height="11" backcolor="#FB8500" uuid="1a301064-9e4f-4a40-953b-1ea4522e1580"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="445" y="8" width="100" height="22" uuid="9e06d03e-3a32-488b-b483-946e82fff233"/>
+				<reportElement x="445" y="8" width="100" height="22" uuid="2369a899-db2b-4844-8846-ebd79b7669e6"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>

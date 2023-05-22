@@ -66,19 +66,19 @@
                [header]="'RELATÓRIO - Chopes Mais Consumidos'"
                (answerForm)="generateReportMostConsumedBeersInAPeriod()"
                (closeDialog)="onClose()">
-  <app-modal-datas-relatorio></app-modal-datas-relatorio>
+  <app-modal-datas-relatorio #report1></app-modal-datas-relatorio>
 </custom-dialog>
 
 <custom-dialog [display]="displayCustomerPurchases"
                [header]="'RELATÓRIO - Compras de Clientes'"
                (answerForm)="generateCustomerReportWithAmountPurchasedInPeriod()"
                (closeDialog)="onClose()">
-  <app-modal-datas-relatorio></app-modal-datas-relatorio>
+  <app-modal-datas-relatorio #report2></app-modal-datas-relatorio>
 </custom-dialog>
 
 <custom-dialog [display]="displayDialogEmail"
                [header]="'RELATÓRIO - Envio de E-mail'"
                (answerForm)="sendEmail()"
                (closeDialog)="onClose()">
-  <app-modal-datas-relatorio></app-modal-datas-relatorio>
+  <app-modal-datas-relatorio #report3></app-modal-datas-relatorio>
 </custom-dialog>

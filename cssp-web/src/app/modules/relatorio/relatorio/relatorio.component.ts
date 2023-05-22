@@ -24,7 +24,10 @@ export class RelatorioComponent implements OnInit {
   @Input() displayDialogEmail = false;
 
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
-  @ViewChild(ModalDatasRelatorioComponent) datesReportComponent: ModalDatasRelatorioComponent;
+
+  @ViewChild('report1') report1: ModalDatasRelatorioComponent;
+  @ViewChild('report2') report2: ModalDatasRelatorioComponent;
+  @ViewChild('report3') report3: ModalDatasRelatorioComponent;
 
 
   constructor(private builder: FormBuilder,
@@ -38,20 +41,20 @@ export class RelatorioComponent implements OnInit {
   }
 
   openModalPopularBeer() {
-    this.datesReportComponent.formGroup.reset();
-    this.datesReportComponent.message = false;
+    this.report1.formGroup.reset();
+    this.report1.message = false;
     this.displayModalPopularBeer = true;
   }
 
   openModalCustomerPurchases() {
-    this.datesReportComponent.formGroup.reset();
-    this.datesReportComponent.message = false;
+    this.report2.formGroup.reset();
+    this.report2.message = false;
     this.displayCustomerPurchases = true;
   }
 
   openRequestToSendEmail() {
-    this.datesReportComponent.formGroup.reset();
-    this.datesReportComponent.message = true;
+    this.report3.formGroup.reset();
+    this.report3.message = true;
     this.displayDialogEmail = true;
   }
 
@@ -88,7 +91,7 @@ export class RelatorioComponent implements OnInit {
   }
 
   generateReportMostConsumedBeersInAPeriod(): void {
-    this.report = this.datesReportComponent.getFormDates();
+    this.report = this.report1.getFormDates();
     this.validateDatesOfRefport(this.report);
     this.reportService.reportMostConsumedBeersInAPeriod(this.report)
       .subscribe({
@@ -97,6 +100,8 @@ export class RelatorioComponent implements OnInit {
           const blob = new Blob([response], {type: 'application/pdf'});
           const url = URL.createObjectURL(blob);
           window.open(url);
+          this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
+          this.onClose();
         },
         error: (error) => {
           console.log(error)
@@ -106,12 +111,12 @@ export class RelatorioComponent implements OnInit {
   }
 
   sendEmail() {
-    this.report = this.datesReportComponent.getFormSendEmail();
+    this.report = this.report3.getFormSendEmail();
     this.clientPurchaseService.sendEmail(this.report)
       .subscribe({
         next: () => {
           this.message.showSuccess('E-mail(s) enviado(s) com sucesso!');
-          this.datesReportComponent.closeForm();
+          this.report3.closeForm();
           this.onClose();
         },
         error: (error) => {
@@ -121,16 +126,16 @@ export class RelatorioComponent implements OnInit {
   }
 
   generateCustomerReportWithAmountPurchasedInPeriod() {
-    this.report = this.datesReportComponent.getFormDates();
+    this.report = this.report2.getFormDates();
     this.validateDatesOfRefport(this.report);
     this.reportService.customerReportWithAmountPurchasedInPeriod(this.report)
       .subscribe({
         next: (response: any) => {
+          this.displayCustomerPurchases = false;
           const blob = new Blob([response], {type: 'application/pdf'});
           const url = URL.createObjectURL(blob);
           window.open(url);
           this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
-          this.datesReportComponent.closeForm();
           this.onClose();
         },
         error: (error) => {
@@ -141,7 +146,9 @@ export class RelatorioComponent implements OnInit {
   }
 
   onClose(): void {
-    this.datesReportComponent.formGroup.reset();
+    this.report1.closeForm();
+    this.report2.closeForm();
+    this.report3.closeForm();
     this.displayDialogEmail = false;
     this.displayCustomerPurchases = false;
     this.displayModalPopularBeer = false;

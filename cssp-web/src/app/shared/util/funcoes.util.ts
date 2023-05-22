@@ -32,14 +32,11 @@ export class FuncoesUtil {
   }
 
   public static convertToDate(date: Date | string): Date | string{
-    //  Convert a "dd/MM/yyyy" string into a Date object
     const originalDate = new Date(date);
     const year = originalDate.getFullYear();
     const month = (originalDate.getMonth() + 1).toString().padStart(2, '0');
     const day = originalDate.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
-    // console.log(date.toISOString().slice(0, 10))
-    // return date.toISOString().slice(0, 10);
   }
 
   public static calcularDataDevolucaoPresvista(dataLocacao: Date, prazoDiasClasse: any): Date {
