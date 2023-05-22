@@ -21,6 +21,7 @@ export class CaixaComponent implements OnInit{
   columns: ColumnUtil[] = CaixaConsumeTable.CONSUME_TABLE;
   clientes: ClienteModel[] = [];
   nomesClientes: string[] = [];
+  listRfidClientes: string[] = []
   formGroup: FormGroup;
 
   ngOnInit(): void {
@@ -62,6 +63,7 @@ export class CaixaComponent implements OnInit{
           if (clientIndexFound < 0) {
             this.clientes = [...this.clientes, cliente];
             this.nomesClientes = [...this.nomesClientes, cliente.nome];
+            this.listRfidClientes = [...this.listRfidClientes, cliente.numCartaoRFID];
             console.log(this.clientes)
           } else {
             this.message.showWarn("O cliente já consta na lista!", "Atenção");
@@ -91,32 +93,153 @@ export class CaixaComponent implements OnInit{
       id: null,
       desconto: 0.0,
       formaPagamento: 'PIX',
+      listCodRfid: this.listRfidClientes,
       valorFinal: this.totalCompra,
       idClientePrincipal: idResponsavel,
       totalConta: this.totalCompra,
       idCompra: this.clientes[0].compras[0].idCompra,
     }
-    //Adicionar aqui infos do dto Caixa
-    // idClienteResponsavelCompra: idResponsavel,
-    // idClientesConjuntos: this.clientes.filter(cliente => cliente.id != idResponsavel).map(cliente => cliente.id)
     this.caixaService.insert(order)
       .subscribe(
         () => {
+          this.imprimirComprovante()
           this.clientes = [];
           this.nomesClientes = [];
           this.renderer.selectRootElement('#codCartaoCliente').focus();
           this.message.showSuccess("Compra finalizada com sucesso!");
-          this.onPrint();
         }
       )
   }
 
-  onPrint(): void {
-    const printContents = this.renderer.selectRootElement('#consumidos', true);
-    document.body.innerHTML = printContents.innerHTML;
-    window.print();
-    location.reload();
-    this.renderer.selectRootElement('#codCartaoCliente').focus();
-   }
+   // imprimir comprovante
 
+  imprimirComprovante(){
+    const mywindow = window.open('', 'PRINT', 'height=600,width=600');
+
+    mywindow?.document.write('<html><head><title>' + "CSSP - Choperia" + '</title>');
+    mywindow?.document.write('<head><body style="margin: 0; display: grid; font-family:Arial, Helvetica, sans-serif; font-size: 14px"></div> </body></html>')
+
+    const divPrincipal = this.criarDivPrincipal();
+
+    divPrincipal.appendChild(this.criarCabecalhoComprovante());
+    divPrincipal.appendChild(this.criarDivNomeCliente());
+    divPrincipal.appendChild(this.criarTabelaItensConsumidos());
+    divPrincipal.appendChild(this.criarDivValorTotal());
+    //divPrincipal.appendChild(this.criarDivMetodoPagamento());
+    mywindow?.document.body.appendChild(divPrincipal);
+
+    setTimeout(() => {
+      mywindow?.document.close();
+      mywindow?.focus();
+      mywindow?.print();
+      mywindow?.close();
+    }, 200);
+
+  }
+
+  private criarDivPrincipal(): HTMLElement{
+    let div = document.createElement('div');
+    div.style.maxWidth = '8cm';
+    return div;
+  }
+
+  private criarCabecalhoComprovante(): HTMLElement {
+    let div = document.createElement('div');
+
+    div.innerHTML = `
+      <p style="text-align: center; font-weight: bold">${new Date().toLocaleDateString()} ${new Date().getHours().toLocaleString()}:${new Date().getMinutes().toLocaleString()}:${new Date().getSeconds().toLocaleString()}</p>
+      <h3 style="text-align: center; font-family:Arial, Helvetica, sans-serif;">CSSP - Choperia</h3>
+      <hr>
+    `;
+    return div;
+  }
+
+  private criarDivValorTotal(): HTMLElement {
+    let div = document.createElement('div');
+
+    div.innerHTML = `
+     <hr>
+     <table style="width: 100%; font-size: 12px">
+        <tr>
+            <td colspan="3">Valor total:</td>
+            <td style="text-align: right">${this.numeroParaReal(this.totalCompra)}</td>
+        </tr>
+     </table>
+     `;
+    return div;
+  }
+
+  criarTabelaItensConsumidos(): HTMLElement {
+    const table = document.createElement('table');
+    const head = document.createElement('thead');
+    const linha = document.createElement('tr');
+    const colunaItem = document.createElement('td');
+    const colunaPreco = document.createElement('td');
+
+    table.style.width = '100%';
+    table.style.fontSize = '8px';
+
+    colunaItem.innerHTML = 'Nome';
+    colunaItem.style.textAlign = 'center';
+
+    colunaPreco.innerHTML = 'Preço';
+    colunaPreco.style.textAlign = 'center';
+
+    linha.append(colunaItem, colunaPreco);
+    head.append(linha);
+    table.append(head);
+    table.appendChild(this.criarLinhasTabelaItensConsumidos());
+    return table;
+  }
+
+  criarLinhasTabelaItensConsumidos(): HTMLElement{
+    const tbody = document.createElement('tbody');
+    this.clientes?.forEach(cliente => {
+      cliente.compras.forEach(compra => {
+        const tr = document.createElement('tr')
+        const colunaItem = document.createElement('td');
+        const colunaPreco = document.createElement('td');
+        colunaItem.innerHTML = <string>compra.descricao;
+        colunaPreco.innerHTML = this.numeroParaReal(compra.valor)
+        tr.appendChild(colunaItem);
+        tr.appendChild(colunaPreco);
+        tbody.appendChild(tr);
+      })
+    });
+    return tbody;
+  }
+
+  numeroParaReal(n: any){
+    return n.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+  }
+
+  criarDivMetodoPagamento(): HTMLElement {
+    let div = document.createElement('div');
+
+    // div.innerHTML = `
+    //  <table style="width: 100%; font-size: 12px">
+    //      <tr>
+    //         <td colspan="3">Método de pagamento:</td>
+    //         <td style="text-align: right">${this.verificarMetodoPagamento(this.formGroup.get('metodoPagamento')?.value)}</td>
+    //     </tr>
+    //  </table>
+    //  <hr>
+    //  `;
+    return div;
+  }
+  private criarDivNomeCliente(): HTMLElement {
+    let div = document.createElement('div');
+
+    div.innerHTML = `
+     <ht>
+     <table style="width: 100%; font-size: 12px">
+         <tr>
+            <td colspan="3">Nome do cliente:</td>
+            <td style="text-align: right">${this.nomesClientes[0]}</td>
+        </tr>
+     </table>
+     <hr>
+     `;
+    return div;
+  }
 }

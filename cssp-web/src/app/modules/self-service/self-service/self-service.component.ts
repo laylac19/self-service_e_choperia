@@ -44,7 +44,16 @@ export class SelfServiceComponent implements OnInit {
   ngOnInit(): void {
     this.newForm();
     this.findSelfServiceProduct();
-    //setInterval(this.getWeight, 1000)
+    setInterval(() => {
+      this.productService.getWeightValue().subscribe(response => {
+        if(response){
+          this.formGroup.patchValue({pesoPrato: response.lastWeight})
+          console.log(response.lastWeight + ' PESO')
+        }else{
+          this.formGroup.patchValue({pesoPrato: 0.0})
+        }
+      })
+    }, 1000)
   }
 
   newForm(): void {
@@ -72,18 +81,6 @@ export class SelfServiceComponent implements OnInit {
           this.showErrorMsgAccordingToId(this.selfServiceBuy.id, error.message);
         }
       });
-  }
-
-  getWeight() {
-    this.productService.getWeightValue().subscribe(response => {
-        if(response){
-          this.formGroup.setValue({pesoPrato: response})
-          console.log(response + ' PESO')
-        }else{
-          this.formGroup.setValue({pesoPrato: 0.0})
-        }
-    })
-    console.log("chamando")
   }
 
   findClienteByRFID(event: any): void {

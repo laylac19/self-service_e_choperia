@@ -2,9 +2,13 @@ package com.cssp.choperiaselfservice.service;
 
 import com.cssp.choperiaselfservice.domain.Caixa;
 import com.cssp.choperiaselfservice.domain.Cliente;
+import com.cssp.choperiaselfservice.domain.CompraCaixa;
 import com.cssp.choperiaselfservice.repository.CaixaRepository;
+import com.cssp.choperiaselfservice.repository.CompraCaixaRepository;
 import com.cssp.choperiaselfservice.service.dto.CaixaDTO;
 import com.cssp.choperiaselfservice.service.dto.CaixaOtimizadoDTO;
+import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
+import com.cssp.choperiaselfservice.service.dto.ClienteSearchDTO;
 import com.cssp.choperiaselfservice.service.mapper.CaixaMapper;
 import com.cssp.choperiaselfservice.service.util.CaixaUtil;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,14 +20,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class CaixaService {
 
     private final CaixaRepository repository;
+    private final CompraCaixaRepository compraCaixaRepository;
     private final CaixaMapper mapper;
 
+    private final ClienteCompraProdutoService service;
     private final ClienteService customerService;
 
     private Caixa findEntity(Long id) {
@@ -67,7 +75,19 @@ public class CaixaService {
 //    }
 
     public CaixaDTO save(CaixaDTO dto) {
-        return mapper.toDto(repository.save(mapper.toEntity(dto)));
+        List rfidClientes = dto.getListCodRfid();
+        CaixaDTO caixa = mapper.toDto(repository.save(mapper.toEntity(dto)));
+        for(int i = 0; i<rfidClientes.size(); i++){
+            this.service.listPurchasedItemsOfCustomer(rfidClientes.get(i).toString()).forEach(iten -> {
+                CompraCaixa compra = new CompraCaixa();
+                compra.setIdCaixa(caixa.getId());
+                compra.setIdCompra(iten.getIdCompra());
+                this.compraCaixaRepository.save(compra);
+            });
+        }
+        //chamar func de finalizar
+        setCodRfidNull(rfidClientes);
+        return caixa;
     }
 
     public void delete(Long id) {
@@ -76,8 +96,13 @@ public class CaixaService {
         repository.save(cashier);
     }
 
-//    public void finalizeSale(CaixaDTO dto) {
-//        dto.getClientes().forEach(customer -> customerService.unlinkCardWithCustomer(customer.getId()));
-//    }
+    private void setCodRfidNull(List<String> rfidClientes){
+        rfidClientes.forEach(rfid -> {
+            ClienteSearchDTO cliente = this.customerService.findClienteByNumCartaoRFIDAndAndAtivoIsTrue(rfid);
+            ClienteDTO clienteDto = this.customerService.findByID(cliente.getId());
+            clienteDto.setNumCartaoRFID(null);
+            this.customerService.save(clienteDto);
+        });
+    }
 
 }

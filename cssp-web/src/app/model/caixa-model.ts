@@ -6,4 +6,5 @@ export class CaixaModel {
   desconto: number;
   valorFinal: number;
   formaPagamento: string;
+  listCodRfid: string[];
 }
