@@ -1,13 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BlockUI, NgBlockUI} from "ng-block-ui";
-import {ProdutoService} from "../../../shared/service/produto.service";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
 import {FormBuilder} from "@angular/forms";
 import {RelatorioEntreDatasModel} from "../../../model/report/relatorio-entre-datas.model";
 import {ClienteCompraService} from "../../../shared/service/cliente-compra.service";
 import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
 import {ModalDatasRelatorioComponent} from "../modal-datas-relatorio/modal-datas-relatorio.component";
-import {ClienteService} from "../../../shared/service/cliente.service";
+import {RelatorioService} from "../../../shared/service/relatorio.service";
 
 @Component({
   selector: 'app-relatorio',
@@ -28,9 +27,8 @@ export class RelatorioComponent implements OnInit {
   @ViewChild(ModalDatasRelatorioComponent) datesReportComponent: ModalDatasRelatorioComponent;
 
   constructor(private builder: FormBuilder,
-              private productService: ProdutoService,
+              private reportService: RelatorioService,
               private clientPurchaseService: ClienteCompraService,
-              private clientService: ClienteService,
               private message: MensagensConfirmacao) {
   }
 
@@ -39,21 +37,24 @@ export class RelatorioComponent implements OnInit {
 
   openModalPopularBeer() {
     this.datesReportComponent.formGroup.reset();
+    this.datesReportComponent.message = false;
     this.displayModalPopularBeer = true;
   }
 
   openModalCustomerPurchases() {
     this.datesReportComponent.formGroup.reset();
+    this.datesReportComponent.message = false;
     this.displayCustomerPurchases = true;
   }
 
   openRequestToSendEmail() {
     this.datesReportComponent.formGroup.reset();
+    this.datesReportComponent.message = true;
     this.displayDialogEmail = true;
   }
 
   generateBalanceReportProductInStock(): void {
-    this.productService.balanceReportProductInStock()
+    this.reportService.balanceReportProductInStock()
       .subscribe({
         next: () => {
           this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
@@ -65,7 +66,7 @@ export class RelatorioComponent implements OnInit {
   }
 
   generatePointOfOrderProductReport(): void {
-    this.productService.pointOfOrderProductReport()
+    this.reportService.pointOfOrderProductReport()
       .subscribe({
         next: () => {
           this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
@@ -79,19 +80,19 @@ export class RelatorioComponent implements OnInit {
 
   generateReportMostConsumedBeersInAPeriod(): void {
     this.report = this.datesReportComponent.getFormDates();
-    console.log(this.report);
-    this.productService.reportMostConsumedBeersInAPeriod(this.report)
-      .subscribe({
-        next: () => {
-          this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
-          this.datesReportComponent.closeForm();
-          this.onClose();
-        },
-        error: (error) => {
-          console.log(error)
-          this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
-        }
-      });
+    // console.log(this.report);
+    // this.reportService.reportMostConsumedBeersInAPeriod(this.report)
+    //   .subscribe({
+    //     next: () => {
+    //       this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
+    //       this.datesReportComponent.closeForm();
+    //       this.onClose();
+    //     },
+    //     error: (error) => {
+    //       console.log(error)
+    //       this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
+    //     }
+    //   });
   }
 
   sendEmail() {
@@ -112,19 +113,19 @@ export class RelatorioComponent implements OnInit {
 
   generateCustomerReportWithAmountPurchasedInPeriod() {
     this.report = this.datesReportComponent.getFormDates();
-    console.log(this.report);
-    this.clientService.customerReportWithAmountPurchasedInPeriod(this.report)
-      .subscribe({
-        next: () => {
-          this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
-          this.datesReportComponent.closeForm();
-          this.onClose();
-        },
-        error: (error) => {
-          console.log(error);
-          this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
-        }
-      });
+    // console.log(this.report);
+    // this.reportService.customerReportWithAmountPurchasedInPeriod(this.report)
+    //   .subscribe({
+    //     next: () => {
+    //       this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
+    //       this.datesReportComponent.closeForm();
+    //       this.onClose();
+    //     },
+    //     error: (error) => {
+    //       console.log(error);
+    //       this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
+    //     }
+    //   });
   }
 
   onClose(): void {

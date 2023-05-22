@@ -33,12 +33,10 @@ export class ModalDatasRelatorioComponent implements OnInit {
   }
 
   getFormSendEmail(): any {
-    this.message = true;
     return this.report = this.formGroup.getRawValue();
   }
 
   getFormDates(): any {
-    this.message = false;
     return this.report = this.formGroup.getRawValue();
   }
 
