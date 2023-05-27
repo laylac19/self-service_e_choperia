@@ -3,6 +3,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio-estoque-produtos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="79d51bde-7d34-4f57-9653-781607602d6c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Style1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{qtde_estoque} < $F{ponto_encomenda}]]></conditionExpression>
+			<style forecolor="#FA2A2A" pattern="" isBold="true"/>
+		</conditionalStyle>
+	</style>
 	<queryString>
 		<![CDATA[select *
 from produto p  
@@ -112,9 +118,9 @@ and p.qtde_estoque <= p.ponto_encomenda]]>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="70" y="0" width="214" height="30" forecolor="#219EBC" uuid="34cb60ca-ceb5-4b87-b608-a2d69c5709c6">
+				<reportElement x="70" y="0" width="224" height="30" forecolor="#219EBC" uuid="34cb60ca-ceb5-4b87-b608-a2d69c5709c6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -130,7 +136,7 @@ and p.qtde_estoque <= p.ponto_encomenda]]>
 				<text><![CDATA[Nome Produto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="390" y="0" width="164" height="30" forecolor="#219EBC" uuid="8c3bd50c-97fa-48b5-90fe-8e9b64f2e30e">
+				<reportElement x="440" y="0" width="114" height="30" forecolor="#219EBC" uuid="8c3bd50c-97fa-48b5-90fe-8e9b64f2e30e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -146,7 +152,7 @@ and p.qtde_estoque <= p.ponto_encomenda]]>
 				<text><![CDATA[Ponto Encomenda]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="284" y="0" width="106" height="30" forecolor="#219EBC" uuid="d15ac32e-2066-43d3-8879-9ce97c0371f5">
+				<reportElement x="294" y="0" width="76" height="30" forecolor="#219EBC" uuid="d15ac32e-2066-43d3-8879-9ce97c0371f5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -177,38 +183,65 @@ and p.qtde_estoque <= p.ponto_encomenda]]>
 				</textElement>
 				<text><![CDATA[ID]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="70" height="30" forecolor="#219EBC" uuid="72a56072-1dae-49a4-bba9-ec47318c6764">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FB8500"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FB8500"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted" lineColor="#FB8500"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde. Estoque]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
+		<band height="29" splitType="Stretch">
 			<textField>
-				<reportElement x="284" y="0" width="106" height="30" uuid="285b8a60-879a-480d-8196-8207d1fc0bca"/>
+				<reportElement x="294" y="-5" width="76" height="30" uuid="285b8a60-879a-480d-8196-8207d1fc0bca"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{unidade}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="70" height="30" uuid="06efdd1f-7e87-41c2-9e5d-d40274430fa1"/>
+				<reportElement x="0" y="-5" width="70" height="30" forecolor="#023047" uuid="06efdd1f-7e87-41c2-9e5d-d40274430fa1"/>
 				<box>
 					<topPen lineColor="#FB8500"/>
 					<leftPen lineWidth="1.0" lineColor="#FB8500"/>
 					<bottomPen lineColor="#FB8500"/>
 					<rightPen lineWidth="1.0" lineColor="#FB8500"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="0" width="214" height="30" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
+				<reportElement x="70" y="-5" width="224" height="30" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="0" width="164" height="30" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
+				<reportElement x="440" y="-5" width="114" height="30" forecolor="#FB8500" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
 				<box>
 					<rightPen lineWidth="1.0" lineColor="#FB8500"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ponto_encomenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Style1" x="370" y="-5" width="70" height="31" uuid="121973ee-5e43-446e-9372-c1ee5ae9ca48"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtde_estoque}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -230,7 +263,7 @@ and p.qtde_estoque <= p.ponto_encomenda]]>
 	<summary>
 		<band height="1">
 			<line>
-				<reportElement x="0" y="0" width="554" height="1" forecolor="#FB8500" uuid="8d2d05e2-7c0c-467c-9bea-f9a42172d327"/>
+				<reportElement x="0" y="-5" width="554" height="1" forecolor="#FB8500" uuid="8d2d05e2-7c0c-467c-9bea-f9a42172d327"/>
 			</line>
 		</band>
 	</summary>

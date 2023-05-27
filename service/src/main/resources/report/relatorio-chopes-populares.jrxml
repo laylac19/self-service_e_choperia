@@ -190,19 +190,23 @@ ORDER BY total_consumido DESC]]>
 				<textFieldExpression><![CDATA[$F{qtde_estoque}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="40" height="30" uuid="06efdd1f-7e87-41c2-9e5d-d40274430fa1"/>
+				<reportElement x="0" y="0" width="40" height="30" forecolor="#023047" uuid="06efdd1f-7e87-41c2-9e5d-d40274430fa1"/>
 				<box>
 					<topPen lineColor="#FB8500"/>
 					<leftPen lineWidth="1.0" lineColor="#FB8500"/>
 					<bottomPen lineColor="#FB8500"/>
 					<rightPen lineWidth="1.0" lineColor="#FB8500"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="0" width="244" height="30" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="40" y="0" width="244" height="30" forecolor="#FB8500" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
 			<textField>
