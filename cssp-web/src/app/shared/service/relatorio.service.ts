@@ -33,5 +33,10 @@ export class RelatorioService {
       `${this.resourceUrl}/relatorio-total-compras-clientes?dataInicio=${report.dataInicial}&dataFinal=${report.dataFinal}`,
       {responseType: 'arraybuffer'});
   }
+  expenseAndIncomeMovementReport(report: RelatorioEntreDatasModel): Observable<any> {
+    return this.http.get(
+      `${this.resourceUrl}//relatorio-receita-despesas?dataInicio=${report.dataInicial}&dataFinal=${report.dataFinal}`,
+      {responseType: 'arraybuffer'});
+  }
 
 }

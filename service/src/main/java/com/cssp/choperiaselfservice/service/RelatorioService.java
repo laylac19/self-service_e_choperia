@@ -82,4 +82,20 @@ public class RelatorioService {
         connection.close();
         return JasperExportManager.exportReportToPdf(jasperPrint);
     }
+
+    public byte[] expenseAndIncomeMovementReport(Date dataInicial, Date dataFinal) throws JRException, SQLException {
+        Connection connection = getConnection();
+        JasperReport jasperReport = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/report/relatorio-receita-despesas.jrxml")
+        );
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(JRParameter.REPORT_CONNECTION, connection);
+        params.put("DataInicial", dataInicial);
+        params.put("DataFinal", dataFinal);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
+        connection.close();
+        return JasperExportManager.exportReportToPdf(jasperPrint);
+    }
 }

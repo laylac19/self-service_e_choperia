@@ -65,4 +65,16 @@ public class RelatorioController {
 
         return ResponseEntity.ok().headers(headers).body(pdf);
     }
+
+    @GetMapping("/relatorio-receita-despesas")
+    public ResponseEntity<byte[]> expenseAndIncomeMovementReport(@RequestParam("dataInicio") Date dataInicio,
+                                                                            @RequestParam("dataFinal") Date dataFinal) throws JRException, SQLException {
+        byte[] pdf = service.expenseAndIncomeMovementReport(dataInicio, dataFinal);
+
+        org.springframework.http.HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("inline", "relatorio-receita-despesas.pdf");
+
+        return ResponseEntity.ok().headers(headers).body(pdf);
+    }
 }

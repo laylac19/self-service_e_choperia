@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="1685234834384-1" author="layla">
+        <createSequence incrementBy="1" sequenceName="seq_historico_compra_produto" startValue="1"/>
+        <createTable tableName="historico_compra_produto">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_historico_compra_produto"/>
+            </column>
+            <column name="produto_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_compra" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor_compra" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="qtde_produto_comprado" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="produto_id" baseTableName="historico_compra_produto"
+                                 constraintName="FK_HISTORICO_COMPRA_PRODUTO_ON_PRODUTO" referencedColumnNames="id"
+                                 referencedTableName="produto"/>
+    </changeSet>
+</databaseChangeLog>

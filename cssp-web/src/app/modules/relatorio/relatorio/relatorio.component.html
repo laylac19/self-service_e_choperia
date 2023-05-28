@@ -51,7 +51,7 @@
       </p-card>
     </div>
     <div class="container menu col-4">
-      <p-card class="card-item-menu">
+      <p-card class="card-item-menu" (click)="openModalMovementReport()">
         <em class="icon bi bi-info-circle"
             pTooltip="Receita x despesas em um período.">
         </em>
@@ -81,4 +81,11 @@
                (answerForm)="sendEmail()"
                (closeDialog)="onClose()">
   <app-modal-datas-relatorio #report3></app-modal-datas-relatorio>
+</custom-dialog>
+
+<custom-dialog [display]="displayMovementReport"
+               [header]="'RELATÓRIO - Receita x Despesas'"
+               (answerForm)="generateExpenseAndIncomeMovementReport()"
+               (closeDialog)="onClose()">
+  <app-modal-datas-relatorio #report4></app-modal-datas-relatorio>
 </custom-dialog>
