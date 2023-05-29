@@ -11,7 +11,9 @@ import lombok.Setter;
 @Setter
 public class LoginDTO {
 
-    private String login;
+    private String usuario;
+    private String nome;
+    private String perfilDesc;
+    private Long perfilId;
 
-    private String senha;
 }

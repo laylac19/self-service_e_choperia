@@ -1,4 +1,4 @@
-<div class="aplicacao">
+<div class="aplicacao" *ngIf="mostrarMenu">
   <app-topbar [configuracaoMenuLateral]="configuracaoMenuLateral"></app-topbar>
   <div class="corpo-aplicacao">
     <app-sidemenu [configuracaoMenuLateral]="configuracaoMenuLateral"></app-sidemenu>
@@ -8,6 +8,13 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="aplicacao" *ngIf="!mostrarMenu">
+    <div class="conteudo-principal">
+      <div class="container list col-12">
+        <app-login-view></app-login-view>
+      </div>
 </div>
 
 <p-confirmDialog #dialogDelete [baseZIndex]="99999">

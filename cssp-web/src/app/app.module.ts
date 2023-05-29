@@ -9,12 +9,16 @@ import {SharedModule} from "./shared/shared.module";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {MensagensConfirmacao} from "./shared/util/msgConfirmacaoDialog.util";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AuthService} from "./modules/login/auth.service";
+import {LoginModule} from "./modules/login/login.module";
+import {LoginViewComponent} from "./modules/login/login-view/login-view.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
     SidemenuComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     BrowserAnimationsModule,
   ],
   providers: [
-    MessageService, ConfirmationService, MensagensConfirmacao
+    MessageService, ConfirmationService, MensagensConfirmacao, AuthService
   ],
   bootstrap: [AppComponent]
 })

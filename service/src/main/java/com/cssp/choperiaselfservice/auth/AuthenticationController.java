@@ -2,6 +2,7 @@ package com.cssp.choperiaselfservice.auth;
 
 import com.cssp.choperiaselfservice.domain.Usuario;
 import com.cssp.choperiaselfservice.service.dto.LoginDTO;
+import com.cssp.choperiaselfservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +18,13 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest registerRequest){
-        return ResponseEntity.ok(authenticationService.register(registerRequest));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody UsuarioDTO usuario){
+        return ResponseEntity.ok(authenticationService.register(usuario));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authenticationRequest){
-        AuthenticationResponse usuario  = authenticationService.authenticate(authenticationRequest);
+    public ResponseEntity<LoginDTO> login(@RequestBody AuthenticationRequest authenticationRequest){
+        LoginDTO usuario  = authenticationService.authenticate(authenticationRequest);
         return ResponseEntity.ok(usuario);
     }
 }

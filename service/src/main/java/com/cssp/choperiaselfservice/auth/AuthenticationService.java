@@ -5,6 +5,8 @@ import com.cssp.choperiaselfservice.domain.Perfil;
 import com.cssp.choperiaselfservice.domain.Usuario;
 import com.cssp.choperiaselfservice.domain.enums.Role;
 import com.cssp.choperiaselfservice.repository.UsuarioRepository;
+import com.cssp.choperiaselfservice.service.dto.LoginDTO;
+import com.cssp.choperiaselfservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,24 +28,25 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest registerRequest) {
-        Usuario usuario = Usuario.builder()
-                .usuario(registerRequest.getUsername())
-                .nome(registerRequest.getName())
-                .senha(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(Role.ADMIN)
+    public AuthenticationResponse register(UsuarioDTO usuario) {
+        Perfil perfilUser = new Perfil();
+        Usuario user = Usuario.builder()
+                .usuario(usuario.getUsuario())
+                .nome(usuario.getNome())
+                .senha(passwordEncoder.encode(usuario.getSenha()))
+                .perfil(perfilUser)
                 .ativo(true)
                 .build();
-        usuarioRepository.save(usuario);
+        usuarioRepository.save(user);
 
-        String jwtToken = jwtService.generateToken(usuario);
+        String jwtToken = jwtService.generateToken(user);
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
+    public LoginDTO authenticate(AuthenticationRequest authenticationRequest) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -52,14 +55,22 @@ public class AuthenticationService {
                 )
         );
 
-        var usuario = usuarioRepository.findByUsuario(authenticationRequest.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario nao encontrado"));
+        var usuario = usuarioRepository.findByUsuario(authenticationRequest.getUsername());
+                //.orElseThrow(() -> new UsernameNotFoundException("Usuario nao encontrado"));
 
+        LoginDTO loginData = new LoginDTO(
+                usuario.getUsuario(),
+                usuario.getNome(),
+                usuario.getPerfil().getDescricao(),
+                usuario.getPerfil().getId()
+        );
 
         String jwtToken = jwtService.generateToken(usuario);
 
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+//        return AuthenticationResponse.builder()
+//                .token(jwtToken)
+//                .build();
+
+        return loginData;
     }
 }

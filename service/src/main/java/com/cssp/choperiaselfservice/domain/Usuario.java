@@ -38,16 +38,13 @@ public class Usuario implements Serializable, UserDetails {
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "perfil_id")
     private Perfil perfil;
 
-    @Enumerated(EnumType.ORDINAL)
-    private Role role;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return null;
     }
 
     @Override
