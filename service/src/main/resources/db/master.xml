@@ -14,4 +14,5 @@
     <include file="db/changelog/202303191140-create_table_cliente_compra-produto.xml"/>
     <include file="db/changelog/202304031823-create_table_caixa.xml"/>
     <include file="db/changelog/202303191141-create_table_compra.xml"/>
+    <include file="db/changelog/202305272146-create_table_historico_compra_produto.xml"/>
 </databaseChangeLog>

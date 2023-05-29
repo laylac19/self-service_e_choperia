@@ -1,6 +1,8 @@
 package com.cssp.choperiaselfservice.service;
 
+import com.cssp.choperiaselfservice.domain.HistoricoCompraProduto;
 import com.cssp.choperiaselfservice.domain.Produto;
+import com.cssp.choperiaselfservice.repository.HistoricoCompraProdutoRepository;
 import com.cssp.choperiaselfservice.repository.ProdutoRepository;
 import com.cssp.choperiaselfservice.service.dto.*;
 import com.cssp.choperiaselfservice.service.exception.BusinessRuleException;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -25,6 +28,7 @@ import java.util.Set;
 @Transactional
 public class ProdutoService {
     private final ProdutoRepository repository;
+    private final HistoricoCompraProdutoRepository historyPurchaseRepository;
     private final ProdutoMapper mapper;
 
     public Produto findEntity(Long id) {
@@ -58,6 +62,16 @@ public class ProdutoService {
         Produto product = findEntity(dto.getId());
         product.setQtdeEstoque(product.getQtdeEstoque() + dto.getQtdeEstoque());
         repository.save(product);
+        createProductPurchaseHistory(product, dto.getQtdeEstoque());
+    }
+
+    private void createProductPurchaseHistory(Produto product, Double inputQuantity) {
+        HistoricoCompraProduto historyPurchase = new HistoricoCompraProduto();
+        historyPurchase.setProduto(product);
+        historyPurchase.setQtde_produto_comprado(inputQuantity);
+        historyPurchase.setValor_compra(product.getPrecoCompra() * inputQuantity);
+        historyPurchase.setData_compra(LocalDate.now());
+        historyPurchaseRepository.save(historyPurchase);
     }
 
     public void productWithdrawal(EntradaProdutoDTO dto) {

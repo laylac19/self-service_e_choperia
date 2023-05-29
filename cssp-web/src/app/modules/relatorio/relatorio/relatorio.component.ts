@@ -22,13 +22,14 @@ export class RelatorioComponent implements OnInit {
   @Input() displayCustomerPurchases = false;
   @Input() displayModalPopularBeer = false;
   @Input() displayDialogEmail = false;
+  @Input() displayMovementReport = false;
 
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
 
   @ViewChild('report1') report1: ModalDatasRelatorioComponent;
   @ViewChild('report2') report2: ModalDatasRelatorioComponent;
   @ViewChild('report3') report3: ModalDatasRelatorioComponent;
-
+  @ViewChild('report4') report4: ModalDatasRelatorioComponent;
 
   constructor(private builder: FormBuilder,
               private reportService: RelatorioService,
@@ -56,6 +57,12 @@ export class RelatorioComponent implements OnInit {
     this.report3.formGroup.reset();
     this.report3.message = true;
     this.displayDialogEmail = true;
+  }
+
+  openModalMovementReport() {
+    this.report4.formGroup.reset();
+    this.report4.message = false;
+    this.displayMovementReport = true;
   }
 
   generateBalanceReportProductInStock(): void {
@@ -145,13 +152,35 @@ export class RelatorioComponent implements OnInit {
       });
   }
 
+  generateExpenseAndIncomeMovementReport() {
+    this.report = this.report4.getFormDates();
+    this.validateDatesOfRefport(this.report);
+    this.reportService.expenseAndIncomeMovementReport(this.report)
+      .subscribe({
+        next: (response: any) => {
+          this.displayCustomerPurchases = false;
+          const blob = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(blob);
+          window.open(url);
+          this.message.showSuccess(MensagensProntasUtil.SUCCESSFULLY_GENERATED_REPORT);
+          this.onClose();
+        },
+        error: (error) => {
+          console.log(error);
+          this.message.showError(MensagensProntasUtil.ERROR, error.mensagem)
+        }
+      });
+  }
+
   onClose(): void {
     this.report1.closeForm();
     this.report2.closeForm();
     this.report3.closeForm();
+    this.report4.closeForm();
     this.displayDialogEmail = false;
     this.displayCustomerPurchases = false;
     this.displayModalPopularBeer = false;
+    this.displayMovementReport = false;
   }
 
   private validateDatesOfRefport(report: RelatorioEntreDatasModel) {
