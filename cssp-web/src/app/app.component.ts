@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'cssp-web';
 
   mostrarMenu: boolean = false;
-
+  role: string | null = localStorage.getItem('roleDescription')
   public configuracaoMenuLateral: SidemenuModel = new SidemenuModel();
 
   constructor(private authService: AuthService) {

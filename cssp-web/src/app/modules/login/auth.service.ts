@@ -31,16 +31,24 @@ export class AuthService {
     return this.username
   }
 
+  saveRoleOnLocalStorege(role: any, usuario: string){
+    localStorage.setItem('roleDescription', role);
+    localStorage.setItem('userName', usuario)
+  }
+
   login(usuario: UsuarioAutenticacaoModel): void{
     this.authentication(usuario)
       .subscribe({
         next: (response) => {
           console.log(response)
           this.username = response.usuario;
+          this.saveRoleOnLocalStorege(response.perfilDesc, response.usuario);
+          console.log(localStorage.getItem('roleDescription'))
           this.usuarioAutenticado = true;
           this.mostrarMenuEmitter.emit(true);
           this.router.navigate(['/'])
           this.message.showSuccess(`Bem vindo ${response.nome}`);
+          location.reload();
         },
         error: () => {
           this.usuarioAutenticado = false;

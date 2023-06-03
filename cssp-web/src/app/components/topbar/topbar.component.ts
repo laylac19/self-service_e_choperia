@@ -23,11 +23,13 @@ export class TopbarComponent {
     }
 
   public fazerLogout(): void{
+      localStorage.setItem("roleDescription", '');
+    localStorage.setItem("userName", '');
       location.reload();
   }
 
   public nomeUsuarioLogado(){
-      return this.authService.nomeUsuario();
+      return localStorage.getItem("userName")
   }
 
     public fecharMenuLateral(): void {

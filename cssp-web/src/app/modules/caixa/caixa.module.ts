@@ -10,16 +10,19 @@ import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
-  declarations: [
-    CaixaComponent,
-    ClienteCaixaComponent
-  ],
-  imports: [
-    SharedModule,
-    CommonModule,
-    CaixaRoutingModule,
-    ComponentsModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        CaixaComponent,
+        ClienteCaixaComponent
+    ],
+    exports: [
+        CaixaComponent
+    ],
+    imports: [
+        SharedModule,
+        CommonModule,
+        CaixaRoutingModule,
+        ComponentsModule,
+        ReactiveFormsModule
+    ]
 })
 export class CaixaModule { }

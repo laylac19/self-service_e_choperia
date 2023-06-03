@@ -4,4 +4,5 @@ export class UsuarioModel {
   nome: string;
   senha: string;
   perfil: number;
+  perfilDesc?: string;
 }

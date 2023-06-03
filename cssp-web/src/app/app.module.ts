@@ -12,6 +12,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthService} from "./modules/login/auth.service";
 import {LoginModule} from "./modules/login/login.module";
 import {LoginViewComponent} from "./modules/login/login-view/login-view.component";
+import {ProdutoModule} from "./modules/produto/produto.module";
+import {CaixaModule} from "./modules/caixa/caixa.module";
+import {SelfServiceModule} from "./modules/self-service/self-service.module";
+import {ClienteModule} from "./modules/cliente/cliente.module";
+import {CozinhaModule} from "./modules/cozinha/cozinha.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +30,11 @@ import {LoginViewComponent} from "./modules/login/login-view/login-view.componen
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
+    ProdutoModule,
+    CaixaModule,
+    SelfServiceModule,
+    ClienteModule,
+    CozinhaModule,
   ],
   providers: [
     MessageService, ConfirmationService, MensagensConfirmacao, AuthService
