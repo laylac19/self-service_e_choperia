@@ -23,7 +23,8 @@
     <div class="corpo-aplicacao">
       <div class="conteudo-principal">
         <div class="container list col-12" *ngIf="role === 'Repositor de Estoque'">
-          <app-produto-list></app-produto-list>
+          <app-produto-list *ngIf="!impBarCode"></app-produto-list>
+          <app-imprimir-codbarras *ngIf="impBarCode"></app-imprimir-codbarras>
         </div>
         <div class="container list col-12" *ngIf="role === 'Caixa'">
           <app-caixa></app-caixa>

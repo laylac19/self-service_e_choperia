@@ -125,6 +125,7 @@ export class CaixaComponent implements OnInit{
     divPrincipal.appendChild(this.criarDivNomeCliente());
     divPrincipal.appendChild(this.criarTabelaItensConsumidos());
     divPrincipal.appendChild(this.criarDivValorTotal());
+    divPrincipal.appendChild(this.criarDivQtdItens());
     //divPrincipal.appendChild(this.criarDivMetodoPagamento());
     mywindow?.document.body.appendChild(divPrincipal);
 
@@ -180,10 +181,10 @@ export class CaixaComponent implements OnInit{
     table.style.fontSize = '8px';
 
     colunaItem.innerHTML = 'Nome';
-    colunaItem.style.textAlign = 'center';
+    colunaItem.style.textAlign = 'left';
 
     colunaPreco.innerHTML = 'Preço';
-    colunaPreco.style.textAlign = 'center';
+    colunaPreco.style.textAlign = 'left';
 
     linha.append(colunaItem, colunaPreco);
     head.append(linha);
@@ -236,6 +237,22 @@ export class CaixaComponent implements OnInit{
          <tr>
             <td colspan="3">Nome do cliente:</td>
             <td style="text-align: right">${this.nomesClientes[0]}</td>
+        </tr>
+     </table>
+     <hr>
+     `;
+    return div;
+  }
+
+  private criarDivQtdItens(): HTMLElement {
+    let div = document.createElement('div');
+
+    div.innerHTML = `
+     <ht>
+     <table style="width: 100%; font-size: 12px">
+         <tr>
+            <td colspan="3">Qtd. Itens:</td>
+            <td style="text-align: right">${this.clientesCompras.length}</td>
         </tr>
      </table>
      <hr>

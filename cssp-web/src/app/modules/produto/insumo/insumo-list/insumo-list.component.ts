@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, ViewChild} from '@angular/core';
 import {ColumnUtil} from "../../../../shared/util/columnUtil";
 import {Page} from "../../../../shared/util/page";
 import {BlockUI, NgBlockUI} from "ng-block-ui";
@@ -36,6 +36,8 @@ export class InsumoListComponent implements OnInit {
   @ViewChild(InsumoEntryComponent) entryFormComponent: InsumoEntryComponent;
   @ViewChild(InsumoWithdrawComponent) withdrawFormComponent: InsumoWithdrawComponent;
   @ViewChild(ImprimirCodbarrasComponent) imprimirCodbarrasComponent: ImprimirCodbarrasComponent;
+
+  impBarCode = new EventEmitter<boolean>();
 
   constructor(private inputService: ProdutoService,
               private message: MensagensConfirmacao,
@@ -80,6 +82,10 @@ export class InsumoListComponent implements OnInit {
 
   printBarcode(): void {
     this.router.navigate(['ImprimirBarCode']);
+    if(localStorage.getItem('roleDescription') != 'Administrador'){
+      localStorage.setItem('impBarCode', 'true');
+      location.reload();
+    }
   }
 
   onSaveRegister(): void {

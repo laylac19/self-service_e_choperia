@@ -18,6 +18,7 @@ export class AuthService {
   username: string
   private usuarioAutenticado: boolean;
   mostrarMenuEmitter = new EventEmitter<boolean>();
+
   constructor(private router: Router,
               private http: HttpClient,
               private message: MensagensConfirmacao) {

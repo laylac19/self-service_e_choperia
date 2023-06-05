@@ -81,4 +81,13 @@ public class ClienteCompraProdutoService {
         return repository.buildEmail(dto.getIdCliente(), dto.getId());
     }
 
+    public void setFalseCompraProduto(Set<ComprasCaixaListDTO> comprasProdutos){
+        comprasProdutos.forEach(item -> {
+            ClienteCompraProdutoDTO compra = this.findByID(item.getIdCompra());
+            compra.setAtivo(false);
+            repository.save(mapper.toEntity(compra));
+        });
+
+    }
+
 }

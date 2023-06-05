@@ -10,9 +10,12 @@ import {ToolbarModule} from "primeng/toolbar";
 
 
 @NgModule({
-  declarations: [
-    ImprimirCodbarrasComponent
-  ],
+    declarations: [
+        ImprimirCodbarrasComponent
+    ],
+    exports: [
+        ImprimirCodbarrasComponent
+    ],
     imports: [
         SharedModule,
         CommonModule,

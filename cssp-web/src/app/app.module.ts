@@ -17,6 +17,7 @@ import {CaixaModule} from "./modules/caixa/caixa.module";
 import {SelfServiceModule} from "./modules/self-service/self-service.module";
 import {ClienteModule} from "./modules/cliente/cliente.module";
 import {CozinhaModule} from "./modules/cozinha/cozinha.module";
+import {ImprimirModule} from "./modules/imprimir-codbarras/imprimir.module";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {CozinhaModule} from "./modules/cozinha/cozinha.module";
     SelfServiceModule,
     ClienteModule,
     CozinhaModule,
+    ImprimirModule,
   ],
   providers: [
     MessageService, ConfirmationService, MensagensConfirmacao, AuthService
