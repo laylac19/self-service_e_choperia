@@ -103,7 +103,6 @@ public class CaixaService {
             ClienteSearchDTO cliente = this.customerService.findClienteByNumCartaoRFIDAndAndAtivoIsTrue(rfid);
             ClienteDTO clienteDto = this.customerService.findByID(cliente.getId());
             customerService.customerExit(clienteDto.getId());
-            this.customerService.save(clienteDto);
         });
     }
 
