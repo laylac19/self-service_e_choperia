@@ -24,11 +24,14 @@ import { ChopeEntryComponent } from './chope/chope-entry/chope-entry.component';
     InsumoWithdrawComponent,
     ChopeEntryComponent
   ],
+  exports: [
+    ProdutoListComponent
+  ],
 
-    imports: [
-        CommonModule,
-        ProdutoRoutingModule,
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    ProdutoRoutingModule,
+    SharedModule
+  ]
 })
 export class ProdutoModule { }

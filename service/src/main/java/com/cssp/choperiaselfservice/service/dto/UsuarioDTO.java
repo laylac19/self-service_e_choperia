@@ -26,8 +26,6 @@ public class UsuarioDTO implements Serializable {
     @NotEmpty(message = MensagemUsuarioUtil.EMPTY_NAME)
     private String nome;
 
-    @NotNull(message = MensagemUsuarioUtil.NULL_PASSWORD)
-    @NotEmpty(message = MensagemUsuarioUtil.EMPTY_PASSWORD)
     private String senha;
 
     private Boolean ativo = true;

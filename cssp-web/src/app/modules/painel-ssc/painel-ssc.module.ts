@@ -12,6 +12,9 @@ import {ChopeModule} from "../chope/chope.module";
   declarations: [
     PainelClienteComponent
   ],
+  exports: [
+    PainelClienteComponent
+  ],
   imports: [
     CommonModule,
     PainelSscRoutingModule,

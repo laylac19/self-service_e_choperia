@@ -9,16 +9,19 @@ import {ClienteEntradaComponent} from './cliente-entrada/cliente-entrada.compone
 
 
 @NgModule({
-  declarations: [
-    ClienteFormComponent,
-    ClienteListComponent,
-    ClienteEntradaComponent
-  ],
-  imports: [
-    CommonModule,
-    ClienteRoutingModule,
-    SharedModule
-  ]
+    declarations: [
+        ClienteFormComponent,
+        ClienteListComponent,
+        ClienteEntradaComponent
+    ],
+    exports: [
+        ClienteListComponent
+    ],
+    imports: [
+        CommonModule,
+        ClienteRoutingModule,
+        SharedModule
+    ]
 })
 export class ClienteModule {
 }

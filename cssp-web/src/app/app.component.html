@@ -1,4 +1,4 @@
-<div class="aplicacao" *ngIf="mostrarMenu">
+<div class="aplicacao" *ngIf="role === 'Administrador'">
   <app-topbar [configuracaoMenuLateral]="configuracaoMenuLateral"></app-topbar>
   <div class="corpo-aplicacao">
     <app-sidemenu [configuracaoMenuLateral]="configuracaoMenuLateral"></app-sidemenu>
@@ -10,12 +10,38 @@
   </div>
 </div>
 
-<div class="aplicacao" *ngIf="!mostrarMenu">
+<div class="aplicacao" *ngIf="!role">
     <div class="conteudo-principal">
       <div class="container list col-12">
         <app-login-view></app-login-view>
       </div>
+    </div>
 </div>
+
+  <div class="aplicacao">
+    <app-topbar [configuracaoMenuLateral]="configuracaoMenuLateral"></app-topbar>
+    <div class="corpo-aplicacao">
+      <div class="conteudo-principal">
+        <div class="container list col-12" *ngIf="role === 'Repositor de Estoque'">
+          <app-produto-list *ngIf="!impBarCode"></app-produto-list>
+          <app-imprimir-codbarras *ngIf="impBarCode"></app-imprimir-codbarras>
+        </div>
+        <div class="container list col-12" *ngIf="role === 'Caixa'">
+          <app-caixa></app-caixa>
+        </div>
+        <div class="container list col-12" *ngIf="role === 'Fiscal de Entrada'">
+          <app-cliente-list></app-cliente-list>
+        </div>
+        <div class="container list col-12" *ngIf="role === 'Cozinheiro'">
+          <app-cozinha></app-cozinha>
+        </div>
+        <div class="container list col-12" *ngIf="role === 'Fiscal Self-Service'">
+          <app-painel-cliente></app-painel-cliente>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <p-confirmDialog #dialogDelete [baseZIndex]="99999">
   <div class="p-col-12">

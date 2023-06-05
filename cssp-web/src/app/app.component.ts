@@ -11,7 +11,9 @@ export class AppComponent {
   title = 'cssp-web';
 
   mostrarMenu: boolean = false;
+  impBarCode: boolean = localStorage.getItem('impBarCode') === 'true';
 
+  role: string | null = localStorage.getItem('roleDescription')
   public configuracaoMenuLateral: SidemenuModel = new SidemenuModel();
 
   constructor(private authService: AuthService) {
@@ -22,5 +24,6 @@ export class AppComponent {
     this.authService.mostrarMenuEmitter.subscribe(
       mostrar => this.mostrarMenu = mostrar
     );
+    console.log(this.impBarCode)
   }
 }

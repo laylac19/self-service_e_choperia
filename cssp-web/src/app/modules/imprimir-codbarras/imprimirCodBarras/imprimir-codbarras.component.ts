@@ -122,6 +122,10 @@ export class ImprimirCodbarrasComponent implements OnInit{
 
   backToProductPage(): void{
     this.router.navigate(['Produtos']);
+    if(localStorage.getItem('roleDescription') != 'Administrador'){
+      localStorage.setItem('impBarCode', '');
+      location.reload();
+    }
   }
 
 

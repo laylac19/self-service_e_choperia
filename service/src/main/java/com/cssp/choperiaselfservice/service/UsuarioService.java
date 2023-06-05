@@ -44,7 +44,9 @@ public class UsuarioService {
 
     public UsuarioDTO save(UsuarioDTO dto) {
 
-        dto.setSenha(passwordEncoder.encode(dto.getSenha()));
+        if(dto.getId() == null){
+            dto.setSenha(passwordEncoder.encode(dto.getSenha()));
+        }
 
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
