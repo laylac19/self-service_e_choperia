@@ -16,7 +16,7 @@ export class SidemenuComponent {
       () => this.router.navigateByUrl('/')),
     new OpcaoMenuModel('bi bi-person-vcard', 'Usuários',
       () => this.router.navigateByUrl('/Usuarios')),
-    new OpcaoMenuModel('bi bi-card-heading', 'Relatórios',
+    new OpcaoMenuModel('bi bi-filetype-pdf', 'Relatórios',
       () => this.router.navigateByUrl('/Relatorios')),
     new OpcaoMenuModel('bi bi-grid', 'Produtos',
       () => this.router.navigateByUrl('/Produtos')),

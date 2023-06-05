@@ -118,8 +118,7 @@
     FROM historico_compra_produto hcp 
     JOIN produto p ON p.id = hcp.produto_id  
     WHERE hcp.data_compra BETWEEN $P{DataInicial} AND $P{DataFinal}
-    GROUP BY p.etiqueta_rfid
-]]>
+    GROUP BY p.etiqueta_rfid]]>
 	</queryString>
 	<field name="valor" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="valor"/>
@@ -264,7 +263,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{saldo_anterior} *100.0)/100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{saldo_anterior}  != null ? new DecimalFormat("#.##").format(Math.round($F{saldo_anterior} *100.0)/100.0) : "-"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="430" y="1" width="22" height="16" uuid="392a9c69-636f-428f-9cf2-141ed8b502d0"/>
@@ -304,7 +303,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{valor} *100.0)/100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valor} != null ? new DecimalFormat("#.##").format(Math.round($F{valor} *100.0)/100.0) : "-"
+]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="351" y="5" width="20" height="11" uuid="a24c9e57-93ae-462d-8b29-e8bc711743db"/>
@@ -370,8 +370,8 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round(($F{saldo_anterior} - ($F{soma_movimentacao} < 0 ? -$F{soma_movimentacao} : $F{soma_movimentacao})) * 100.0) / 100.0)
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{saldo_anterior} != null && $F{soma_movimentacao} != null ? new DecimalFormat("#.##").format(Math.round(($F{saldo_anterior} - ($F{soma_movimentacao} < 0 ? -$F{soma_movimentacao} : $F{soma_movimentacao})) * 100.0) / 100.0) : "-"
+ ]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="60" y="-1" width="290" height="16" uuid="1e9158c0-00eb-46be-89bf-51e539336494"/>
@@ -386,7 +386,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{soma_movimentacao} *100.0)/100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{soma_movimentacao} != null ? new DecimalFormat("#.##").format(Math.round($F{soma_movimentacao} *100.0)/100.0) : "-"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="351" y="0" width="20" height="14" uuid="5e1c68b2-fc88-4058-b0d8-84cca5ee11d2"/>
