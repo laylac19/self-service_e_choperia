@@ -15,4 +15,5 @@
     <include file="db/changelog/202304031823-create_table_caixa.xml"/>
     <include file="db/changelog/202303191141-create_table_compra.xml"/>
     <include file="db/changelog/202305272146-create_table_historico_compra_produto.xml"/>
+    <include file="db/changelog/202306051927-inset-into-table-usuario.xml"/>
 </databaseChangeLog>

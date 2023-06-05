@@ -26,7 +26,7 @@ public interface ClienteCompraProdutoRepository extends JpaRepository<ClienteCom
             " FROM  ClienteCompraProduto        CCP " +
             " JOIN Cliente                      C " +
                 " ON CCP.cliente.id = C.id " +
-            " WHERE C.ativo = true AND CCP.dataCompra BETWEEN :initialDate AND :finalDate " )
+            " WHERE CCP.dataCompra BETWEEN :initialDate AND :finalDate " )
     Set<ClienteCompraProdutoDTO> searchCustomersWhoPurchasedBetweenDates(@Param("initialDate") LocalDate initialDate, @Param("finalDate") LocalDate finalDate);
 
     @Query( " SELECT new com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO(" +
@@ -35,6 +35,6 @@ public interface ClienteCompraProdutoRepository extends JpaRepository<ClienteCom
             " FROM  ClienteCompraProduto        CCP " +
             " JOIN Cliente                      C " +
                 " ON CCP.cliente.id = C.id " +
-            " WHERE C.ativo = true AND C.id = :idClient AND CCP.id = :idPurchased" )
+            " WHERE C.id = :idClient AND CCP.id = :idPurchased" )
     BuildEmailPurchadeDTO buildEmail(@Param("idClient") Long idClient, @Param("idPurchased") Long idPurchased);
 }
