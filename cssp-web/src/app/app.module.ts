@@ -18,6 +18,7 @@ import {SelfServiceModule} from "./modules/self-service/self-service.module";
 import {ClienteModule} from "./modules/cliente/cliente.module";
 import {CozinhaModule} from "./modules/cozinha/cozinha.module";
 import {ImprimirModule} from "./modules/imprimir-codbarras/imprimir.module";
+import {PainelSscModule} from "./modules/painel-ssc/painel-ssc.module";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {ImprimirModule} from "./modules/imprimir-codbarras/imprimir.module";
     ClienteModule,
     CozinhaModule,
     ImprimirModule,
+    PainelSscModule,
   ],
   providers: [
     MessageService, ConfirmationService, MensagensConfirmacao, AuthService

@@ -22,7 +22,7 @@
       </simple-table>
       <p>Itens: <ng-template [ngIf]="clientesCompras.length">{{ clientesCompras.length }}</ng-template></p>
       <p>Cliente: <ng-template [ngIf]="nomesClientes.length">{{ nomesClientes[0] }}</ng-template></p>
-      <p>Total da Conta: {{ totalCompra }}</p>
+      <p>Total da Conta: R$ {{ totalCompra.toPrecision(2) }}</p>
     </div>
     <button pButton type="submit"
             class="button-action w-3"

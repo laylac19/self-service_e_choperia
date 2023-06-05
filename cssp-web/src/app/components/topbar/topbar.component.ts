@@ -24,8 +24,9 @@ export class TopbarComponent {
 
   public fazerLogout(): void{
       localStorage.setItem("roleDescription", '');
-    localStorage.setItem("userName", '');
-      location.reload();
+      localStorage.setItem("userName", '');
+      location.replace("Login");
+     // location.reload();
   }
 
   public nomeUsuarioLogado(){
