@@ -22,11 +22,11 @@ public interface ClienteCompraProdutoRepository extends JpaRepository<ClienteCom
             " WHERE cc.ativo = true AND c.numCartaoRFID = :numCartaoRFID ")
     Set<ComprasCaixaListDTO> listPurchasesCustomersCashier(@Param("numCartaoRFID") String numCartaoRFID);
 
-    @Query( " SELECT new com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO(CCP.id, C.id) " +
-            " FROM  ClienteCompraProduto        CCP " +
-            " JOIN Cliente                      C " +
-                " ON CCP.cliente.id = C.id " +
-            " WHERE CCP.dataCompra BETWEEN :initialDate AND :finalDate " )
+    @Query( " SELECT DISTINCT new com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO(C.id) " +
+            " FROM  Cliente                      C " +
+            " JOIN ClienteCompraProduto          CCP " +
+                " ON C.id = CCP.cliente.id " +
+            " WHERE CCP.dataCompra BETWEEN :initialDate AND :finalDate ")
     Set<ClienteCompraProdutoDTO> searchCustomersWhoPurchasedBetweenDates(@Param("initialDate") LocalDate initialDate, @Param("finalDate") LocalDate finalDate);
 
     @Query( " SELECT new com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO(" +
