@@ -3,6 +3,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio-estoque-produtos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="79d51bde-7d34-4f57-9653-781607602d6c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Style1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{qtde_estoque}<=0.0]]></conditionExpression>
+			<style forecolor="#FF130F" isBold="true"/>
+		</conditionalStyle>
+	</style>
 	<queryString>
 		<![CDATA[select *
 from produto p 
@@ -215,14 +221,14 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="-1" width="190" height="36" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
+				<reportElement style="Style1" x="40" y="-1" width="190" height="36" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="330" y="-1" width="100" height="36" forecolor="#FB8500" uuid="9364b4aa-25c5-4de5-9d97-da7d6b53ac06"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtde_estoque}]]></textFieldExpression>
 			</textField>
@@ -232,7 +238,8 @@ and p.codigo_barras notnull or p.etiqueta_rfid notnull]]>
 					<rightPen lineWidth="1.0" lineColor="#FB8500"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{preco_compra} *100.0)/100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[String.format("R$ %.2f", Math.round($F{preco_compra} * 100.0) / 100.0)
+]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

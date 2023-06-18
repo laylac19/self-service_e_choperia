@@ -43,14 +43,16 @@ export class SelfServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.newForm();
-    this.findSelfServiceProduct();
     setInterval(() => {
       this.productService.getWeightValue().subscribe(response => {
         if(response){
           this.formGroup.patchValue({pesoPrato: response.lastWeight})
+          this.findSelfServiceProduct();
+          this.setPurchaseValue(response.lastWeight);
           console.log(response.lastWeight + ' PESO')
         }else{
           this.formGroup.patchValue({pesoPrato: 0.0})
+          this.formGroup.patchValue({valorCompra: 0.0})
         }
       })
     }, 1000)
@@ -95,7 +97,7 @@ export class SelfServiceComponent implements OnInit {
   setPurchaseValue(event: any): void {
     this.formGroup.get('idProduto')?.setValue(this.seflService.id);
 
-    const peso: number = event.target.value;
+    const peso: number = event;
     this.formGroup.get('pesoPrato')?.setValue(peso);
 
     const total: number = this.seflService.precoVenda * peso;

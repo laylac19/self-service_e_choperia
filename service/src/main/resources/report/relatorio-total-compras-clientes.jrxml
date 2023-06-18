@@ -161,12 +161,13 @@ ORDER BY total_comprado DESC]]>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="-5" width="184" height="30" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
+				<reportElement x="370" y="-5" width="184" height="30" forecolor="#FB8500" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
 				<box>
 					<rightPen lineWidth="1.0" lineColor="#FB8500"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{total_comprado} *100.0)/100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[String.format("R$ %.2f", Math.round($F{total_comprado} * 100.0) / 100.0)
+]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="50" y="-5" width="320" height="30" uuid="fc26d03a-0da1-4229-9d62-b780904267c4"/>

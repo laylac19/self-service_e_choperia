@@ -9,17 +9,22 @@
 	<parameter name="DataFinal" class="java.sql.Date"/>
 	<queryString>
 		<![CDATA[SELECT p.id,
-	COUNT(*) AS total_consumido,
-	p.descricao,
-	p.qtde_estoque,
-	p.preco_compra,
-	p.preco_venda
-FROM produto p
-	JOIN cliente_compra_produto ccp ON 
-	 p.id = ccp.produto_id 
-WHERE ccp.data_compra BETWEEN $P{DataInicial} AND $P{DataFinal} 
-AND (p.codigo_barras IS NOT NULL OR p.etiqueta_rfid IS NOT NULL)GROUP BY p.id,
-	p.descricao
+    total_consumido,
+    (total_consumido * p.preco_venda) AS total_vendas,
+    p.descricao,
+    p.qtde_estoque,
+    p.preco_compra,
+    p.preco_venda
+FROM (
+    SELECT p.id,
+        COUNT(*) AS total_consumido
+    FROM produto p
+        JOIN cliente_compra_produto ccp ON p.id = ccp.produto_id
+    WHERE ccp.data_compra BETWEEN $P{DataInicial} AND $P{DataFinal}
+        AND (p.codigo_barras IS NOT NULL OR p.etiqueta_rfid IS NOT NULL)
+    GROUP BY p.id
+) AS subquery
+JOIN produto p ON subquery.id = p.id
 ORDER BY total_consumido DESC]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
@@ -30,6 +35,10 @@ ORDER BY total_consumido DESC]]>
 	<field name="total_consumido" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="total_consumido"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_consumido"/>
+	</field>
+	<field name="total_vendas" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_vendas"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_vendas"/>
 	</field>
 	<field name="descricao" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="descricao"/>
@@ -101,7 +110,7 @@ ORDER BY total_consumido DESC]]>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement x="40" y="0" width="244" height="30" forecolor="#219EBC" uuid="34cb60ca-ceb5-4b87-b608-a2d69c5709c6">
+				<reportElement x="30" y="0" width="160" height="30" forecolor="#219EBC" uuid="34cb60ca-ceb5-4b87-b608-a2d69c5709c6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -117,7 +126,7 @@ ORDER BY total_consumido DESC]]>
 				<text><![CDATA[Nome Produto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="454" y="0" width="100" height="30" forecolor="#219EBC" uuid="8c3bd50c-97fa-48b5-90fe-8e9b64f2e30e">
+				<reportElement x="360" y="0" width="65" height="30" forecolor="#219EBC" uuid="8c3bd50c-97fa-48b5-90fe-8e9b64f2e30e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -133,7 +142,7 @@ ORDER BY total_consumido DESC]]>
 				<text><![CDATA[Preço Venda]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="284" y="0" width="70" height="30" forecolor="#219EBC" uuid="d15ac32e-2066-43d3-8879-9ce97c0371f5">
+				<reportElement x="190" y="0" width="70" height="30" forecolor="#219EBC" uuid="d15ac32e-2066-43d3-8879-9ce97c0371f5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -149,7 +158,7 @@ ORDER BY total_consumido DESC]]>
 				<text><![CDATA[Qtde. Estoque]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="40" height="30" forecolor="#219EBC" uuid="8cccd2a9-3dac-41d8-9bc3-e0fa9fcc46c3">
+				<reportElement x="0" y="0" width="30" height="30" forecolor="#219EBC" uuid="8cccd2a9-3dac-41d8-9bc3-e0fa9fcc46c3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
 				</reportElement>
 				<box>
@@ -165,7 +174,7 @@ ORDER BY total_consumido DESC]]>
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="354" y="0" width="100" height="30" forecolor="#219EBC" uuid="f2ca889f-c596-46e9-95a0-02a61e9d1668">
+				<reportElement x="260" y="0" width="100" height="30" forecolor="#219EBC" uuid="f2ca889f-c596-46e9-95a0-02a61e9d1668">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -180,17 +189,51 @@ ORDER BY total_consumido DESC]]>
 				</textElement>
 				<text><![CDATA[Preço Compra]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="74" height="30" forecolor="#219EBC" uuid="0d587e4e-9434-49e1-a6a9-b6a87f905602">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<pen lineColor="#FB8500"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FB8500"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted" lineColor="#FB8500"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FB8500"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Total Vendido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="55" height="30" forecolor="#219EBC" uuid="246a8d07-a26d-48fd-9f9f-426c83e1edf6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FB8500"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FB8500"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted" lineColor="#FB8500"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde. 
+Vendido
+]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<textField>
-				<reportElement x="284" y="0" width="70" height="30" uuid="285b8a60-879a-480d-8196-8207d1fc0bca"/>
+				<reportElement x="190" y="0" width="70" height="30" uuid="285b8a60-879a-480d-8196-8207d1fc0bca"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{qtde_estoque}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="40" height="30" forecolor="#023047" uuid="06efdd1f-7e87-41c2-9e5d-d40274430fa1"/>
+				<reportElement x="0" y="0" width="30" height="30" forecolor="#023047" uuid="06efdd1f-7e87-41c2-9e5d-d40274430fa1"/>
 				<box>
 					<topPen lineColor="#FB8500"/>
 					<leftPen lineWidth="1.0" lineColor="#FB8500"/>
@@ -203,24 +246,44 @@ ORDER BY total_consumido DESC]]>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="0" width="244" height="30" forecolor="#FB8500" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
+				<reportElement x="30" y="0" width="160" height="30" forecolor="#FB8500" uuid="8c696f4c-1aff-420d-9775-1d223e021bb1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="354" y="0" width="100" height="30" uuid="9364b4aa-25c5-4de5-9d97-da7d6b53ac06"/>
+				<reportElement x="260" y="0" width="100" height="30" uuid="9364b4aa-25c5-4de5-9d97-da7d6b53ac06"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{preco_compra} *100.0)/100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[String.format("R$ %.2f", Math.round($F{preco_compra} * 100.0) / 100.0)
+]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="454" y="0" width="100" height="30" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
+				<reportElement x="360" y="0" width="65" height="30" uuid="44ed39a7-935b-4159-87b5-ca58e770347d"/>
 				<box>
 					<rightPen lineWidth="1.0" lineColor="#FB8500"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new DecimalFormat("#.##").format(Math.round($F{preco_venda} *100.0)/100.0)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="0" width="55" height="30" uuid="cdf8c38f-a054-483a-8a4b-0ad83fc01704"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_consumido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="74" height="30" uuid="76d61248-459e-41ea-b752-f4e4cfcb10d6"/>
+				<box>
+					<pen lineColor="#FB8500"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format("R$ %.2f", Math.round($F{total_vendas} * 100.0) / 100.0)
+]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
