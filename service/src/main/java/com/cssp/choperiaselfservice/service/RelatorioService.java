@@ -86,7 +86,7 @@ public class RelatorioService {
     public byte[] expenseAndIncomeMovementReport(Date dataInicial, Date dataFinal) throws JRException, SQLException {
         Connection connection = getConnection();
         JasperReport jasperReport = JasperCompileManager.compileReport(
-                getClass().getResourceAsStream("/report/relatorio-receita-despesas.jrxml")
+                getClass().getResourceAsStream("/report/relatorio-receita-despesas2.jrxml")
         );
 
         Map<String, Object> params = new HashMap<>();
