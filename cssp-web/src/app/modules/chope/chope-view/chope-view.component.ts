@@ -11,6 +11,7 @@ import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.ut
 import {ClienteModel} from "../../../model/cliente.model";
 import {MensagensClienteUtil} from "../../cliente/util/mensagens-cliente.util";
 import {ProdutoModel} from "../../../model/produto.model";
+import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
 
 @Component({
   selector: 'app-chope-view',
@@ -100,7 +101,7 @@ export class ChopeViewComponent implements OnInit {
 
   private showMsgAccordingToValidatingAnswer(response: ClienteModel): void {
     response ? this.message.showSuccess(MensagensClienteUtil.CUSTOMER_FOUND)
-      : this.message.showSuccess(MensagensClienteUtil.CUSTOMER_NOT_FOUND);
+      : this.message.showError(MensagensProntasUtil.SUB_MESSAGE_ERROR, MensagensClienteUtil.CUSTOMER_NOT_FOUND);
   }
 
   private fillInCustomerData(response: ClienteModel) {
