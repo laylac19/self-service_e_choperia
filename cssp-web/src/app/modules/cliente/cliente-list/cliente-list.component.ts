@@ -13,6 +13,8 @@ import {finalize} from "rxjs";
 import {ClienteEntradaComponent} from "../cliente-entrada/cliente-entrada.component";
 import {TituloModalClienteUtil} from "../util/titulo-modal-cliente.util";
 import {MensagensClienteUtil} from "../util/mensagens-cliente.util";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ClienteModel} from "../../../model/cliente.model";
 
 @Component({
   selector: 'app-cliente-list',
@@ -21,7 +23,9 @@ import {MensagensClienteUtil} from "../util/mensagens-cliente.util";
 })
 export class ClienteListComponent implements OnInit {
 
+  formGroup: FormGroup;
   columns: ColumnUtil[] = ClienteColumnUtil.CUSTOMER_COLUMNS;
+  client: ClienteModel | null;
   customersList: Page<ClienteListModel[]> | any = new Page<ClienteListModel[]>();
   customerEntries: ClienteListModel[] = [];
 
@@ -37,12 +41,32 @@ export class ClienteListComponent implements OnInit {
   // @ViewChild(ClienteSaidaComponent) customerExitComponent: ClienteSaidaComponent;
 
   constructor(private customerService: ClienteService,
-              private message: MensagensConfirmacao) {
+              private message: MensagensConfirmacao,
+              private builder: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.findAllCustomers();
     this.findCustomersWhoHaveEntered();
+    this.newForm();
+  }
+
+  newForm(): void {
+    this.formGroup = this.builder.group({
+      idCliente: [null, Validators.required],
+      numCartaoRFID: [null],
+    });
+  }
+
+  findClienteByRFID(event: any): ClienteModel | null {
+    this.customerService.findClienteByNumCartaoRFID(event.target.value).subscribe({
+      next: (response) => {
+        this.showMsgAccordingToValidatingAnswer(response);
+        this.fillInCustomerData(response);
+        this.client = response;
+      },
+    });
+    return this.client;
   }
 
   findAllCustomers(): void {
@@ -166,4 +190,13 @@ export class ClienteListComponent implements OnInit {
     this.displayEntry = false;
   }
 
+  private showMsgAccordingToValidatingAnswer(response: ClienteModel): void {
+    response ? this.message.showWarn(MensagensClienteUtil.CUSTOMER_FOUND, MensagensClienteUtil.CUSTORMER_OPEN_PURCHASES)
+      : this.message.showInfo(MensagensClienteUtil.SUCCESS_EXIT, MensagensClienteUtil.CUSTORMER_RELEASED);
+  }
+
+  private fillInCustomerData(response: ClienteModel) {
+    this.formGroup.get('idCliente')?.setValue(response.id);
+    this.formGroup.get('numCartaoRFID')?.setValue(response.numCartaoRFID);
+  }
 }

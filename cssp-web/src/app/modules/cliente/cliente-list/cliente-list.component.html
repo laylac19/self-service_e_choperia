@@ -25,8 +25,32 @@
       </custom-table>
     </p-tabPanel>
 
-    <p-tabPanel header="Entrada">
-      <div class="list-card">
+    <p-tabPanel header="Entrada e Saída">
+      <p-accordion>
+        <p-accordionTab header="CONFERIR SITUAÇÃO CARTÃO RFID">
+          <form [formGroup]="formGroup">
+            <div class="area-field">
+              <div class="consulta">
+                <div class="item-field">
+                  <span class="item-form rfid">
+                    <label class="campo">Cartão RFID</label>
+                    <input type="text" id="numCartaoRFID" pInputText formControlName="numCartaoRFID"
+                           (change)="findClienteByRFID($event)"/>
+                  </span>
+                </div>
+                <div class="item-field flex align-items-center">
+                  <span class="item-form">
+                    <label class="campo">Nome Cliente: </label>
+                    <span class="descricao">{{client ? client.nome.toUpperCase() : ''}}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </p-accordionTab>
+      </p-accordion>
+
+      <div class="list-card pt-5">
         <div *ngFor="let item of customerEntries">
           <div class="item">
             <div class="body-card">
@@ -53,4 +77,11 @@
                (answerForm)="onSaveEntry()"
                (closeDialog)="onCloseEntryDialog()">
   <app-cliente-entrada></app-cliente-entrada>
+</custom-dialog>
+
+<custom-dialog [display]="display"
+               [header]="titleDialog"
+               (answerForm)="onSave()"
+               (closeDialog)="onClose()">
+
 </custom-dialog>
