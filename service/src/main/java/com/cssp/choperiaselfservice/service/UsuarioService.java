@@ -6,6 +6,7 @@ import com.cssp.choperiaselfservice.domain.Perfil;
 import com.cssp.choperiaselfservice.domain.Usuario;
 import com.cssp.choperiaselfservice.domain.enums.Role;
 import com.cssp.choperiaselfservice.repository.UsuarioRepository;
+import com.cssp.choperiaselfservice.service.dto.UserPasswordChangeDTO;
 import com.cssp.choperiaselfservice.service.dto.UsuarioDTO;
 import com.cssp.choperiaselfservice.service.dto.UsuarioListDTO;
 import com.cssp.choperiaselfservice.service.exception.EntityNotFoundException;
@@ -54,6 +55,12 @@ public class UsuarioService {
     public void delete(Long id) {
         Usuario user = findEntity(id);
         user.setAtivo(false);
+        repository.save(user);
+    }
+
+    public void updtPassword(UserPasswordChangeDTO userPasswordChangeDTO){
+        Usuario user = findEntity(userPasswordChangeDTO.getId());
+        user.setSenha(passwordEncoder.encode(userPasswordChangeDTO.getSenha()));
         repository.save(user);
     }
 }

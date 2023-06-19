@@ -9,4 +9,6 @@ export class MensagensClienteUtil {
   static readonly ERRO_EXIT = 'Cartão não desvinculado com o cliente';
   static readonly CUSTOMER_FOUND = 'Cliente encontrado com sucesso';
   static readonly CUSTOMER_NOT_FOUND = 'Cliente não encontrado';
+  static readonly PAYMENT_MADE = 'Cliente não possui pendencias!';
+  static readonly PENDING_PAYMENT = 'Cliente possui pendencias!';
 }

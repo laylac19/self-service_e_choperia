@@ -38,7 +38,9 @@ export class CaixaComponent implements OnInit{
 
   newForm(): void {
     this.formGroup = this.builder.group({
-      codCartaoCliente: [null, [Validators.required]]
+      codCartaoCliente: [null, [Validators.required]],
+      desconto: [null],
+      metodoPagamento: [null]
     });
   }
 
@@ -64,7 +66,6 @@ export class CaixaComponent implements OnInit{
             this.clientes = [...this.clientes, cliente];
             this.nomesClientes = [...this.nomesClientes, cliente.nome];
             this.listRfidClientes = [...this.listRfidClientes, cliente.numCartaoRFID];
-            console.log(this.clientes)
           } else {
             this.message.showWarn("O cliente já consta na lista!", "Atenção");
           }
@@ -77,7 +78,6 @@ export class CaixaComponent implements OnInit{
     this.clientes.forEach(cliente => {
       cliente.compras?.forEach(compra => compras.push(compra));
     })
-    console.log(this.clientes)
     return compras;
   }
 

@@ -49,13 +49,15 @@ export class ChopeEntryComponent {
             if (index < 0) {
               let newDraftBeer: any = {
                 ...beer,
-                qtdeEstoque: 100,
+                litro_chope: 100,
+                qtdeEstoque: 1
               }
               this.entryList = [...this.entryList, newDraftBeer];
             } else {
               this.entryList = this.entryList.map((product) => {
                 if (product.id === beer.id) {
-                  product.qtdeEstoque = product.qtdeEstoque + 100;
+                  product.qtdeEstoque = product.qtdeEstoque + 1;
+                  product.litro_chope = product.litro_chope + 100;
                 }
                 return product;
               })

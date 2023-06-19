@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Renderer2} from '@angular/core';
 import {ClienteModel} from "../../../model/cliente.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ClienteService} from "../../../shared/service/cliente.service";
@@ -7,11 +7,11 @@ import {MensagensClienteUtil} from "../util/mensagens-cliente.util";
 import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
 
 @Component({
-  selector: 'app-cliente-entrada',
-  templateUrl: './cliente-entrada.component.html',
-  styleUrls: ['./cliente-entrada.component.scss']
+  selector: 'app-verifica-rfid',
+  templateUrl: './verifica-rfid.component.html',
+  styleUrls: ['./verifica-rfid.component.scss']
 })
-export class ClienteEntradaComponent implements OnInit {
+export class VerificaRfid implements OnInit {
 
   @Output() answerForm: EventEmitter<boolean> = new EventEmitter();
 
@@ -22,7 +22,8 @@ export class ClienteEntradaComponent implements OnInit {
 
   constructor(private builder: FormBuilder,
               private customerService: ClienteService,
-              private message: MensagensConfirmacao) {
+              private message: MensagensConfirmacao,
+              private renderer: Renderer2) {
   }
 
   ngOnInit(): void {
@@ -31,25 +32,27 @@ export class ClienteEntradaComponent implements OnInit {
 
   assignRFIDCardForm(): void {
     this.formGroup = this.builder.group({
-      id: [null],
-      nome: [null],
       numCartaoRFID: [null],
-      telefone: [null],
-      email: [null],
-      cpf: [null]
     });
-
-    this.formGroup.get("nome")?.disable();
-    this.formGroup.get("telefone")?.disable();
-    this.formGroup.get("email")?.disable();
-    this.formGroup.get("cpf")?.disable();
   }
 
-  findCustomerByID(id: any): void {
-    this.customerService.findById(id).subscribe({
-      next: (response: ClienteModel) => {
-        this.customer = response;
-        this.formGroup.patchValue(response);
+  findCustomerByRfid(event: any): void {
+    const rfid = event.target.value
+    this.customerService.findClienteByNumCartaoRFID(rfid).subscribe({
+      next: (response) => {
+        console.log(response)
+        if(response){
+          this.showErrorMsg();
+          this.formGroup.reset();
+          this.renderer.selectRootElement('#numCartaoRFID').focus();
+          console.log("Esta devendo");
+        }
+        else{
+          this.showSuccessMsg();
+          this.formGroup.reset();
+          this.renderer.selectRootElement('#numCartaoRFID').focus();
+          console.log("liberado");
+        }
       },
     })
   }
@@ -59,7 +62,7 @@ export class ClienteEntradaComponent implements OnInit {
     this.customerService.customerEntry(this.customer)
       .subscribe({
         next: () => {
-          this.showSuccessMsg(this.customer.numCartaoRFID);
+          this.showSuccessMsg();
           this.closeForm();
           this.list = true;
         },
@@ -74,8 +77,11 @@ export class ClienteEntradaComponent implements OnInit {
     this.answerForm.emit();
   }
 
-  private showSuccessMsg(card: string): void {
-    card ? this.message.showSuccess(MensagensClienteUtil.SUCCESS_ENTRY)
-      : this.message.showSuccess(MensagensClienteUtil.CARD_READ_ERROR);
+  private showSuccessMsg(): void {
+   this.message.showSuccess(MensagensClienteUtil.PAYMENT_MADE);
+  }
+
+  private showErrorMsg(): void{
+    this.message.showError(MensagensClienteUtil.PENDING_PAYMENT, "Encaminhe o Cliente para o Caixa")
   }
 }

@@ -5,8 +5,8 @@
   <form [formGroup]="formGroup">
     <section>
       <div class="item-form pb-3 pt-3">
-        <label class="font-bold">Cód. Cartão Cliente</label>
-        <input pInputText class="" type="text" placeholder="Numero cartao cliente" id="codCartaoCliente" formControlName="codCartaoCliente" (change)="addConsumeOnTable($event)" />
+        <label class="font-bold" for="codCartaoCliente">Cód. Cartão Cliente</label>
+        <input pInputText autofocus type="text" placeholder="Numero cartao cliente" id="codCartaoCliente" formControlName="codCartaoCliente" (change)="addConsumeOnTable($event)" />
       </div>
       <div class="flex gap-2 overflow-auto">
         <app-cliente-caixa [nome]="nome" *ngFor="let nome of nomesClientes"></app-cliente-caixa>
@@ -22,9 +22,10 @@
       </simple-table>
       <p>Itens: <ng-template [ngIf]="clientesCompras.length">{{ clientesCompras.length }}</ng-template></p>
       <p>Cliente: <ng-template [ngIf]="nomesClientes.length">{{ nomesClientes[0] }}</ng-template></p>
-      <p>Total da Conta: R$ {{ totalCompra.toPrecision() }}</p>
+      <p>Total da Conta: {{ totalCompra | currency : 'BRL' }}</p>
     </div>
-    <button pButton type="submit"
+
+    <button pButton type="button"
             class="button-action w-3"
             iconPos="left"
             label="Finalizar Compra"

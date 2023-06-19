@@ -68,10 +68,6 @@ export class ChopeListComponent implements OnInit {
     this.displayEntry = true;
   }
 
-  printRFIDtag() {
-
-  }
-
   onSave() {
     this.draftBeerFormComponent.saveForm();
     this.onClose();
@@ -105,7 +101,11 @@ export class ChopeListComponent implements OnInit {
 
   callEntryQtd(): void {
     this.productService.enterProductInput(
-      this.entryFormComponent.entryList.map((product) => ({id: product.id, qtdeEstoque: product.qtdeEstoque}))
+      this.entryFormComponent.entryList.map((product) => (
+        {id: product.id,
+          qtdeEstoque: product.qtdeEstoque,
+          litros_chope: product.litro_chope
+        }))
     ).subscribe(
       () => {
         this.onCloseEntry();

@@ -13,6 +13,7 @@ import {finalize} from "rxjs";
 import {ClienteEntradaComponent} from "../cliente-entrada/cliente-entrada.component";
 import {TituloModalClienteUtil} from "../util/titulo-modal-cliente.util";
 import {MensagensClienteUtil} from "../util/mensagens-cliente.util";
+import {VerificaRfid} from "../verifica-rfid/verifica-rfid.component";
 
 @Component({
   selector: 'app-cliente-list',
@@ -31,8 +32,10 @@ export class ClienteListComponent implements OnInit {
   @Input() display: boolean = false;
   @Input() displayEntry: boolean = false;
   @Input() displayExit: boolean = false;
+  @Input() displayCheckCardModal: boolean = false;
   @ViewChild(ClienteFormComponent) customerFormComponent: ClienteFormComponent;
   @ViewChild(ClienteEntradaComponent) customerEntryComponent: ClienteEntradaComponent;
+  @ViewChild(VerificaRfid) verificaRfid: VerificaRfid;
 
   // @ViewChild(ClienteSaidaComponent) customerExitComponent: ClienteSaidaComponent;
 
@@ -79,6 +82,17 @@ export class ClienteListComponent implements OnInit {
     this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.NEW.index).header;
     this.customerFormComponent.formGroup.reset();
     this.display = true;
+  }
+
+  openModalCheckCardRfidStatus(): void{
+    this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.NEW.index).header;
+    this.customerFormComponent.formGroup.reset();
+    this.displayCheckCardModal = true;
+  }
+
+  onCloseCheckCardModal(): void{
+    this.displayCheckCardModal = false;
+    this.verificaRfid.formGroup.reset();
   }
 
   onSave(): void {

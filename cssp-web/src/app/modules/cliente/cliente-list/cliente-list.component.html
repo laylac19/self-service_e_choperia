@@ -11,6 +11,13 @@
             label="Cadastrar Cliente"
             (click)="newCustomer()">
     </button>
+    <button pButton type="button"
+            icon="pi pi-plus"
+            class="button-action ui-button-success button-save-new"
+            iconPos="left"
+            label="Verificar Cartao RFID"
+            (click)="openModalCheckCardRfidStatus()">
+    </button>
   </div>
 
   <p-tabView>
@@ -53,4 +60,10 @@
                (answerForm)="onSaveEntry()"
                (closeDialog)="onCloseEntryDialog()">
   <app-cliente-entrada></app-cliente-entrada>
+</custom-dialog>
+
+<custom-dialog [display]="displayCheckCardModal"
+               [header]="titleDialog"
+               (closeDialog)="onCloseCheckCardModal()">
+  <app-verifica-rfid></app-verifica-rfid>
 </custom-dialog>

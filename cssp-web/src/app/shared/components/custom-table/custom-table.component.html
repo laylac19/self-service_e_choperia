@@ -102,6 +102,14 @@
                       class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
                       (click)="this.deletarDado.emit(rowData)">
               </button>
+              <button *ngIf="changePassword"
+                      pButton
+                      pTooltip="Alterar Senha"
+                      tooltipPosition="top"
+                      icon="pi pi-lock"
+                      class="button-action botao-secundario button-view sem-fundo flex align-items-center justify-content-center m-1"
+                      (click)="this.abrirModalChangePassword.emit(rowData)">
+              </button>
             </div>
           </ng-container>
         </td>
