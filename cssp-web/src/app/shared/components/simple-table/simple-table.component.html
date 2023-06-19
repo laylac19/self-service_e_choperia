@@ -19,7 +19,7 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr *ngIf="!chope">
             <td *ngFor="let col of columns">
-              {{ rowData[col.field] }}
+              {{col.field != 'valor' ? rowData[col.field] : rowData[col.field] | currency : 'BRL'}}
             </td>
           </tr>
           <tr *ngIf="chope">

@@ -13,6 +13,7 @@ import {Page} from "../../../shared/util/page";
 import {UsuarioColumnUtil} from "../util/usuario-column.util";
 import {MensagensUsuarioUtil} from "../util/mensagens-usuario.util";
 import {MensagensProntasUtil} from "../../../shared/util/messages/MensagensProntas.util";
+import {ChangePasswordComponet} from "../cahngePassword-form/changePassword-form.component";
 
 @Component({
   selector: 'app-usuario-list',
@@ -30,7 +31,9 @@ export class UsuarioListComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   @Input() display = false;
+  @Input() displayChangePassword = false;
   @ViewChild(UsuarioFormComponent) userFormComponent: UsuarioFormComponent;
+  @ViewChild(ChangePasswordComponet) changePasswordComponent: ChangePasswordComponet;
 
   constructor(private userService: UsuarioService,
               private message: MensagensConfirmacao) {
@@ -71,10 +74,21 @@ export class UsuarioListComponent implements OnInit {
     this.onClose();
   }
 
+  onSaveNewPassword(): void{
+    this.changePasswordComponent.changePassword();
+    //this.onCloseModalChangePassword();
+  }
+
   editUser(id: number): void {
     this.titleDialog = TituloModalUsuarioUtil.setTitulo(TituloModalUsuarioUtil.EDIT.index).header;
     this.display = true;
     this.userFormComponent.editUser(id);
+  }
+
+  changePassword(id: number): void{
+    this.titleDialog = TituloModalUsuarioUtil.setTitulo(TituloModalUsuarioUtil.CHANGE_PASSWORD.index).header;
+    this.displayChangePassword = true;
+    this.changePasswordComponent.user = id;
   }
 
   deactivateUser(id: number): void {
@@ -92,6 +106,12 @@ export class UsuarioListComponent implements OnInit {
   onClose(): void {
     this.updateList();
     this.userFormComponent.formGroup.reset();
+  }
+
+  onCloseModalChangePassword(){
+    this.updateList();
+    this.changePasswordComponent.formGroup.reset();
+    this.displayChangePassword = false;
   }
 
   private updateList() {

@@ -15,6 +15,7 @@ export class CustomTableComponent implements OnInit {
   @Input() paginator: boolean;
 
   @Input() editarDado: boolean;
+  @Input() changePassword: boolean;
   @Input() desativarDado: boolean;
   @Input() reativarDado: boolean;
   @Input() visualizarDado: boolean;
@@ -24,8 +25,9 @@ export class CustomTableComponent implements OnInit {
 
   @Output() public abrirModalEntrada: EventEmitter<number> = new EventEmitter<number>();
   @Output() public abrirModalSaida: EventEmitter<number> = new EventEmitter<number>();
-  @Output() public abrirModalHabilitado: EventEmitter<number> = new EventEmitter<number>();
   @Output() public abrirModalVisualizar: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public abrirModalChangePassword: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public abrirModalHabilitado: EventEmitter<number> = new EventEmitter<number>();
   @Output() public deletarDado: EventEmitter<number> = new EventEmitter<number>();
   @Output() public reativar: EventEmitter<number> = new EventEmitter<number>();
   @Output() public solicitarReposicao: EventEmitter<any> = new EventEmitter<any>();

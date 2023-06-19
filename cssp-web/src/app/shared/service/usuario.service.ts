@@ -36,4 +36,8 @@ export class UsuarioService {
     return this.http.delete<UsuarioModel>(this.resourceUrl + '/' + id);
   }
 
+  updtSenha(entity: {id: number, senha: string}){
+    return this.http.put(this.resourceUrl + '/updtSenha', entity);
+  }
+
 }

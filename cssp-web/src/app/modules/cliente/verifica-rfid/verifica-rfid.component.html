@@ -1,0 +1,16 @@
+<div class="form p-fluid p-grid">
+  <form [formGroup]="formGroup">
+
+    <div class="area-field flex">
+      <div class="item-field col-12 pt-2">
+        <span class="item-form">
+          <label class="campo" for="numCartaoRFID">Cartão RFID</label>
+          <input type="text" autofocus id="numCartaoRFID" pInputText formControlName="numCartaoRFID" (change)="findCustomerByRfid($event)">
+        </span>
+      </div>
+
+    </div>
+  </form>
+</div>
+<ng-content></ng-content>
+

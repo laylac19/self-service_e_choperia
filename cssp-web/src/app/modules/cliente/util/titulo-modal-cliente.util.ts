@@ -5,6 +5,7 @@ export class TituloModalClienteUtil {
     static readonly DELETE = new TituloModalClienteUtil(3, 'Excluir Cliente');
     static readonly ENTRY = new TituloModalClienteUtil(4, 'Registrar Entrada de Cliente');
     static readonly EXIT = new TituloModalClienteUtil(5, 'Registrar Saída de Cliente');
+    static readonly VERIFICA_CARTAO = new TituloModalClienteUtil(6, 'Verificar Pagamento da Conta');
 
     static values = [
       TituloModalClienteUtil.NEW,
@@ -12,7 +13,8 @@ export class TituloModalClienteUtil {
       TituloModalClienteUtil.EDIT,
       TituloModalClienteUtil.DELETE,
       TituloModalClienteUtil.ENTRY,
-      TituloModalClienteUtil.EXIT
+      TituloModalClienteUtil.EXIT,
+      TituloModalClienteUtil.VERIFICA_CARTAO
     ];
 
     private constructor(

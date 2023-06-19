@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -19,6 +19,10 @@ import {ClienteModule} from "./modules/cliente/cliente.module";
 import {CozinhaModule} from "./modules/cozinha/cozinha.module";
 import {ImprimirModule} from "./modules/imprimir-codbarras/imprimir.module";
 import {PainelSscModule} from "./modules/painel-ssc/painel-ssc.module";
+import ptBr from '@angular/common/locales/pt';
+import {registerLocaleData} from "@angular/common";
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -41,7 +45,7 @@ import {PainelSscModule} from "./modules/painel-ssc/painel-ssc.module";
     PainelSscModule,
   ],
   providers: [
-    MessageService, ConfirmationService, MensagensConfirmacao, AuthService
+    MessageService, ConfirmationService, MensagensConfirmacao, AuthService, {provide: LOCALE_ID, useValue: 'pt'}
   ],
   bootstrap: [AppComponent]
 })

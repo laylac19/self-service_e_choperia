@@ -61,6 +61,9 @@ public class ProdutoService {
     public void enterProduct(EntradaProdutoDTO dto) {
         Produto product = findEntity(dto.getId());
         product.setQtdeEstoque(product.getQtdeEstoque() + dto.getQtdeEstoque());
+        if(dto.getLitros_chope() != null){
+            product.setLitro_chope(product.getLitro_chope() + dto.getLitros_chope());
+        }
         repository.save(product);
         createProductPurchaseHistory(product, dto.getQtdeEstoque());
     }

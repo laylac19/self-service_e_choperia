@@ -11,6 +11,12 @@
             label="Cadastrar Cliente"
             (click)="newCustomer()">
     </button>
+    <button pButton type="button"
+            class="button-action ui-button-success button-save-new"
+            iconPos="left"
+            label="Verificar Cartao RFID"
+            (click)="openModalCheckCardRfidStatus()">
+    </button>
   </div>
 
   <p-tabView>
@@ -25,32 +31,8 @@
       </custom-table>
     </p-tabPanel>
 
-    <p-tabPanel header="Entrada e Saída">
-      <p-accordion>
-        <p-accordionTab header="CONFERIR SITUAÇÃO CARTÃO RFID">
-          <form [formGroup]="formGroup">
-            <div class="area-field">
-              <div class="consulta">
-                <div class="item-field">
-                  <span class="item-form rfid">
-                    <label class="campo">Cartão RFID</label>
-                    <input type="text" id="numCartaoRFID" pInputText formControlName="numCartaoRFID"
-                           (change)="findClienteByRFID($event)"/>
-                  </span>
-                </div>
-                <div class="item-field flex align-items-center">
-                  <span class="item-form">
-                    <label class="campo">Nome Cliente: </label>
-                    <span class="descricao">{{client ? client.nome.toUpperCase() : ''}}</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </form>
-        </p-accordionTab>
-      </p-accordion>
-
-      <div class="list-card pt-5">
+    <p-tabPanel header="Entrada">
+      <div class="list-card">
         <div *ngFor="let item of customerEntries">
           <div class="item">
             <div class="body-card">
@@ -79,9 +61,8 @@
   <app-cliente-entrada></app-cliente-entrada>
 </custom-dialog>
 
-<custom-dialog [display]="display"
+<custom-dialog [display]="displayCheckCardModal"
                [header]="titleDialog"
-               (answerForm)="onSave()"
-               (closeDialog)="onClose()">
-
+               (closeDialog)="onCloseCheckCardModal()">
+  <app-verifica-rfid></app-verifica-rfid>
 </custom-dialog>
