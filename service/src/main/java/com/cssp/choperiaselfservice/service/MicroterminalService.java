@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class MicroterminalService {
 
-    private int port = 1001;
+    private int port = 1025;
     private Socket socket = null;
     private ServerSocket serverSocket = null;
     private BufferedInputStream bis = null;
@@ -94,7 +94,7 @@ public class MicroterminalService {
     private void verificarContaCliente(String codigoCartaoCliente, DataOutputStream dos) throws IOException {
         if(codigoCartaoCliente.isEmpty()) return;
         //conferir porta aplic
-        var rotaContaCliente = new URL("http://localhost:8090/api/clientes/" + codigoCartaoCliente + "/totalConta");
+        var rotaContaCliente = new URL("http://localhost:8080/api/cliente/" + codigoCartaoCliente + "/totalConta");
         //criar rota pra retornar o valor da conta
             //return double
         HttpURLConnection con = (HttpURLConnection) rotaContaCliente.openConnection();

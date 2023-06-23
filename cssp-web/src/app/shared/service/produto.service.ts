@@ -52,7 +52,7 @@ export class ProdutoService {
   }
 
   getWeightValue(): Observable<any> {
-    return this.http.get("http://192.168.110.121/peso");
+    return this.http.get("http://192.168.0.103/peso");
   }
 
   balanceReportProductInStock(): Observable<ProdutoEstoqueReportModel[]> {

@@ -74,4 +74,9 @@ public class ClienteController {
         return new ResponseEntity<>(service.customerReportWithAmountPurchasedInPeriod(report), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{cardRFID}/totalConta")
+    public ResponseEntity<Double> checkCustomerCardBalance(@PathVariable("cardRFID") String cardRFID) {
+        return new ResponseEntity<>(service.checkCustomerCardBalance(cardRFID), HttpStatus.OK);
+    }
+
 }

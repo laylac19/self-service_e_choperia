@@ -83,6 +83,10 @@ public class ClienteService {
         return listClients;
     }
 
+    public Double checkCustomerCardBalance(String cardRFID) {
+        return repository.checkCustomerCardBalance(cardRFID);
+    }
+
     private static void validateListProductsReport(List<ClienteRelatorioDTO> listClients) {
         if (Objects.equals(0, listClients.size())) {
             throw new ReportException(MensagemRelatorioUtil.UNABLE_TO_GENERATE_REPORT);

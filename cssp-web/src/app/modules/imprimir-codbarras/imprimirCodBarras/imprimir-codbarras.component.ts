@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProdutoModel} from "../../../model/produto.model";
 import {Location} from "@angular/common";
 import {ProdutoService} from "../../../shared/service/produto.service";
 import * as jsBarcode from 'jsbarcode';
-import { jsPDF } from 'jspdf';
+import {jsPDF} from 'jspdf';
 import {Page} from "../../../shared/util/page";
 import {InsumoListModel} from "../../../model/list/insumo-list.model";
 import {finalize} from "rxjs";
@@ -92,8 +92,8 @@ export class ImprimirCodbarrasComponent implements OnInit{
     debugger
     const canvas = document.createElement('canvas');
     const pdf = new jsPDF('l', 'mm', [115, 23]);
-    const spacingBetweenTickets = 1.3;
-    const barcodeSize = 36.6;
+    const spacingBetweenTickets = 7.3;
+    const barcodeSize = 30.0;
     let positionBuffer = spacingBetweenTickets;
 
     this.selectedProducts.forEach((product) => {
