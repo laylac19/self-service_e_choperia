@@ -169,4 +169,15 @@ export class ClienteListComponent implements OnInit {
     this.displayEntry = false;
   }
 
+  openModalCheckCardRfidStatus(): void{
+    this.titleDialog = TituloModalClienteUtil.setTitulo(TituloModalClienteUtil.NEW.index).header;
+    this.customerFormComponent.formGroup.reset();
+    this.displayCheckCardModal = true;
+  }
+
+  onCloseCheckCardModal(): void{
+    this.displayCheckCardModal = false;
+    this.verificaRfid.formGroup.reset();
+  }
+
 }

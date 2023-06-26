@@ -40,4 +40,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             " ORDER BY total_comprado ")
     List<ClienteRelatorioDTO> customerReportWithAmountPurchasedInPeriod(@Param("initialDate") LocalDate initialDate,
                                                                         @Param("finalDate") LocalDate finalDate);
+
+    @Query( " SELECT SUM(CCP.valorCompra) " +
+            " FROM  Cliente                 C " +
+            " JOIN ClienteCompraProduto     CCP " +
+            " ON C.id = CCP.cliente.id " +
+            " WHERE C.numCartaoRFID = :cardRFID AND CCP.ativo = true" )
+    Double checkCustomerCardBalance(@Param("cardRFID") String cardRFID);
 }
