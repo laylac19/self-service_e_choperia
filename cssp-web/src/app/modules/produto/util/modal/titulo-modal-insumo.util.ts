@@ -5,6 +5,7 @@ export class TituloModalInsumoUtil {
     static readonly DELETE = new TituloModalInsumoUtil(3, 'Excluir Insumo');
     static readonly ENTRY = new TituloModalInsumoUtil(4, 'Entrada de Insumo');
     static readonly WITHDRAW = new TituloModalInsumoUtil(5, 'Saida de Insumo');
+    static readonly SELFSERVICE  = new TituloModalInsumoUtil(6, 'Cadastro de Self-Servie');
 
     static values = [
       TituloModalInsumoUtil.NEW,
@@ -13,6 +14,7 @@ export class TituloModalInsumoUtil {
       TituloModalInsumoUtil.DELETE,
       TituloModalInsumoUtil.ENTRY,
       TituloModalInsumoUtil.WITHDRAW,
+      TituloModalInsumoUtil.SELFSERVICE,
     ];
 
     private constructor(

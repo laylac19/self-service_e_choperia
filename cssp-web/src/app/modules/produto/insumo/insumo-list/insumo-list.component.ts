@@ -15,6 +15,7 @@ import {InsumoEntryComponent} from "../insumo-entry/insumo-entry.component";
 import {InsumoWithdrawComponent} from "../insumo-withdraw/insumo-withdraw.component";
 import {ImprimirCodbarrasComponent} from "../../../imprimir-codbarras/imprimirCodBarras/imprimir-codbarras.component";
 import {Router} from "@angular/router";
+import {InsumoSelfServiceComponent} from "../insumo-selfservice/insumo-selfService.component";
 
 @Component({
   selector: 'app-insumo-list',
@@ -32,10 +33,12 @@ export class InsumoListComponent implements OnInit {
   @Input() display = false;
   @Input() displayEntry = false;
   @Input() displayWithdraw = false;
+  @Input() displaySelfservice = false;
   @ViewChild(InsumoProdComponent) inputFormComponent: InsumoProdComponent;
   @ViewChild(InsumoEntryComponent) entryFormComponent: InsumoEntryComponent;
   @ViewChild(InsumoWithdrawComponent) withdrawFormComponent: InsumoWithdrawComponent;
   @ViewChild(ImprimirCodbarrasComponent) imprimirCodbarrasComponent: ImprimirCodbarrasComponent;
+  @ViewChild(InsumoSelfServiceComponent) insumoSelfServiceComponent: InsumoSelfServiceComponent;
 
   impBarCode = new EventEmitter<boolean>();
 
@@ -68,6 +71,12 @@ export class InsumoListComponent implements OnInit {
     this.display = true;
   }
 
+  selfServiceInput() {
+    this.titleDialog = TituloModalInsumoUtil.setTitulo(TituloModalInsumoUtil.SELFSERVICE.index).header;
+    this.insumoSelfServiceComponent.formGroup.reset();
+    this.displaySelfservice = true;
+  }
+
   giveEntryToProduct(): void {
     this.titleDialog = TituloModalInsumoUtil.setTitulo(TituloModalInsumoUtil.ENTRY.index).header;
     this.entryFormComponent.formGroup.reset();
@@ -89,7 +98,7 @@ export class InsumoListComponent implements OnInit {
   }
 
   onSaveRegister(): void {
-    this.inputFormComponent.saveInputForm();
+    this.insumoSelfServiceComponent.saveInputForm();
     this.onClose();
   }
 
@@ -144,6 +153,11 @@ export class InsumoListComponent implements OnInit {
   onCloseEntry(): void {
     this.updateListAfterEntry();
     this.entryFormComponent.reset();
+  }
+
+  onCloseModalSelfservice(): void {
+    this.displaySelfservice = false;
+    this.insumoSelfServiceComponent.formGroup.reset();
   }
 
   onCloseWithdraw(): void {

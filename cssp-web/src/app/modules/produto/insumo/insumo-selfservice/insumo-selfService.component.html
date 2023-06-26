@@ -1,0 +1,26 @@
+<div class="form p-fluid p-grid">
+  <form [formGroup]="formGroup">
+
+    <div class="area-field flex pt-2 col-12">
+
+      <div class="item-field col-6">
+        <span class="item-form">
+          <label class="campo" for="descricao">Descrição</label>
+          <input type="text" id="descricao" pInputText formControlName="descricao">
+        </span>
+      </div>
+
+      <div class="item-field col-6">
+        <span class="item-form">
+          <label class="campo">Preço do Kilo R$</label>
+          <p-inputNumber formControlName="precoVenda" mode="currency" locale="pt-BR" currency="BRL" [min]="0">
+          </p-inputNumber>
+        </span>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+<ng-content></ng-content>
+

@@ -11,6 +11,7 @@ import {SharedModule} from "../../shared/shared.module";
 import { InsumoListComponent } from './insumo/insumo-list/insumo-list.component';
 import { ChopeListComponent } from './chope/chope-list/chope-list.component';
 import { ChopeEntryComponent } from './chope/chope-entry/chope-entry.component';
+import {InsumoSelfServiceComponent} from "./insumo/insumo-selfservice/insumo-selfService.component";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ChopeEntryComponent } from './chope/chope-entry/chope-entry.component';
     ChopeListComponent,
     InsumoEntryComponent,
     InsumoWithdrawComponent,
+    InsumoSelfServiceComponent,
     ChopeEntryComponent
   ],
   exports: [
