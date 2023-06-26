@@ -1,0 +1,15 @@
+select{
+  padding: 3px 2px;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid #ced4da;
+  margin-bottom: 20px;
+}
+
+select:focus{
+  border-color: #85b2f9;
+}
+
+select > option{
+  border-color: #85b2f9;
+}

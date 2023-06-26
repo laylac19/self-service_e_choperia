@@ -23,6 +23,14 @@
       <p>Itens: <ng-template [ngIf]="clientesCompras.length">{{ clientesCompras.length }}</ng-template></p>
       <p>Cliente: <ng-template [ngIf]="nomesClientes.length">{{ nomesClientes[0] }}</ng-template></p>
       <p>Total da Conta: {{ totalCompra | currency : 'BRL' }}</p>
+      <label for="metodosPagamento">Forma de Pagamento: </label>
+      <select name="metodosPagamento" id="metodosPagamento" formControlName="metodoPagamento" >
+        <option value="pix" selected>PIX</option>
+        <option value="picPay" selected>PIC PAY</option>
+        <option value="dinheiro">DINHEIRO</option>
+        <option value="credito">CARTAO DE CREDITO</option>
+        <option value="debito">CARTAO DE DEBITO</option>
+      </select>
     </div>
 
     <button pButton type="button"

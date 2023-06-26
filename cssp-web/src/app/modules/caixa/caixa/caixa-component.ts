@@ -1,6 +1,6 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
 import {ColumnUtil} from "../../../shared/util/columnUtil";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CaixaConsumeTable} from "../caixa-consume-table";
 import {MensagensConfirmacao} from "../../../shared/util/msgConfirmacaoDialog.util";
 import {ClienteModel} from "../../../model/cliente.model";
@@ -11,17 +11,24 @@ import {ClienteCompraModelList} from "../../../model/list/cliente-compra-list.mo
 import {finalize, map, switchMap} from "rxjs";
 import {CaixaModel} from "../../../model/caixa-model";
 
+interface PaymentMethod {
+  method: string
+  code: number
+}
+
 @Component({
   selector: 'app-caixa',
   templateUrl: './caixa-component.html',
   styleUrls: ['./caixa-component.scss']
 })
+
 export class CaixaComponent implements OnInit{
 
   columns: ColumnUtil[] = CaixaConsumeTable.CONSUME_TABLE;
   clientes: ClienteModel[] = [];
   nomesClientes: string[] = [];
   listRfidClientes: string[] = []
+  paymentMethods: PaymentMethod[];
   formGroup: FormGroup;
 
   ngOnInit(): void {
@@ -39,8 +46,7 @@ export class CaixaComponent implements OnInit{
   newForm(): void {
     this.formGroup = this.builder.group({
       codCartaoCliente: [null, [Validators.required]],
-      desconto: [null],
-      metodoPagamento: [null]
+      metodoPagamento: [null],
     });
   }
 
@@ -89,10 +95,11 @@ export class CaixaComponent implements OnInit{
 
   finalizeOrder(){
     const idResponsavel = this.clientes[0].id;
+    const formaPagamentoSelecionada = this.formGroup.get('metodoPagamento')?.value;
     let order: CaixaModel = {
       id: null,
       desconto: 0.0,
-      formaPagamento: 'PIX',
+      formaPagamento: formaPagamentoSelecionada.toUpperCase(),
       listCodRfid: this.listRfidClientes,
       valorFinal: this.totalCompra,
       idClientePrincipal: idResponsavel,
@@ -126,7 +133,7 @@ export class CaixaComponent implements OnInit{
     divPrincipal.appendChild(this.criarTabelaItensConsumidos());
     divPrincipal.appendChild(this.criarDivValorTotal());
     divPrincipal.appendChild(this.criarDivQtdItens());
-    //divPrincipal.appendChild(this.criarDivMetodoPagamento());
+    divPrincipal.appendChild(this.criarDivMetodoPagamento());
     mywindow?.document.body.appendChild(divPrincipal);
 
     setTimeout(() => {
@@ -216,16 +223,16 @@ export class CaixaComponent implements OnInit{
 
   criarDivMetodoPagamento(): HTMLElement {
     let div = document.createElement('div');
-
-    // div.innerHTML = `
-    //  <table style="width: 100%; font-size: 12px">
-    //      <tr>
-    //         <td colspan="3">Método de pagamento:</td>
-    //         <td style="text-align: right">${this.verificarMetodoPagamento(this.formGroup.get('metodoPagamento')?.value)}</td>
-    //     </tr>
-    //  </table>
-    //  <hr>
-    //  `;
+    let formaDePagamentoSelecionada = this.formGroup.get('metodoPagamento')?.value
+    div.innerHTML = `
+     <table style="width: 100%; font-size: 12px">
+         <tr>
+            <td colspan="3">Método de pagamento:</td>
+            <td style="text-align: right">${formaDePagamentoSelecionada.toUpperCase()}</td>
+        </tr>
+     </table>
+     <hr>
+     `;
     return div;
   }
   private criarDivNomeCliente(): HTMLElement {
