@@ -1,7 +1,7 @@
 div.topbar {
-    background-color: var(--cor-tema-7);
+    background-color: #343a40;
     padding: 10px;
-    border-bottom: 5px solid var(--cor-tema-6);
+    border-bottom: 5px solid var(--cor-tema-5);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,4 +17,9 @@ span.titulo {
 
 div.opcao-menu {
     padding: 0 5px 0 5px;
+}
+
+.button-action {
+  background-color: var(--cor-tema-3);
+  color: var(--cor-tema-4);
 }

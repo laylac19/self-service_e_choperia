@@ -1,7 +1,7 @@
 div.sidemenu {
-    background-color: var(--cor-tema-7);
+    background-color: var(--cor-tema-2);
     height: 100%;
-    border-right: 5px dashed var(--cor-tema-6);
+    border-right: 5px solid var(--cor-tema-5);
 
     &.invisivel {
         display: none;
@@ -12,7 +12,7 @@ div.opcao-menu {
     padding: 8px;
 }
 
-//.button-action-side {
-//  background-color: var(--cor-tema-3);
-//  border: #219EBC;
-//}
+.button-action-side {
+  background-color: var(--cor-tema-3);
+  border:  var(--cor-tema-4);
+}
