@@ -74,11 +74,13 @@ public class ClienteCompraProdutoService {
     }
 
     private Set<ClienteCompraProdutoDTO> searchCustomersWhoPurchasedBetweenDates(LocalDate initialDate, LocalDate finalDate) {
-        return repository.searchCustomersWhoPurchasedBetweenDates(initialDate, finalDate);
+        var teste = repository.searchCustomersWhoPurchasedBetweenDates(initialDate, finalDate);
+        return teste;
     }
 
     private BuildEmailPurchadeDTO createEmail(ClienteCompraProdutoDTO dto) {
-        return repository.buildEmail(dto.getIdCliente(), dto.getId());
+        var teste = repository.buildEmail(dto.getIdCliente(), dto.getId());
+        return teste;
     }
 
     public void setFalseCompraProduto(Set<ComprasCaixaListDTO> comprasProdutos){

@@ -98,6 +98,11 @@ export class InsumoListComponent implements OnInit {
   }
 
   onSaveRegister(): void {
+    this.inputFormComponent.saveInputForm();
+    this.onClose();
+  }
+
+  onSaveRegisterSelfService(): void {
     this.insumoSelfServiceComponent.saveInputForm();
     this.onClose();
   }

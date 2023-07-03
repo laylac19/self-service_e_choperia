@@ -22,7 +22,7 @@ public interface ClienteCompraProdutoRepository extends JpaRepository<ClienteCom
             " WHERE cc.ativo = true AND c.numCartaoRFID = :numCartaoRFID ")
     Set<ComprasCaixaListDTO> listPurchasesCustomersCashier(@Param("numCartaoRFID") String numCartaoRFID);
 
-    @Query( " SELECT DISTINCT new com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO(C.id) " +
+    @Query( " SELECT DISTINCT new com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO(C.id, CCP.id) " +
             " FROM  Cliente                      C " +
             " JOIN ClienteCompraProduto          CCP " +
                 " ON C.id = CCP.cliente.id " +
