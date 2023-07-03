@@ -24,7 +24,8 @@ public class EnviarEmailService {
         message.setSubject("CSSP Compras");
         message.setText("Olá " + build.getNomeCliente() + "," +
                 "\n\n\t" + emailDTO.getMensagem() +
-                "\n\n\n\n\t Obrigada pela prefeência!!!");
+                "\n\n\n\n\t Obrigada pela preferência!" +
+                "\n A Direção.");
         envioEmailJava.send(message);
         log.info("Enviado");
     }

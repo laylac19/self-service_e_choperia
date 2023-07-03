@@ -38,4 +38,10 @@ public class ClienteDTO implements Serializable {
     private String cpf;
 
     private Boolean ativo = true;
+
+    public ClienteDTO(Long id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
 }
