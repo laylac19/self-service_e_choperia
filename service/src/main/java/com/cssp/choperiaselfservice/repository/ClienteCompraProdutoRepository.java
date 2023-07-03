@@ -2,7 +2,7 @@ package com.cssp.choperiaselfservice.repository;
 
 import com.cssp.choperiaselfservice.domain.ClienteCompraProduto;
 import com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO;
-import com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO;
+import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
 import com.cssp.choperiaselfservice.service.dto.ComprasCaixaListDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,19 +22,11 @@ public interface ClienteCompraProdutoRepository extends JpaRepository<ClienteCom
             " WHERE cc.ativo = true AND c.numCartaoRFID = :numCartaoRFID ")
     Set<ComprasCaixaListDTO> listPurchasesCustomersCashier(@Param("numCartaoRFID") String numCartaoRFID);
 
-    @Query( " SELECT DISTINCT new com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO(C.id, CCP.id) " +
+    @Query( " SELECT DISTINCT new com.cssp.choperiaselfservice.service.dto.ClienteDTO(C.id, C.nome, C.email) " +
             " FROM  Cliente                      C " +
             " JOIN ClienteCompraProduto          CCP " +
                 " ON C.id = CCP.cliente.id " +
-            " WHERE CCP.dataCompra BETWEEN :initialDate AND :finalDate ")
-    Set<ClienteCompraProdutoDTO> searchCustomersWhoPurchasedBetweenDates(@Param("initialDate") LocalDate initialDate, @Param("finalDate") LocalDate finalDate);
+            " WHERE CCP.dataCompra BETWEEN :initialDate AND :finalDate")
+    Set<ClienteDTO> searchCustomersWhoPurchasedBetweenDates(@Param("initialDate") LocalDate initialDate, @Param("finalDate") LocalDate finalDate);
 
-    @Query( " SELECT new com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO(" +
-                " C.id, C.nome, C.email, " +
-                " CCP.id, CCP.dataCompra, CCP.valorCompra) " +
-            " FROM  ClienteCompraProduto        CCP " +
-            " JOIN Cliente                      C " +
-                " ON CCP.cliente.id = C.id " +
-            " WHERE C.id = :idClient AND CCP.id = :idPurchased" )
-    BuildEmailPurchadeDTO buildEmail(@Param("idClient") Long idClient, @Param("idPurchased") Long idPurchased);
 }

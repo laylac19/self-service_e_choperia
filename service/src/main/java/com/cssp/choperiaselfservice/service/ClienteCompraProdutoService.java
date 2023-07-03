@@ -4,6 +4,7 @@ import com.cssp.choperiaselfservice.domain.ClienteCompraProduto;
 import com.cssp.choperiaselfservice.repository.ClienteCompraProdutoRepository;
 import com.cssp.choperiaselfservice.service.dto.BuildEmailPurchadeDTO;
 import com.cssp.choperiaselfservice.service.dto.ClienteCompraProdutoDTO;
+import com.cssp.choperiaselfservice.service.dto.ClienteDTO;
 import com.cssp.choperiaselfservice.service.dto.ComprasCaixaListDTO;
 import com.cssp.choperiaselfservice.service.dto.EmailClienteCompraDTO;
 import com.cssp.choperiaselfservice.service.dto.RelatorioEntreDatasDTO;
@@ -73,14 +74,16 @@ public class ClienteCompraProdutoService {
         });
     }
 
-    private Set<ClienteCompraProdutoDTO> searchCustomersWhoPurchasedBetweenDates(LocalDate initialDate, LocalDate finalDate) {
-        var teste = repository.searchCustomersWhoPurchasedBetweenDates(initialDate, finalDate);
-        return teste;
+    private Set<ClienteDTO> searchCustomersWhoPurchasedBetweenDates(LocalDate initialDate, LocalDate finalDate) {
+        return repository.searchCustomersWhoPurchasedBetweenDates(initialDate, finalDate);
     }
 
-    private BuildEmailPurchadeDTO createEmail(ClienteCompraProdutoDTO dto) {
-        var teste = repository.buildEmail(dto.getIdCliente(), dto.getId());
-        return teste;
+    private BuildEmailPurchadeDTO createEmail(ClienteDTO dto) {
+        BuildEmailPurchadeDTO build = new BuildEmailPurchadeDTO();
+        build.setIdCliente(dto.getId());
+        build.setNomeCliente(dto.getNome());
+        build.setEmailCliente(dto.getEmail());
+        return build;
     }
 
     public void setFalseCompraProduto(Set<ComprasCaixaListDTO> comprasProdutos){

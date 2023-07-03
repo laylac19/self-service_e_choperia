@@ -153,6 +153,7 @@ export class InsumoListComponent implements OnInit {
   onClose(): void {
     this.updateListAfterCreate();
     this.inputFormComponent.formGroup.reset();
+    this.displaySelfservice = false;
   }
 
   onCloseEntry(): void {

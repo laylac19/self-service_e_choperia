@@ -36,8 +36,5 @@ public class ClienteCompraProdutoDTO implements Serializable {
 
     private Boolean ativo = true;
 
-    public ClienteCompraProdutoDTO(Long idCliente, Long id) {
-        this.idCliente = idCliente;
-        this.id = id;
-    }
+
 }

@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProdutoModel} from "../../../../model/produto.model";
 import {MensagensConfirmacao} from "../../../../shared/util/msgConfirmacaoDialog.util";
 import {ProdutoService} from "../../../../shared/service/produto.service";
-import {MensagensInsumoUtil} from "../../util/messages/mensagens-insumo.util";
+import {MensagensSelfServiceUtil} from "../../util/messages/mensagens-self-service.util";
 
 @Component({
   selector: 'app-insumo-selfService',
@@ -59,13 +59,13 @@ export class InsumoSelfServiceComponent implements OnInit {
   }
 
   private showSuccessMsgAccordingToId(idInput: number): void {
-    idInput ? this.message.showSuccess(MensagensInsumoUtil.UPDATE_SUCCESSFUL_INPUT)
-      : this.message.showSuccess(MensagensInsumoUtil.SUCCESS_CREATED_INPUT);
+    idInput ? this.message.showSuccess(MensagensSelfServiceUtil.UPDATE_SUCCESSFUL_DISH)
+      : this.message.showSuccess(MensagensSelfServiceUtil.SUCCESS_CREATED_DISH);
   }
 
   private showErrorMsgAccordingToId(idInput: number, errorMsg: string): void {
-    idInput ? this.message.showError(MensagensInsumoUtil.ERROR_UPDATE, errorMsg)
-      : this.message.showError(MensagensInsumoUtil.ERROR_CREATED, errorMsg);
+    idInput ? this.message.showError(MensagensSelfServiceUtil.ERROR_UPDATE, errorMsg)
+      : this.message.showError(MensagensSelfServiceUtil.ERROR_CREATED, errorMsg);
   }
 
 }
